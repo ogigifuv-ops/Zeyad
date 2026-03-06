@@ -3,44 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZEYAD ULTIMATE EMPIRE</title>
+    <title>ZEYAD MEGA EMPIRE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --neon: #00f2ff; --purple: #bc13fe; --dark: #050505; --gold: #ffd700; --red: #ff4b2b; --green: #00ff00; }
         body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
         
-        /* شريط التنقل العلوي */
         nav { background: rgba(0,0,0,0.95); padding: 10px; display: flex; overflow-x: auto; gap: 8px; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--neon); scrollbar-width: none; }
         nav::-webkit-scrollbar { display: none; }
         nav button { background: rgba(255,255,255,0.05); border: 1px solid var(--neon); color: white; padding: 8px 15px; border-radius: 10px; cursor: pointer; white-space: nowrap; font-family: 'Cairo'; font-weight: bold; font-size: 12px; }
         .active-btn { background: var(--neon) !important; color: black !important; box-shadow: 0 0 15px var(--neon); }
 
-        /* تنسيق الصفحات المنفصلة */
         .page { display: none; width: 92%; margin: 15px auto; text-align: center; min-height: 80vh; }
         .show { display: block !important; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .card { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; border: 1px solid rgba(0,242,255,0.2); backdrop-filter: blur(10px); margin-bottom: 15px; box-sizing: border-box; width: 100%; }
+        .btn-link { display: block; width: 100%; padding: 12px 0; margin: 10px 0; border: 1px solid var(--purple); color: white; text-decoration: none; border-radius: 12px; background: rgba(188, 19, 254, 0.1); font-weight: bold; font-size: 14px; box-sizing: border-box; }
         
-        .btn-link { 
-            display: block; 
-            width: 100%; 
-            padding: 12px 0; 
-            margin: 10px 0; 
-            border: 1px solid var(--purple); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 12px; 
-            background: rgba(188, 19, 254, 0.1); 
-            font-weight: bold; 
-            font-size: 14px; 
-            box-sizing: border-box; 
-            transition: 0.2s; 
-        }
-        .btn-link:active { transform: scale(0.98); }
-        
-        .wa-float { position: fixed; bottom: 15px; left: 15px; background: #25d366; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; z-index: 2000; box-shadow: 0 0 15px #25d366; font-size: 24px; }
+        .wa-float { position: fixed; bottom: 15px; left: 15px; background: #25d366; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; z-index: 2000; box-shadow: 0 0 15px #25d366; }
         input { width: 85%; padding: 12px; border-radius: 12px; border: 1px solid var(--gold); background: #000; color: white; margin: 10px 0; text-align: center; }
     </style>
 </head>
@@ -49,11 +31,14 @@
 <canvas id="matrix"></canvas>
 <a href="https://wa.me/201148175381" class="wa-float" target="_blank">💬</a>
 
-<nav id="topNav">
+<nav>
     <button onclick="st('home', this)" class="active-btn">🏠 الرئيسية</button>
+    <button onclick="st('money', this)">💳 فلوسك</button>
     <button onclick="st('live', this)">⚽ كورة لايف</button>
+    <button onclick="st('services', this)">🏛️ خدمات مصر</button>
     <button onclick="st('games', this)">🎮 الألعاب</button>
     <button onclick="st('tools', this)">🛠️ أدوات</button>
+    <button onclick="st('health', this)">🍎 صحتك</button>
     <button onclick="st('islam', this)">🕋 إسلاميات</button>
     <button onclick="st('secret', this)">🔐 الخزنة</button>
 </nav>
@@ -61,81 +46,61 @@
 <div id="home" class="page show">
     <div class="card">
         <h1 style="color: var(--neon); font-size: 24px;">👑 إمبراطورية ZEYAD</h1>
-        <p>مرحباً بك في النسخة المنظمة والمحدثة.</p>
+        <p>كل اللي تحتاجه في مكان واحد.</p>
         <div class="card" style="border-color: var(--gold);">
-            <h3 style="color: var(--gold);">📥 التحميلات الرسمية</h3>
+            <h3 style="color: var(--gold);">📥 التحميلات</h3>
             <a href="https://www.appcreator24.com/app3947806-z45quj" class="btn-link" style="background: var(--gold); color: black; border:none;">📱 تحميل التطبيق الرسمي (APK)</a>
-            </div>
-    </div>
-</div>
-
-<div id="live" class="page">
-    <div class="card">
-        <h2 style="color: var(--green);">⚽ بث مباشر للمباريات</h2>
-        <p>ادخل وشاهد أهم مباريات اليوم</p>
-        <a href="https://kooora4live.net/" class="btn-link" style="border-color: var(--green); background: rgba(0,255,0,0.1);">🏆 موقع كورة لايف</a>
-    </div>
-</div>
-
-<div id="games" class="page">
-    <div class="card">
-        <h2 style="color: var(--neon);">🎮 ألعاب الإمبراطورية</h2>
-        <a href="https://poki.com/en/g/subway-surfers" class="btn-link">🏃 Subway Surfers</a>
-        <a href="https://poki.com/en/g/tictactoe" class="btn-link">❌ Tic Tac Toe</a>
-        <a href="https://poki.com/en/g/drive-mad" class="btn-link">🚗 Drive Mad</a>
-    </div>
-</div>
-
-<div id="tools" class="page">
-    <div class="card">
-        <h2 style="color: var(--gold);">🛠️ أدوات مساعدة</h2>
-        <a href="https://www.speedtest.net" class="btn-link">🚀 قياس سرعة النت</a>
-        <a href="https://www.accuweather.com/ar/eg/minya/127059" class="btn-link">🛰️ طقس المنيا</a>
-        <a href="https://chatgpt.com" class="btn-link">🤖 المساعد الذكي ChatGPT</a>
-    </div>
-</div>
-
-<div id="islam" class="page">
-    <div class="card">
-        <h2 style="color: #4caf50;">🕋 ركن المسلم</h2>
-        <a href="https://quran.com" class="btn-link">📖 المصحف كاملاً</a>
-        <a href="https://www.azkary.com" class="btn-link">📿 أذكار المسلم</a>
-    </div>
-</div>
-
-<div id="secret" class="page">
-    <div class="card" style="border-color: var(--gold);">
-        <h2>🔐 الخزنة السرية</h2>
-        <input type="password" id="pass" placeholder="اكتب الباسورد السري...">
-        <button class="btn-link" onclick="chk()">فتح الإحصائيات 🔓</button>
-        <div id="sc" style="display:none; margin-top:15px;">
-            <p style="color: var(--gold);">عدد الزيارات الحقيقي لموقعك:</p>
-            <img src="https://profile-counter.glitch.me/fuv-ops/count.svg" alt="Counter" style="max-width: 100%;">
         </div>
     </div>
 </div>
 
+<div id="money" class="page">
+    <div class="card">
+        <h2 style="color: var(--gold);">💳 محفظتك وأسعار اليوم</h2>
+        <a href="https://personal.voda.com.eg/vf-wallet/index.html" class="btn-link">💸 فودافون كاش (دخول سريع)</a>
+        <a href="https://www.goldprice.org/ar/gold-price-egypt.html" class="btn-link">🟡 سعر الذهب الآن في مصر</a>
+        <a href="https://www.xe.com/ar/currencyconverter/convert/?Amount=1&From=USD&To=EGP" class="btn-link">💵 سعر الدولار اليوم</a>
+    </div>
+</div>
+
+<div id="services" class="page">
+    <div class="card">
+        <h2 style="color: var(--neon);">🏛️ بوابة الخدمات الحكومية</h2>
+        <a href="https://digital.gov.eg/" class="btn-link">🇪🇬 مصر الرقمية (كل الخدمات)</a>
+        <a href="https://ppo.gov.eg/webcenter/portal/PPOPortal/pages_publicservices/trafficservices" class="btn-link">🚗 استعلام مخالفات المرور</a>
+        <a href="https://www.fawry.com" class="btn-link">💳 دفع فواتير (فوري)</a>
+    </div>
+</div>
+
+<div id="health" class="page">
+    <div class="card">
+        <h2 style="color: var(--red);">🍎 صحتك تهمنا</h2>
+        <a href="https://www.calculator.net/calorie-calculator.html" class="btn-link">🔥 حساب السعرات الحرارية</a>
+        <a href="https://www.calculator.net/bmi-calculator.html" class="btn-link">⚖️ حساب كتلة الجسم (BMI)</a>
+        <a href="https://www.webteb.com/" class="btn-link">🏥 موسوعة الطب العربية</a>
+    </div>
+</div>
+
+<div id="live" class="page"><div class="card"><h2 style="color: var(--green);">⚽ بث مباشر</h2><a href="https://kooora4live.net/" class="btn-link">🏆 كورة لايف</a></div></div>
+<div id="games" class="page"><div class="card"><h2>🎮 الألعاب</h2><a href="https://poki.com/en/g/subway-surfers" class="btn-link">🏃 Subway</a><a href="https://poki.com/en/g/drive-mad" class="btn-link">🚗 Drive Mad</a></div></div>
+<div id="tools" class="page"><div class="card"><h2>🛠️ أدوات</h2><a href="https://www.speedtest.net" class="btn-link">🚀 سرعة النت</a><a href="https://www.accuweather.com/ar/eg/minya/127059" class="btn-link">🛰️ طقس المنيا</a></div></div>
+<div id="islam" class="page"><div class="card"><h2>🕋 إسلاميات</h2><a href="https://quran.com" class="btn-link">📖 المصحف</a><a href="https://www.azkary.com" class="btn-link">📿 أذكار</a></div></div>
+<div id="secret" class="page"><div class="card" style="border-color: var(--gold);"><h2>🔐 الخزنة</h2><input type="password" id="pass" placeholder="الباسورد..."><button class="btn-link" onclick="chk()">دخول</button><div id="sc" style="display:none;"><img src="https://profile-counter.glitch.me/fuv-ops/count.svg" style="max-width: 100%;"></div></div></div>
+
 <script>
-    // دالة التبديل بين الصفحات (تخفي الكل وتظهر المختارة فقط)
     function st(pageId, btn) {
         var pages = document.getElementsByClassName('page');
-        for (var i = 0; i < pages.length; i++) {
-            pages[i].classList.remove('show');
-        }
+        for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('show'); }
         document.getElementById(pageId).classList.add('show');
-        
         var buttons = document.querySelectorAll('nav button');
         buttons.forEach(function(b) { b.classList.remove('active-btn'); });
         btn.classList.add('active-btn');
-        window.scrollTo(0,0); // للرجوع لأعلى الصفحة عند التبديل
+        window.scrollTo(0,0);
     }
-
     function chk() {
-        if(document.getElementById('pass').value === "1148175381") {
-            document.getElementById('sc').style.display = 'block';
-        } else { alert("الباسورد غلط يا زعيم!"); }
+        if(document.getElementById('pass').value === "1148175381") document.getElementById('sc').style.display = 'block';
+        else alert("غلط!");
     }
-
     // تأثير الماتريكس (ZEYAD)
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
