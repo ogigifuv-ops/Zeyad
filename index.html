@@ -11,18 +11,18 @@
         header { padding: 15px; text-align: center; background: rgba(0,0,0,0.2); border-bottom: 2px solid #6366f1; }
         .chat-box { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
         .msg { padding: 10px 15px; border-radius: 15px; max-width: 80%; line-height: 1.6; }
-        .bot { background: #334155; align-self: flex-start; border-bottom-left-radius: 2px; }
-        .user { background: #6366f1; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .bot { background: #334155; align-self: flex-start; }
+        .user { background: #6366f1; align-self: flex-end; }
         .input-area { padding: 15px; display: flex; gap: 10px; background: rgba(0,0,0,0.3); }
         input { flex: 1; padding: 12px; border-radius: 10px; border: none; outline: none; background: #1e293b; color: white; }
-        button { padding: 10px 20px; background: #6366f1; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        button { padding: 10px 20px; background: #6366f1; color: white; border: none; border-radius: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
     <div class="container">
-        <header><h2>Zeyad AI Pro ✨</h2></header>
+        <header><h2>Zeyad AI Master ✨</h2></header>
         <div id="chat-box" class="chat-box">
-            <div class="msg bot">مرحباً! أنا مساعدك الذكي، اطلب ما تشاء وسأجيبك فوراً.</div>
+            <div class="msg bot">مرحباً بك! أنا مساعدك الذكي، كيف يمكنني مساعدتك؟</div>
         </div>
         <div class="input-area">
             <input type="text" id="user-input" placeholder="اسألني أي شيء...">
@@ -30,7 +30,7 @@
         </div>
     </div>
     <script>
-        // مفتاح الـ API الجديد اللي إنت بعته
+        // مفتاحك الجديد اللي هيخلي الموقع يشتغل صاروخ
         const API_KEY = "AIzaSyB654-HXqsYoWH7-MQbNXVODk9c9ehzeWM";
 
         async function send() {
@@ -44,7 +44,7 @@
             box.scrollTop = box.scrollHeight;
 
             const loadingId = "load-" + Date.now();
-            box.innerHTML += `<div class="msg bot" id="${loadingId}">جاري التفكير...</div>`;
+            box.innerHTML += `<div class="msg bot" id="${loadingId}">... جاري التفكير</div>`;
             box.scrollTop = box.scrollHeight;
 
             try {
@@ -58,11 +58,9 @@
                 
                 if(data.candidates && data.candidates[0].content.parts[0].text) {
                     box.innerHTML += `<div class="msg bot">${data.candidates[0].content.parts[0].text}</div>`;
-                } else {
-                    throw new Error();
-                }
+                } else { throw new Error(); }
             } catch(e) { 
-                document.getElementById(loadingId).innerText = "عذراً، حدث خطأ في معالجة طلبك. تأكد من جودة الإنترنت."; 
+                document.getElementById(loadingId).innerText = "عذراً، حدث خطأ. تأكد من المفتاح والإنترنت."; 
             }
             box.scrollTop = box.scrollHeight;
         }
