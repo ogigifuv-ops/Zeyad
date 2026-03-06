@@ -3,47 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeyad AI Pro</title>
+    <title>Zeyad AI Pro ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body { margin: 0; font-family: 'Cairo', sans-serif; background: #0f172a; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; }
         .container { width: 95%; max-width: 450px; height: 85vh; background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border-radius: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
         header { padding: 15px; text-align: center; background: rgba(0,0,0,0.2); border-bottom: 2px solid #6366f1; }
         .chat-box { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .msg { padding: 10px 15px; border-radius: 15px; max-width: 80%; }
-        .bot { background: #334155; align-self: flex-start; }
-        .user { background: #6366f1; align-self: flex-end; }
+        .msg { padding: 10px 15px; border-radius: 15px; max-width: 80%; line-height: 1.6; }
+        .bot { background: #334155; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .user { background: #6366f1; align-self: flex-end; border-bottom-right-radius: 2px; }
         .input-area { padding: 15px; display: flex; gap: 10px; background: rgba(0,0,0,0.3); }
-        input { flex: 1; padding: 10px; border-radius: 10px; border: none; outline: none; }
-        button { padding: 10px 20px; background: #6366f1; color: white; border: none; border-radius: 10px; cursor: pointer; }
+        input { flex: 1; padding: 12px; border-radius: 10px; border: none; outline: none; background: #1e293b; color: white; }
+        button { padding: 10px 20px; background: #6366f1; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="container">
         <header><h2>Zeyad AI Pro ✨</h2></header>
-        <div id="chat-box" class="chat-box"><div class="msg bot">أهلاً يا زياد! أنا جاهز للرد.</div></div>
+        <div id="chat-box" class="chat-box">
+            <div class="msg bot">مرحباً! أنا مساعدك الذكي، اطلب ما تشاء وسأجيبك فوراً.</div>
+        </div>
         <div class="input-area">
-            <input type="text" id="user-input" placeholder="اسألني أي حاجة...">
+            <input type="text" id="user-input" placeholder="اسألني أي شيء...">
             <button onclick="send()">إرسال</button>
         </div>
     </div>
     <script>
-        const API_KEY = "AIzaSyBdu3S2A0NLoCHV6-VOIi10nk5fo5eKPo4";
+        // مفتاح الـ API الجديد اللي إنت بعته
+        const API_KEY = "AIzaSyB654-HXqsYoWH7-MQbNXVODk9c9ehzeWM";
+
         async function send() {
             const input = document.getElementById('user-input');
             const box = document.getElementById('chat-box');
-            if(!input.value) return;
-            box.innerHTML += `<div class="msg user">${input.value}</div>`;
-            const userTxt = input.value; input.value = "";
+            if(!input.value.trim()) return;
+
+            const userText = input.value;
+            box.innerHTML += `<div class="msg user">${userText}</div>`;
+            input.value = "";
+            box.scrollTop = box.scrollHeight;
+
+            const loadingId = "load-" + Date.now();
+            box.innerHTML += `<div class="msg bot" id="${loadingId}">جاري التفكير...</div>`;
+            box.scrollTop = box.scrollHeight;
+
             try {
                 const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({contents: [{parts: [{text: userTxt}]}]})
+                    body: JSON.stringify({contents: [{parts: [{text: userText}]}]})
                 });
                 const data = await res.json();
-                box.innerHTML += `<div class="msg bot">${data.candidates[0].content.parts[0].text}</div>`;
-            } catch(e) { box.innerHTML += `<div class="msg bot">حدث خطأ، جرب تاني.</div>`; }
+                document.getElementById(loadingId).remove();
+                
+                if(data.candidates && data.candidates[0].content.parts[0].text) {
+                    box.innerHTML += `<div class="msg bot">${data.candidates[0].content.parts[0].text}</div>`;
+                } else {
+                    throw new Error();
+                }
+            } catch(e) { 
+                document.getElementById(loadingId).innerText = "عذراً، حدث خطأ في معالجة طلبك. تأكد من جودة الإنترنت."; 
+            }
             box.scrollTop = box.scrollHeight;
         }
     </script>
