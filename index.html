@@ -3,116 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZEYAD EMPIRE | النسخة الشغالة</title>
+    <title>ZEYAD ULTIMATE EMPIRE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --neon: #00f2ff; --purple: #bc13fe; --dark: #050505; --gold: #ffd700; }
+        :root { --neon: #00f2ff; --purple: #bc13fe; --dark: #050505; --gold: #ffd700; --red: #ff4b2b; }
         body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
         
-        /* شريط الأزرار - اتأكد إنه شغال سكرول */
-        nav { background: rgba(0,0,0,0.95); padding: 10px; display: flex; overflow-x: auto; gap: 8px; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--neon); }
-        nav button { background: rgba(255,255,255,0.05); border: 1px solid var(--neon); color: white; padding: 10px 18px; border-radius: 10px; cursor: pointer; white-space: nowrap; font-family: 'Cairo'; font-weight: bold; font-size: 13px; }
-        .active-btn { background: var(--neon) !important; color: black !important; }
+        /* شريط التنقل العملاق - اسحب يمين وشمال لرؤية باقي الأزرار */
+        nav { background: rgba(0,0,0,0.95); padding: 10px; display: flex; overflow-x: auto; gap: 8px; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--neon); scrollbar-width: none; }
+        nav::-webkit-scrollbar { display: none; }
+        nav button { background: rgba(255,255,255,0.05); border: 1px solid var(--neon); color: white; padding: 8px 15px; border-radius: 10px; cursor: pointer; white-space: nowrap; font-family: 'Cairo'; font-weight: bold; font-size: 12px; }
+        .active-btn { background: var(--neon) !important; color: black !important; box-shadow: 0 0 15px var(--neon); }
 
-        .page { display: none; width: 90%; margin: 20px auto; text-align: center; }
-        .show { display: block !important; }
+        .page { display: none; width: 92%; margin: 15px auto; text-align: center; }
+        .show { display: block !important; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .card { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; border: 1px solid rgba(0,242,255,0.2); margin-bottom: 15px; box-sizing: border-box; }
+        .card { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; border: 1px solid rgba(0,242,255,0.2); backdrop-filter: blur(10px); margin-bottom: 15px; box-sizing: border-box; width: 100%; }
         
-        /* تصليح الأزرار عشان متطلعش بره */
+        /* تنسيق الأزرار لمنع الخروج عن الإطار */
         .btn-link { 
             display: block; 
             width: 100%; 
             padding: 12px 0; 
-            margin: 10px 0; 
+            margin: 8px 0; 
             border: 1px solid var(--purple); 
             color: white; 
             text-decoration: none; 
             border-radius: 12px; 
             background: rgba(188, 19, 254, 0.1); 
             font-weight: bold; 
-            box-sizing: border-box;
+            font-size: 13px; 
+            box-sizing: border-box; 
+            transition: 0.2s; 
         }
+        .btn-link:active { transform: scale(0.98); background: var(--purple); }
         
-        .wa-float { position: fixed; bottom: 15px; left: 15px; background: #25d366; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; z-index: 2000; box-shadow: 0 0 15px #25d366; }
+        .wa-float { position: fixed; bottom: 15px; left: 15px; background: #25d366; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; z-index: 2000; box-shadow: 0 0 15px #25d366; font-size: 24px; }
+        input { width: 85%; padding: 12px; border-radius: 12px; border: 1px solid var(--gold); background: #000; color: white; margin: 10px 0; text-align: center; }
     </style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
-<a href="https://wa.me/201148175381" class="wa-float">💬</a>
+<a href="https://wa.me/201148175381" class="wa-float" target="_blank">💬</a>
 
 <nav id="topNav">
     <button onclick="st('home', this)" class="active-btn">🏠 الرئيسية</button>
+    <button onclick="st('live', this)">📺 بث مباشر</button>
     <button onclick="st('games', this)">🎮 الألعاب</button>
+    <button onclick="st('tools', this)">🛠️ أدوات ذكية</button>
+    <button onclick="st('design', this)">🎨 تصميم</button>
     <button onclick="st('study', this)">📚 المذاكرة</button>
+    <button onclick="st('ai', this)">🤖 ذكاء اصطناعي</button>
+    <button onclick="st('islam', this)">🕋 إسلاميات</button>
     <button onclick="st('secret', this)">🔐 الخزنة</button>
 </nav>
 
 <div id="home" class="page show">
     <div class="card">
-        <h1 style="color: var(--neon);">👑 إمبراطورية ZEYAD</h1>
+        <h1 style="color: var(--neon); font-size: 22px;">👑 إمبراطورية ZEYAD</h1>
+        <p style="font-size: 14px;">أهلاً بك في النسخة الإمبراطورية الأضخم.</p>
         <div class="card" style="border-color: var(--gold);">
-            <h3 style="color: var(--gold);">📥 التحميلات</h3>
-            <a href="https://www.appcreator24.com/app3947806-z45quj" class="btn-link" style="background: var(--gold); color: black;">📱 تحميل التطبيق (APK)</a>
-            <a href="https://www.mediafire.com/folder/hzyq8ztab32un/تخ" class="btn-link">📁 مجلد الأكواد</a>
+            <h3 style="color: var(--gold);">📥 التحميلات الرسمية</h3>
+            <a href="https://www.appcreator24.com/app3947806-z45quj" class="btn-link" style="background: var(--gold); color: black; border:none;">📱 تحميل التطبيق (APK)</a>
+            <a href="https://www.mediafire.com/folder/hzyq8ztab32un/تخ" class="btn-link" style="border-color: #007bff; color: #007bff;">📁 مجلد الملفات (MediaFire)</a>
         </div>
+    </div>
+</div>
+
+<div id="live" class="page">
+    <div class="card">
+        <h2 style="color: var(--red);">📺 ركن المشاهدة</h2>
+        <a href="https://www.elahmad.com/tv/beinsports.php" class="btn-link">⚽ مباريات اليوم لايف</a>
+        <a href="https://vaughn.live" class="btn-link">📽️ قنوات منوعة</a>
     </div>
 </div>
 
 <div id="games" class="page">
     <div class="card">
-        <h2 style="color: var(--neon);">🎮 ألعاب أونلاين</h2>
+        <h2 style="color: var(--neon);">🎮 ألعاب سريعة</h2>
         <a href="https://poki.com/en/g/subway-surfers" class="btn-link">🏃 Subway Surfers</a>
         <a href="https://poki.com/en/g/tictactoe" class="btn-link">❌ Tic Tac Toe</a>
+        <a href="https://poki.com/en/g/drive-mad" class="btn-link">🚗 Drive Mad</a>
+    </div>
+</div>
+
+<div id="tools" class="page">
+    <div class="card">
+        <h2 style="color: var(--gold);">🛠️ أدوات الإمبراطور</h2>
+        <a href="https://www.speedtest.net" class="btn-link">🚀 قياس سرعة النت</a>
+        <a href="https://123apps.com/ar" class="btn-link">✂️ تعديل فيديو وصوت</a>
+        <a href="https://www.accuweather.com/ar/eg/minya/127059" class="btn-link">🛰️ طقس المنيا</a>
+    </div>
+</div>
+
+<div id="design" class="page">
+    <div class="card">
+        <h2 style="color: var(--purple);">🎨 ركن المصممين</h2>
+        <a href="https://www.photopea.com" class="btn-link">🖌️ فوتوشوب أونلاين</a>
+        <a href="https://www.remove.bg" class="btn-link">✂️ إزالة خلفية الصور</a>
     </div>
 </div>
 
 <div id="study" class="page">
     <div class="card">
-        <h2>📚 ركن المذاكرة</h2>
-        <a href="https://www.google.com/search?q=ترجمة" class="btn-link">🔤 ترجمة فورية</a>
+        <h2 style="color: #4caf50;">📚 ركن الطالب</h2>
+        <a href="https://translate.google.com" class="btn-link">🔤 ترجمة فورية</a>
+        <a href="https://www.wikipedia.org" class="btn-link">📖 ويكيبيديا</a>
+    </div>
+</div>
+
+<div id="ai" class="page">
+    <div class="card">
+        <h2 style="color: var(--neon);">🤖 ركن الـ AI</h2>
+        <a href="https://chatgpt.com" class="btn-link">💬 ChatGPT</a>
+        <a href="https://poe.com" class="btn-link">🤖 مساعد ذكي منوع</a>
+    </div>
+</div>
+
+<div id="islam" class="page">
+    <div class="card">
+        <h2 style="color: #4caf50;">🕋 ركن المسلم</h2>
+        <a href="https://quran.com" class="btn-link">📖 المصحف كاملاً</a>
+        <a href="https://www.azkary.com" class="btn-link">📿 أذكار المسلم</a>
     </div>
 </div>
 
 <div id="secret" class="page">
     <div class="card" style="border-color: var(--gold);">
         <h2>🔐 الخزنة السرية</h2>
-        <input type="password" id="pass" style="width: 80%; padding: 10px; margin: 10px 0; background: #000; color: #fff; border: 1px solid var(--gold); border-radius: 10px;" placeholder="اكتب الباسورد...">
-        <button class="btn-link" onclick="chk()">فتح الإحصائيات</button>
+        <input type="password" id="pass" placeholder="اكتب الباسورد السري...">
+        <button class="btn-link" onclick="chk()">فتح الإحصائيات 🔓</button>
         <div id="sc" style="display:none; margin-top:15px;">
-            <img src="https://profile-counter.glitch.me/fuv-ops/count.svg" alt="Counter">
+            <p style="color: var(--gold);">إجمالي الزيارات لموقعك:</p>
+            <img src="https://profile-counter.glitch.me/fuv-ops/count.svg" alt="Counter" style="max-width: 100%; border: 1px solid var(--gold);">
+            <p style="font-size: 10px;">خاص بزياد فقط</p>
         </div>
     </div>
 </div>
 
 <script>
-    // دالة التنقل - اتأكدت إنها شغالة تمام
+    // دالة التنقل - اتأكدت إنها شغالة طيارة
     function st(pageId, btn) {
-        // 1. إخفاء كل الصفحات
         var pages = document.getElementsByClassName('page');
-        for (var i = 0; i < pages.length; i++) {
-            pages[i].style.display = 'none';
-        }
-        // 2. إظهار الصفحة المطلوبة
-        document.getElementById(pageId).style.display = 'block';
+        for (var i = 0; i < pages.length; i++) { pages[i].style.display = 'none'; }
+        var target = document.getElementById(pageId);
+        if(target) { target.style.display = 'block'; }
         
-        // 3. تغيير شكل الزرار النشط
         var buttons = document.querySelectorAll('nav button');
         buttons.forEach(function(b) { b.classList.remove('active-btn'); });
         btn.classList.add('active-btn');
     }
 
+    // دالة الخزنة السرية
     function chk() {
         if(document.getElementById('pass').value === "1148175381") {
             document.getElementById('sc').style.display = 'block';
-        } else {
-            alert("الباسورد غلط!");
-        }
+        } else { alert("الباسورد غلط يا زياد!"); }
     }
 
-    // كود الماتريكس
+    // تأثير الماتريكس (ZEYAD)
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
