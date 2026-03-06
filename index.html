@@ -8,36 +8,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --gold: #ffcc00; --emerald: #014436; --dark: #010c0a; --neon: 0 0 15px #ffcc00; }
-        body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; min-height: 100vh; display: flex; flex-direction: column; overflow-y: auto; scroll-behavior: smooth; }
+        body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; min-height: 100vh; display: flex; flex-direction: column; overflow-y: auto; }
         
-        .whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 9999; text-decoration: none; border: 2px solid white; transition: 0.3s; }
+        .whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 9999; text-decoration: none; border: 2px solid white; }
 
         header { background: linear-gradient(to bottom, var(--emerald), var(--dark)); padding: 20px; text-align: center; border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
         header h1 { font-family: 'Amiri', serif; font-size: 28px; color: var(--gold); margin: 0; text-shadow: var(--neon); }
 
         nav { display: flex; overflow-x: auto; background: #000; padding: 12px; gap: 10px; border-bottom: 2px solid var(--gold); scrollbar-width: none; position: sticky; top: 78px; z-index: 999; }
         nav::-webkit-scrollbar { display: none; }
-        nav button { background: rgba(255, 204, 0, 0.1); border: 1px solid var(--gold); color: white; padding: 12px 20px; border-radius: 25px; white-space: nowrap; cursor: pointer; font-weight: bold; font-size: 15px; }
-        .active-btn { background: var(--gold) !important; color: black !important; box-shadow: var(--neon); }
+        nav button { background: rgba(255, 204, 0, 0.1); border: 1px solid var(--gold); color: white; padding: 12px 20px; border-radius: 25px; white-space: nowrap; cursor: pointer; font-weight: bold; }
+        .active-btn { background: var(--gold) !important; color: black !important; }
 
         .main-display { flex-grow: 1; padding: 20px; background: radial-gradient(circle, #022b22, #010c0a); }
         .page { display: none; width: 100%; max-width: 800px; margin: auto; animation: fadeIn 0.4s ease; }
         .show-page { display: block !important; }
 
-        .card { background: rgba(1, 68, 54, 0.6); border: 1.5px solid var(--gold); border-radius: 20px; padding: 25px; margin-bottom: 30px; }
-        .item-box { background: rgba(255,255,255,0.08); padding: 20px; border-radius: 15px; margin-bottom: 15px; border-right: 6px solid var(--gold); font-family: 'Amiri', serif; font-size: 24px; line-height: 1.8; text-align: justify; }
-        .item-box b { color: var(--gold); display: block; margin-bottom: 10px; font-size: 20px; }
-
-        .s-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .s-btn { background: var(--emerald); color: white; border: 1.5px solid var(--gold); padding: 18px; border-radius: 15px; cursor: pointer; font-weight: bold; }
+        .card { background: rgba(1, 68, 54, 0.6); border: 1.5px solid var(--gold); border-radius: 20px; padding: 20px; margin-bottom: 30px; }
         
-        #player-ui { background: #000; padding: 20px; border-radius: 20px; border: 2px solid var(--gold); margin-bottom: 25px; text-align: center; }
+        /* اختيار القارئ */
+        .reciter-select { width: 100%; padding: 15px; background: var(--emerald); color: white; border: 2px solid var(--gold); border-radius: 12px; font-family: 'Cairo'; font-weight: bold; font-size: 16px; margin-bottom: 20px; outline: none; }
 
-        .sebha-circle { width: 150px; height: 150px; border: 8px solid var(--gold); border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 60px; cursor: pointer; background: rgba(255,204,0,0.1); box-shadow: var(--neon); }
-        .reset-btn { background: #ff3333; color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; cursor: pointer; font-weight: bold; font-size: 18px; }
+        .s-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .s-btn { background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,204,0,0.3); padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .s-btn:active { background: var(--gold); color: black; }
+
+        #player-ui { background: #000; padding: 20px; border-radius: 20px; border: 2px solid var(--gold); margin-bottom: 20px; text-align: center; position: sticky; top: 140px; z-index: 90; }
 
         .footer-empire { text-align: center; padding: 40px 20px; background: #000; border-top: 3px solid var(--gold); margin-top: auto; }
-        .footer-empire h2 { font-family: 'Cairo', sans-serif; font-size: 24px; color: white; text-shadow: 0 0 15px var(--gold); margin: 0; }
+        .footer-empire h2 { font-family: 'Cairo', sans-serif; font-size: 22px; color: white; text-shadow: 0 0 15px var(--gold); margin: 0; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -48,64 +47,68 @@
 
 <header><h1>✨ إِمْبَرَاطُورِيَّةُ التِّلَاوَةِ ✨</h1></header>
 
-<nav id="navbar">
+<nav>
     <button onclick="go('p1', this)" class="active-btn">🏠 الرئيسية</button>
     <button onclick="go('p3', this)">📖 المصحف</button>
-    <button onclick="go('p10', this)">📿 السبحة</button>
-    <button onclick="go('p4', this)">☀️ الصباح</button>
     <button onclick="go('p5', this)">🌆 المساء</button>
-    <button onclick="go('p2', this)">🌙 رمضان</button>
+    <button onclick="go('p10', this)">📿 السبحة</button>
     <button onclick="go('p12', this)">📻 الراديو</button>
 </nav>
 
 <div class="main-display">
     <div id="p1" class="page show-page">
         <div class="card">
-            <h2 style="text-align:center; color:var(--gold);">مرحباً يا إمبراطور</h2>
-            <div class="item-box">تم إصلاح زر أذكار المساء، وتحديث الراديو، وإضافة أدعية مطولة جداً في كافة الأقسام.</div>
+            <h2 style="text-align:center; color:var(--gold);">مرحباً يا زياد</h2>
+            <div style="background:rgba(255,255,255,0.08); padding:20px; border-radius:15px; border-right:6px solid var(--gold); font-size:22px; line-height:1.6;">
+                تم إضافة كبار القراء (الدوسري، الحصري، المنشاوي، عبد الباسط). اختر قارئك المفضل من قسم المصحف واستمتع بالتلاوة.
+            </div>
         </div>
     </div>
 
     <div id="p3" class="page">
         <div class="card">
-            <h3>📖 المصحف المرتل</h3>
+            <h3 style="text-align:center;">📖 اختر القارئ والسورة</h3>
+            
+            <select id="reciter" class="reciter-select">
+                <option value="husr">الشيخ محمود خليل الحصري</option>
+                <option value="yasser">الشيخ ياسر الدوسري</option>
+                <option value="minsh">الشيخ محمد صديق المنشاوي</option>
+                <option value="basit">الشيخ عبد الباسط عبد الصمد</option>
+            </select>
+
             <div id="player-ui" style="display:none;">
                 <p id="s-title" style="color:var(--gold); font-weight:bold;"></p>
                 <audio id="audio-player" controls style="width:100%"><source id="audio-src" src=""></audio>
             </div>
-            <div id="surah-container" class="s-grid"></div>
-        </div>
-    </div>
 
-    <div id="p4" class="page">
-        <div class="card">
-            <h3>☀️ أذكار الصباح كاملة</h3>
-            <div class="item-box">أصبحنا وأصبح الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير.</div>
-            <div class="item-box">اللهم إني أسألك خير هذا اليوم فتحه ونصره ونوره وبركته وهداه، وأعوذ بك من شر ما فيه وشر ما بعده.</div>
-            <div class="item-box">رضيت بالله رباً، وبالإسلام ديناً، وبمحمد صلى الله عليه وسلم نبياً (3 مرات).</div>
+            <div id="surah-container" class="s-grid"></div>
         </div>
     </div>
 
     <div id="p5" class="page">
         <div class="card">
             <h3>🌆 أذكار المساء كاملة</h3>
-            <div class="item-box">أمسينا وأمسى الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير.</div>
-            <div class="item-box">اللهم بك أمسينا، وبك أصبحنا، وبك نحيا، وبك نموت، وإليك المصير.</div>
-            <div class="item-box">أعوذ بكلمات الله التامات من شر ما خلق (3 مرات).</div>
-            <div class="item-box">يا حي يا قيوم برحمتك أستغيث، أصلح لي شأني كله ولا تكلني إلى نفسي طرفة عين.</div>
+            <div style="background:rgba(255,255,255,0.08); padding:15px; border-radius:10px; margin-bottom:10px; font-family:Amiri; font-size:22px;">أعوذ بالله من الشيطان الرجيم (آية الكرسي).</div>
+            <div style="background:rgba(255,255,255,0.08); padding:15px; border-radius:10px; margin-bottom:10px; font-family:Amiri; font-size:22px;">اللهم بك أمسينا، وبك أصبحنا، وبك نحيا، وبك نموت، وإليك المصير.</div>
+            <div style="background:rgba(255,255,255,0.08); padding:15px; border-radius:10px; margin-bottom:10px; font-family:Amiri; font-size:22px;">أمسينا على فطرة الإسلام، وعلى كلمة الإخلاص، وعلى دين نبينا محمد صلى الله عليه وسلم.</div>
         </div>
     </div>
 
     <div id="p12" class="page">
         <div class="card" style="text-align:center;">
-            <h3>📻 إذاعة القرآن الكريم (القاهرة)</h3>
-            <div class="item-box" style="font-size:16px;">البث المباشر يعمل الآن.. اضغط تشغيل</div>
-            <audio controls style="width:100%;"><source src="https://n02.radiojar.com/8s7u7caactv5v"></audio>
+            <h3>📻 إذاعة القرآن الكريم</h3>
+            <audio controls style="width:100%;"><source src="https://stream.zeno.fm/f677v8u3qy8uv"></audio>
+            <p style="margin-top:10px; font-size:14px; color:var(--gold);">بث مباشر فائق الجودة</p>
         </div>
     </div>
 
-    <div id="p10" class="page"><div class="card" style="text-align:center;"><h3>📿 السبحة</h3><div id="counter" class="sebha-circle" onclick="countUp()">0</div><button class="reset-btn" onclick="clearCount()">تصفير العداد</button></div></div>
-    <div id="p2" class="page"><div class="card"><h3>🌙 رمضان</h3><div class="item-box"><b>دعاء الإفطار:</b> ذهب الظمأ وابتلت العروق وثبت الأجر إن شاء الله.</div></div></div>
+    <div id="p10" class="page">
+        <div class="card" style="text-align:center;">
+            <h3>📿 السبحة</h3>
+            <div id="counter" style="width:140px; height:140px; border:8px solid var(--gold); border-radius:50%; margin:20px auto; display:flex; align-items:center; justify-content:center; font-size:50px; cursor:pointer;" onclick="countUp()">0</div>
+            <button onclick="c=0; document.getElementById('counter').innerText=0;" style="background:red; color:white; border:none; padding:15px; border-radius:12px; width:100%; font-weight:bold;">تصفير العداد</button>
+        </div>
+    </div>
 </div>
 
 <footer class="footer-empire">
@@ -123,15 +126,28 @@
     }
 
     const suras = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
+    
+    // روابط السيرفرات لكل قارئ
+    const servers = {
+        'husr': 'https://server13.mp3quran.net/husr/',
+        'yasser': 'https://server11.mp3quran.net/yasser/',
+        'minsh': 'https://server10.mp3quran.net/minsh/Almusshaf_Almuallim/',
+        'basit': 'https://server7.mp3quran.net/basit/'
+    };
+
     const container = document.getElementById('surah-container');
     suras.forEach((name, index) => {
         let btn = document.createElement('button');
         btn.className = 's-btn'; btn.innerText = name;
         btn.onclick = () => {
+            let reciter = document.getElementById('reciter').value;
             let id = (index + 1).toString().padStart(3, '0');
             document.getElementById('player-ui').style.display = 'block';
-            document.getElementById('s-title').innerText = "سورة " + name;
-            document.getElementById('audio-src').src = `https://server13.mp3quran.net/husr/${id}.mp3`;
+            document.getElementById('s-title').innerText = "تلاوة سورة " + name;
+            
+            // ضبط الرابط بناءً على القارئ
+            document.getElementById('audio-src').src = servers[reciter] + id + '.mp3';
+            
             const player = document.getElementById('audio-player');
             player.load(); player.play();
         };
@@ -140,7 +156,6 @@
 
     let c = 0;
     function countUp() { c++; document.getElementById('counter').innerText = c; }
-    function clearCount() { c = 0; document.getElementById('counter').innerText = 0; }
 </script>
 </body>
 </html>
