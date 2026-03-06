@@ -3,56 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeyad Empire | إمبراطورية زياد</title>
+    <title>إمبراطورية زياد | الشغالة 100%</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --neon: #00f2ff; --purple: #bc13fe; --dark: #080808; }
         body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
         
-        /* Navbar عملاق */
-        nav { background: rgba(0,0,0,0.95); padding: 15px; display: flex; overflow-x: auto; gap: 20px; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--neon); scrollbar-width: none; }
-        nav::-webkit-scrollbar { display: none; }
-        nav a { color: white; text-decoration: none; white-space: nowrap; font-weight: bold; padding: 8px 15px; border-radius: 20px; border: 1px solid transparent; transition: 0.3s; }
-        nav a:hover { border-color: var(--neon); box-shadow: 0 0 10px var(--neon); }
+        /* Navbar شغال باللمس والضغط */
+        nav { background: rgba(0,0,0,0.95); padding: 15px; display: flex; overflow-x: auto; gap: 15px; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--neon); }
+        nav button { background: none; border: 1px solid var(--neon); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-family: 'Cairo'; transition: 0.3s; }
+        nav button.active-nav { background: var(--neon); color: black; box-shadow: 0 0 15px var(--neon); }
 
-        .container { max-width: 900px; margin: 30px auto; padding: 20px; display: none; }
-        .active { display: block; animation: zoomIn 0.4s ease; }
-        @keyframes zoomIn { from { opacity:0; transform:scale(0.9); } to { opacity:1; transform:scale(1); } }
+        .container { max-width: 900px; margin: 20px auto; padding: 20px; display: none; }
+        .active-page { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
 
-        .card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; border: 1px solid rgba(0,242,255,0.3); backdrop-filter: blur(20px); text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
-        .box { background: rgba(0,0,0,0.5); padding: 20px; border-radius: 15px; border: 1px solid var(--purple); cursor: pointer; transition: 0.3s; }
-        .box:hover { transform: translateY(-5px); border-color: var(--neon); }
-        
-        .btn { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid var(--neon); color: var(--neon); background: none; border-radius: 15px; cursor: pointer; font-weight: bold; font-size: 16px; }
-        .btn:hover { background: var(--neon); color: black; box-shadow: 0 0 20px var(--neon); }
-
-        input { width: 90%; padding: 15px; border-radius: 10px; border: 1px solid var(--neon); background: #111; color: white; margin-bottom: 10px; }
+        .card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 25px; border: 1px solid rgba(0,242,255,0.3); backdrop-filter: blur(15px); text-align: center; }
+        .btn-link { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 2px solid var(--purple); color: white; text-decoration: none; border-radius: 15px; font-weight: bold; background: rgba(188, 19, 254, 0.1); }
+        .btn-link:hover { background: var(--purple); box-shadow: 0 0 20px var(--purple); }
     </style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
 
-<nav>
-    <a onclick="showPage('home')">🏰 القصر الرئيسي</a>
-    <a onclick="showPage('apps')">📱 متجر التطبيقات</a>
-    <a onclick="showPage('games')">🎮 صالة الألعاب</a>
-    <a onclick="showPage('tools')">🔧 الورشة الفنية</a>
-    <a onclick="showPage('music')">🎵 الاستوديو</a>
-    <a onclick="showPage('hacker')">💻 منطقة الهكر</a>
-    <a onclick="showPage('social')">💬 مجتمع زياد</a>
+<nav id="navbar">
+    <button onclick="openPage('home', this)" class="active-nav">🏰 الرئيسية</button>
+    <button onclick="openPage('apps', this)">📱 التطبيقات</button>
+    <button onclick="openPage('games', this)">🎮 الألعاب</button>
+    <button onclick="openPage('hacker', this)">💻 الهكر</button>
 </nav>
 
-<div id="home" class="container active">
+<div id="home" class="container active-page">
     <div class="card">
-        <h1 style="font-size: 40px;">👑 إمبراطورية ZEYAD</h1>
-        <p>أنت الآن في أضخم منصة برمجية صنعها زياد بمفرده. استمتع بكل المزايا مجاناً.</p>
-        <div class="grid">
-            <div class="box">⭐ 5.0 تقييم</div>
-            <div class="box">👥 10K+ مستخدم</div>
-            <div class="box">🚀 سرعة فائقة</div>
+        <h1 style="font-size: 35px;">👑 إمبراطورية ZEYAD</h1>
+        <p>أهلاً بك في أضخم منصة برمجية صنعها زياد. الأزرار الآن تعمل بكفاءة!</p>
+        <div class="card" style="margin-top:20px; border-color: var(--purple);">
+            <h3>⭐ تقييمنا: 5.0</h3>
+            <h3>👥 مستخدمينا: +10K</h3>
         </div>
     </div>
 </div>
@@ -60,97 +49,67 @@
 <div id="apps" class="container">
     <div class="card">
         <h2>📱 تطبيقات زياد الحصرية</h2>
-        <div class="grid">
-            <div class="box">تطبيق الصلاة</div>
-            <div class="box">محرر الأكواد</div>
-            <div class="box">منظف الهاتف</div>
-            <div class="box">برنامج التصميم</div>
-        </div>
-        <p style="margin-top: 20px; font-size: 12px;">(قريباً روابط التحميل المباشرة)</p>
+        <a href="#" class="btn-link">🕋 تطبيق الصلاة</a>
+        <a href="#" class="btn-link">📝 محرر الأكواد</a>
+        <a href="#" class="btn-link">🧹 منظف الهاتف</a>
     </div>
 </div>
 
 <div id="games" class="container">
     <div class="card">
-        <h2>🎮 منطقة الألعاب المتقدمة</h2>
-        <p>لعبة تخمين الكلمة السرية:</p>
-        <input type="text" id="word-input" placeholder="خمن الكلمة...">
-        <button class="btn" onclick="checkWord()">تحقق من الذكاء 🧠</button>
-        <p id="game-res"></p>
+        <h2>🎮 صالة الألعاب</h2>
+        <p>لعبة "تحطيم الأرقام" قريباً!</p>
+        <button class="btn-link" onclick="alert('اللعبة تحت التطوير يا بطل!')">العب الآن</button>
     </div>
 </div>
 
 <div id="hacker" class="container">
-    <div class="card" style="border-color: #0f0; background: rgba(0,255,0,0.05);">
-        <h2 style="color: #0f0;">💻 Terminal Mode</h2>
-        <div id="console" style="text-align: left; font-family: monospace; height: 150px; overflow-y: auto; color: #0f0;">
-            > Initializing Zeyad Hack System...<br>
-            > Accessing Mainframe...<br>
-            > Security Bypassed...<br>
+    <div class="card" style="border-color: #0f0;">
+        <h2 style="color: #0f0;">💻 وضع الاختراق الوهمي</h2>
+        <div id="console" style="text-align: left; font-family: monospace; color: #0f0; background: #000; padding: 10px; height: 150px; overflow-y: auto;">
+            > النظام جاهز للأوامر...
         </div>
-        <button class="btn" style="border-color: #0f0; color: #0f0;" onclick="startHack()">إطلاق الهجوم الوهمي 🧨</button>
-    </div>
-</div>
-
-<div id="social" class="container">
-    <div class="card">
-        <h2>💬 شات مجتمع زياد</h2>
-        <div id="chat-box" style="height: 150px; background: rgba(0,0,0,0.5); border-radius: 10px; padding: 10px; margin-bottom: 10px; overflow-y: auto;">
-            <div style="text-align: right;"><b>المشرف:</b> أهلاً بكل أعضاء الإمبراطورية!</div>
-        </div>
-        <input type="text" id="msg-input" placeholder="اكتب رسالتك للمجتمع...">
-        <button class="btn" onclick="sendMsg()">إرسال للكل 🌍</button>
+        <button class="btn-link" style="border-color: #0f0; color: #0f0;" onclick="startHack()">تشغيل الهجوم 🧨</button>
     </div>
 </div>
 
 <script>
-    function showPage(id) {
-        document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-    }
-
-    function checkWord() {
-        const i = document.getElementById('word-input').value.toLowerCase();
-        const r = document.getElementById('game-res');
-        if(i === "زياد") { r.innerText = "✅ عبقري! دي كلمة السر فعلاً"; r.style.color = "#00f2ff"; }
-        else { r.innerText = "❌ حاول مرة تانية يا بطل"; r.style.color = "#ff4444"; }
+    // برمجة الأزرار عشان تشتغل
+    function openPage(pageId, btn) {
+        // إخفاء كل الصفحات
+        document.querySelectorAll('.container').forEach(p => p.classList.remove('active-page'));
+        // إظهار الصفحة المطلوبة
+        document.getElementById(pageId).classList.add('active-page');
+        
+        // تغيير شكل الزرار النشط
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-nav'));
+        btn.classList.add('active-nav');
     }
 
     function startHack() {
-        const con = document.getElementById('console');
-        const lines = ["> Finding Vulnerabilities...", "> Downloading Database...", "> Sending Virus...", "> System Hacked Successfully!"];
+        const c = document.getElementById('console');
+        const lines = ["> Finding IP...", "> Bypassing Firewall...", "> Access Granted!", "> Downloading Data..."];
         let i = 0;
-        const interval = setInterval(() => {
-            con.innerHTML += lines[i] + "<br>";
-            con.scrollTop = con.scrollHeight;
-            i++; if(i >= lines.length) clearInterval(interval);
-        }, 800);
+        const inv = setInterval(() => {
+            c.innerHTML += `<br>> ${lines[i]}`;
+            c.scrollTop = c.scrollHeight;
+            i++; if(i>=lines.length) clearInterval(inv);
+        }, 600);
     }
 
-    function sendMsg() {
-        const input = document.getElementById('msg-input');
-        const box = document.getElementById('chat-box');
-        if(input.value) {
-            box.innerHTML += `<div style="text-align: right;"><b>أنت:</b> ${input.value}</div>`;
-            input.value = "";
-            box.scrollTop = box.scrollHeight;
-        }
-    }
-
-    // Matrix Effect
+    // Matrix Background
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const letters = "ZEYAD-SYSTEM-MOD-2025-ACTIVE";
-    const fontSize = 16;
-    const drops = Array(Math.floor(canvas.width/fontSize)).fill(1);
+    const letters = "ZEYAD1010";
+    const drops = Array(Math.floor(canvas.width/16)).fill(1);
     function draw() {
         ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = "#00f2ff"; ctx.font = fontSize + "px monospace";
+        ctx.fillStyle = "#00f2ff"; ctx.font = "16px monospace";
         drops.forEach((y, i) => {
             const text = letters[Math.floor(Math.random()*letters.length)];
-            ctx.fillText(text, i*fontSize, y*fontSize);
-            if(y*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            ctx.fillText(text, i*16, y*16);
+            if(y*16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
             drops[i]++;
         });
     }
