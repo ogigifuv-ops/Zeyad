@@ -10,41 +10,33 @@
         :root { --gold: #ffcc00; --emerald: #014436; --dark: #010c0a; --neon: 0 0 15px #ffcc00; }
         body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; min-height: 100vh; overflow-x: hidden; }
         
-        /* الهيدر */
         header { background: linear-gradient(to bottom, var(--emerald), var(--dark)); padding: 20px 10px; text-align: center; border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 1001; }
         header h1 { font-family: 'Amiri', serif; font-size: 26px; color: var(--gold); margin: 0; text-shadow: var(--neon); }
 
-        /* شريط التنقل - تم إصلاح الترتيب */
         nav { display: flex; overflow-x: auto; background: #000; padding: 12px; gap: 10px; border-bottom: 2px solid var(--gold); position: sticky; top: 75px; z-index: 1000; scrollbar-width: none; }
-        nav button { background: rgba(255, 204, 0, 0.1); border: 1.5px solid var(--gold); color: white; padding: 10px 20px; border-radius: 25px; white-space: nowrap; cursor: pointer; font-family: 'Cairo'; font-weight: bold; transition: 0.3s; }
+        nav button { background: rgba(255, 204, 0, 0.1); border: 1.5px solid var(--gold); color: white; padding: 10px 20px; border-radius: 25px; white-space: nowrap; cursor: pointer; font-family: 'Cairo'; font-weight: bold; }
         .active-btn { background: var(--gold) !important; color: black !important; box-shadow: var(--neon); }
 
-        /* المحتوى الرئيسي */
         .main-display { padding: 20px; background: radial-gradient(circle, #022b22, #010c0a); min-height: 80vh; }
-        .page { display: none; animation: fadeIn 0.4s ease-in-out; max-width: 600px; margin: auto; }
+        .page { display: none; animation: fadeIn 0.4s ease; max-width: 600px; margin: auto; }
         .show-page { display: block !important; }
 
-        /* الكروت */
         .card { background: rgba(1, 68, 54, 0.7); border: 2px solid var(--gold); border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; }
-        h3 { color: var(--gold); margin-top: 0; font-family: 'Amiri', serif; font-size: 24px; }
-
-        /* المشغل الصوتي المطور */
-        .player-container { background: #000; border-radius: 20px; padding: 20px; margin-top: 20px; border: 1px solid var(--gold); }
-        .audio-info { margin-bottom: 10px; color: var(--gold); font-weight: bold; font-size: 14px; }
-        audio { width: 100%; height: 45px; border-radius: 10px; }
         
-        /* أزرار الراديو والسور */
-        .radio-btn, .s-btn { background: rgba(1, 68, 54, 0.9); color: white; border: 1.5px solid var(--gold); padding: 15px; border-radius: 15px; width: 100%; margin-bottom: 12px; cursor: pointer; font-weight: bold; font-family: 'Cairo'; transition: 0.2s; font-size: 16px; }
+        /* مشغل الصوت المطور بالعداد */
+        .player-box { background: #000; border-radius: 15px; padding: 15px; margin-top: 15px; border: 1px solid var(--gold); }
+        .audio-timer { display: flex; justify-content: space-between; color: var(--gold); font-size: 14px; margin-top: 5px; font-family: monospace; }
+        audio { width: 100%; height: 40px; }
+
+        .item-box { background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; margin-bottom: 12px; border: 1px solid rgba(255,204,0,0.3); font-family: 'Amiri', serif; font-size: 20px; line-height: 1.6; }
+        .copy-btn { float: left; background: var(--gold); color: black; border: none; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
+
         .s-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .s-btn { padding: 12px 5px; font-size: 14px; }
-        .radio-btn:active, .s-btn:active { transform: scale(0.95); background: var(--gold); color: black; }
-
-        /* عداد السبحة - تم إصلاحه */
-        .sebha-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .sebha-circle { width: 150px; height: 150px; border: 8px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 50px; cursor: pointer; background: rgba(255,204,0,0.1); box-shadow: var(--neon); color: var(--gold); font-weight: bold; }
-
-        /* واتساب */
-        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; border: 2px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-decoration: none; }
+        .s-btn, .radio-btn { background: rgba(1, 68, 54, 0.9); color: white; border: 1.5px solid var(--gold); padding: 15px; border-radius: 12px; cursor: pointer; font-weight: bold; width: 100%; }
+        
+        .sebha-circle { width: 140px; height: 140px; border: 6px solid var(--gold); border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 45px; cursor: pointer; box-shadow: var(--neon); color: var(--gold); }
+        
+        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; border: 2px solid white; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -60,29 +52,26 @@
     <button onclick="go('p10', this)">📿 السبحة</button>
     <button onclick="go('p11', this)">🌟 الأسماء</button>
     <button onclick="go('p4', this)">☀️ الصباح</button>
+    <button onclick="go('p5', this)">🌆 المساء</button>
+    <button onclick="go('p2', this)">🌙 رمضان</button>
+    <button onclick="go('p8', this)">💰 الرزق</button>
+    <button onclick="go('p6', this)">😴 النوم</button>
+    <button onclick="go('p7', this)">🕌 الصلاة</button>
+    <button onclick="go('p9', this)">🤲 أدعية</button>
 </nav>
 
 <div class="main-display">
-    <div id="p1" class="page show-page">
-        <div class="card">
-            <h2>أهلاً بك يا إمبراطور زياد</h2>
-            <p>تم إصلاح عداد الصوت وتنسيق الأزرار. استمتع بالتجربة الجديدة.</p>
-        </div>
-    </div>
+    <div id="p1" class="page show-page"><div class="card"><h2>مرحباً يا إمبراطور زياد</h2><p>تم استعادة الـ 12 قسم وتفعيل عداد الصوت في جميع الأقسام.</p></div></div>
 
     <div id="p12" class="page">
         <div class="card">
-            <h3>📻 مكتبة التلاوات المسجلة</h3>
-            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/tarabeel.mp3', 'تلاوات نادرة ومختارة')">📻 تلاوات مختارة</button>
-            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/mohammad_siddiq_alminshawi_mojawwad', 'الشيخ المنشاوي - مجود')">📻 مكتبة المنشاوي كاملة</button>
-            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/mahmoud_khalil_alhussary_mojawwad', 'الشيخ الحصري - مجود')">📻 مكتبة الحصري كاملة</button>
-
-            <div id="audio-box" class="player-container" style="display:none;">
-                <div class="audio-info" id="audio-title">جاري التحميل...</div>
-                <audio id="main-player" controls preload="auto">
-                    <source id="audio-source" src="">
-                </audio>
-                <p style="font-size: 11px; color: #aaa; margin-top: 10px;">العداد يظهر داخل شريط المشغل أعلاه</p>
+            <h3>📻 محطات الراديو المباشرة</h3>
+            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/mohammad_siddiq_alminshawi_mojawwad', 'إذاعة الشيخ المنشاوي')">📻 إذاعة الشيخ المنشاوي</button><br><br>
+            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/mahmoud_khalil_alhussary_mojawwad', 'إذاعة الشيخ الحصري')">📻 إذاعة الشيخ الحصري</button><br><br>
+            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/radio_quran', 'إذاعة القرآن الكريم - القاهرة')">📻 إذاعة القرآن الكريم</button>
+            <div id="audio-ui" class="player-box" style="display:none;">
+                <div id="atitle" style="color:var(--gold); margin-bottom:10px; font-weight:bold;"></div>
+                <audio id="main-player" controls preload="auto"><source id="asrc" src=""></audio>
             </div>
         </div>
     </div>
@@ -90,81 +79,79 @@
     <div id="p3" class="page">
         <div class="card">
             <h3>📖 المصحف الشريف</h3>
-            <select id="reciter" class="radio-btn" style="background: #000; margin-bottom: 20px;">
+            <select id="reciter" class="radio-btn" style="background:#000; margin-bottom:15px;">
                 <option value="minsh">الشيخ المنشاوي</option>
                 <option value="husr">الشيخ الحصري</option>
                 <option value="basit">الشيخ عبد الباسط</option>
             </select>
-            <div id="surah-container" class="s-grid"></div>
+            <div id="surah-list" class="s-grid"></div>
         </div>
     </div>
 
     <div id="p10" class="page">
-        <div class="card">
-            <h3>📿 السبحة الإلكترونية</h3>
-            <div class="sebha-container">
-                <div id="count-display" class="sebha-circle" onclick="addCount()">0</div>
-                <button onclick="resetCount()" style="background:red; color:white; border:none; padding:15px; border-radius:10px; width:100%; font-weight:bold; cursor:pointer;">إعادة ضبط (تصفير)</button>
-            </div>
-        </div>
+        <div class="card"><h3>📿 السبحة</h3><div id="count" class="sebha-circle" onclick="countUp()">0</div><button onclick="resetC()" style="background:red; color:white; border:none; padding:10px; border-radius:8px; width:100%;">تصفير</button></div>
     </div>
+
+    <div id="p11" class="page"><div class="card"><h3>🌟 أسماء الله الحسنى</h3><div id="names-grid" class="s-grid"></div></div></div>
+    
+    <div id="p4" class="page"><div class="card"><h3>☀️ أذكار الصباح</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">أصبحنا وأصبح الملك لله..</span></div></div></div>
+    <div id="p5" class="page"><div class="card"><h3>🌆 أذكار المساء</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">أمسينا وأمسى الملك لله..</span></div></div></div>
+    <div id="p2" class="page"><div class="card"><h3>🌙 رمضان</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">اللهم بلغنا رمضان..</span></div></div></div>
+    <div id="p8" class="page"><div class="card"><h3>💰 الرزق</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">اللهم اكفني بحلالك..</span></div></div></div>
+    <div id="p6" class="page"><div class="card"><h3>😴 النوم</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">باسمك ربي وضعت جنبي..</span></div></div></div>
+    <div id="p7" class="page"><div class="card"><h3>🕌 الصلاة</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">أستغفر الله (3 مرات)..</span></div></div></div>
+    <div id="p9" class="page"><div class="card"><h3>🤲 أدعية</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">ربنا آتنا في الدنيا حسنة..</span></div></div></div>
 </div>
 
 <a href="https://wa.me/201148175381" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <script>
-    // التنقل بين الصفحات
-    function go(pageId, btn) {
+    function go(id, btn) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('show-page'));
-        document.getElementById(pageId).classList.add('show-page');
+        document.getElementById(id).classList.add('show-page');
         document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-btn'));
         btn.classList.add('active-btn');
         window.scrollTo(0,0);
     }
 
-    // مشغل الصوت
     function playAudio(url, title) {
-        const box = document.getElementById('audio-box');
+        const ui = document.getElementById('audio-ui');
         const player = document.getElementById('main-player');
-        const source = document.getElementById('audio-source');
-        const titleText = document.getElementById('audio-title');
-
-        box.style.display = 'block';
-        titleText.innerText = "جاري تشغيل: " + title;
-        source.src = url;
+        ui.style.display = 'block';
+        document.getElementById('atitle').innerText = "جاري تشغيل: " + title;
+        document.getElementById('asrc').src = url;
         player.load();
         player.play();
+        ui.scrollIntoView({behavior: 'smooth'});
     }
 
-    // عداد السبحة
-    let counter = 0;
-    function addCount() {
-        counter++;
-        document.getElementById('count-display').innerText = counter;
-        // اهتزاز بسيط للموبايل عند التسبيح
-        if (navigator.vibrate) navigator.vibrate(50);
-    }
-    function resetCount() {
-        counter = 0;
-        document.getElementById('count-display').innerText = 0;
+    let c = 0;
+    function countUp() { c++; document.getElementById('count').innerText = c; if(navigator.vibrate) navigator.vibrate(50); }
+    function resetC() { c = 0; document.getElementById('count').innerText = 0; }
+
+    function copyT(btn) {
+        const t = btn.parentElement.querySelector('.txt').innerText;
+        navigator.clipboard.writeText(t);
+        btn.innerText = "تم!";
+        setTimeout(() => btn.innerText = "نسخ", 2000);
     }
 
-    // توليد سور القرآن
     const suras = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
-    const servers = { 'minsh': 'https://server10.mp3quran.net/minsh/', 'husr': 'https://server13.mp3quran.net/husr/', 'basit': 'https://server7.mp3quran.net/basit/' };
-
-    const grid = document.getElementById('surah-container');
-    suras.forEach((name, i) => {
-        let btn = document.createElement('button');
-        btn.className = 's-btn';
-        btn.innerText = name;
-        btn.onclick = () => {
-            let rec = document.getElementById('reciter').value;
-            let id = (i + 1).toString().padStart(3, '0');
-            playAudio(servers[rec] + id + '.mp3', "سورة " + name);
+    const srv = { 'minsh': 'https://server10.mp3quran.net/minsh/', 'husr': 'https://server13.mp3quran.net/husr/', 'basit': 'https://server7.mp3quran.net/basit/' };
+    const list = document.getElementById('surah-list');
+    suras.forEach((s, i) => {
+        let b = document.createElement('button'); b.className = 's-btn'; b.innerText = s;
+        b.onclick = () => {
+            let r = document.getElementById('reciter').value;
+            let id = (i+1).toString().padStart(3, '0');
+            playAudio(srv[r]+id+'.mp3', "سورة " + s);
         };
-        grid.appendChild(btn);
+        list.appendChild(b);
     });
+
+    const names = ["الله", "الرحمن", "الرحيم", "الملك", "القدوس", "السلام", "المؤمن", "المهيمن", "العزيز", "الجبار", "المتكبر", "الخالق", "البارئ", "المصور", "الغفار", "القهار", "الوهاب", "الرزاق", "الفتاح", "العليم", "القابض", "الباسط", "الخافض", "الرافع", "المعز", "المذل", "السميع", "البصير", "الحكم", "العدل", "اللطيف", "الخبير", "الحليم", "العظيم", "الغفور", "الشكور", "العلي", "الكبير", "الحفيظ", "المقيت", "الحسيب", "الجليل", "الكريم", "الرقيب", "المجيب", "الواسع", "الحكيم", "الودود", "المجيد", "الباعث", "الشهيد", "الحق", "الوكيل", "القوي", "المتين", "الولي", "الحميد", "المحصي", "المبدئ", "المعيد", "المحيي", "المميت", "الحي", "القيوم", "الواجد", "الماجد", "الواحد", "الأحد", "الصمد", "القادر", "المقتدر", "المقدم", "المؤخر", "الأول", "الآخر", "الظاهر", "الباطن", "الوالي", "المتعالي", "البر", "التواب", "المنتقم", "العفو", "الرؤوف", "مالك الملك", "ذو الجلال والإكرام", "المقسط", "الجامع", "الغني", "المغني", "المانع", "الضار", "النافع", "النور", "الهادي", "البديع", "الباقي", "الوارث", "الرشيد", "الصبور"];
+    const ng = document.getElementById('names-grid');
+    names.forEach(n => { let d = document.createElement('div'); d.className = 's-btn'; d.innerText = n; ng.appendChild(d); });
 </script>
 </body>
 </html>
