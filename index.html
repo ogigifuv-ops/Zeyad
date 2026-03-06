@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إمبراطورية زياد | الشغالة 100%</title>
+    <title>إمبراطورية زياد | النظام المتكامل</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --neon: #00f2ff; --purple: #bc13fe; --dark: #080808; }
         body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
         
-        /* Navbar ثابت وشغال */
+        /* Navbar ثابت ومنور */
         nav { 
             background: rgba(0,0,0,0.95); padding: 15px; display: flex; 
             overflow-x: auto; gap: 10px; position: sticky; top: 0; 
             z-index: 100; border-bottom: 2px solid var(--neon); 
         }
         nav button { 
-            background: rgba(255,255,255,0.1); border: 1px solid var(--neon); 
+            background: rgba(255,255,255,0.05); border: 1px solid var(--neon); 
             color: white; padding: 10px 20px; border-radius: 15px; 
             cursor: pointer; white-space: nowrap; font-family: 'Cairo'; 
             font-weight: bold; transition: 0.3s;
         }
-        /* شكل الزرار لما يكون شغال */
-        .btn-active { background: var(--neon) !important; color: black !important; box-shadow: 0 0 15px var(--neon); }
+        .active-btn { background: var(--neon) !important; color: black !important; box-shadow: 0 0 15px var(--neon); }
 
-        .page { display: none; max-width: 900px; margin: 20px auto; padding: 20px; text-align: center; }
-        .show { display: block; animation: fadeIn 0.5s ease; }
+        .page { display: none; max-width: 800px; margin: 20px auto; padding: 20px; text-align: center; }
+        .show { display: block !important; animation: slideIn 0.3s ease; }
 
-        @keyframes fadeIn { from { opacity:0; transform: scale(0.95); } to { opacity:1; transform: scale(1); } }
+        @keyframes slideIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
 
         .card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 25px; border: 1px solid rgba(0,242,255,0.3); backdrop-filter: blur(15px); }
-        .item { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 1px solid var(--purple); color: white; text-decoration: none; border-radius: 12px; background: rgba(188, 19, 254, 0.1); font-weight: bold; }
+        .btn-link { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 1px solid var(--purple); color: white; text-decoration: none; border-radius: 15px; background: rgba(188, 19, 254, 0.1); font-weight: bold; }
+        .btn-link:hover { background: var(--purple); box-shadow: 0 0 20px var(--purple); }
     </style>
 </head>
 <body>
@@ -39,79 +39,78 @@
 <canvas id="matrix"></canvas>
 
 <nav>
-    <button onclick="changePage('p1', this)" class="btn-active">🏰 الرئيسية</button>
-    <button onclick="changePage('p2', this)">📱 التطبيقات</button>
-    <button onclick="changePage('p3', this)">🎮 الألعاب</button>
-    <button onclick="changePage('p4', this)">💻 الهكر</button>
+    <button onclick="showSection('home', this)" class="active-btn">🏰 الرئيسية</button>
+    <button onclick="showSection('apps', this)">📱 التطبيقات</button>
+    <button onclick="showSection('tools', this)">🔧 الأدوات</button>
+    <button onclick="showSection('hacker', this)">💻 الهكر</button>
 </nav>
 
-<div id="p1" class="page show">
+<div id="home" class="page show">
     <div class="card">
-        <h1>👑 إمبراطورية ZEYAD</h1>
-        <p>الأزرار اللي فوق دلوقتي هتنقلك بين الأقسام بلمسة واحدة.</p>
+        <h1 style="font-size: 35px;">👑 إمبراطورية ZEYAD</h1>
+        <p>أهلاً بك في المنصة رقم #1. تم تفعيل كل الأزرار والمحتوى الآن.</p>
         <div style="display: flex; justify-content: space-around; margin-top: 20px;">
-            <div>⭐ 5.0</div>
-            <div>👥 +10K</div>
+            <div class="card" style="padding:10px;">⭐ 5.0</div>
+            <div class="card" style="padding:10px;">👥 +10K</div>
         </div>
     </div>
 </div>
 
-<div id="p2" class="page">
+<div id="apps" class="page">
     <div class="card">
-        <h2>📱 تطبيقات زياد الحصرية</h2>
-        <div class="item">🕋 تطبيق الصلاة (قريباً)</div>
-        <div class="item">📝 محرر الأكواد Pro</div>
-        <div class="item">🧹 منظف الهاتف السريع</div>
+        <h2>📱 تطبيقات جاهزة للاستخدام</h2>
+        <a href="https://quran.com" target="_blank" class="btn-link">🕋 تصفح المصحف الإلكتروني</a>
+        <a href="https://codepen.io/pen/" target="_blank" class="btn-link">📝 محرر أكواد أونلاين</a>
+        <a href="https://pwa.rocks" target="_blank" class="btn-link">🧹 متجر تطبيقات ويب خفيفة</a>
     </div>
 </div>
 
-<div id="p3" class="page">
+<div id="tools" class="page">
     <div class="card">
-        <h2>🎮 صالة الألعاب</h2>
-        <p>خمن الرقم السري واكسب نقط!</p>
-        <input type="number" id="guess" style="width: 80%; padding: 10px; margin-bottom: 10px;" placeholder="اكتب رقم...">
-        <button class="item" onclick="alert('حاول مرة أخرى!')">تحقق 🎲</button>
+        <h2>🔧 ورشة الأدوات الذكية</h2>
+        <p>آلة حاسبة سريعة:</p>
+        <input type="text" id="res" style="width: 80%; padding: 10px; margin-bottom: 10px; background: #000; color: var(--neon); border: 1px solid var(--neon); text-align: center;" placeholder="0">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
+            <button class="btn-link" onclick="document.getElementById('res').value+='1'">1</button>
+            <button class="btn-link" onclick="document.getElementById('res').value+='2'">2</button>
+            <button class="btn-link" onclick="document.getElementById('res').value+='3'">3</button>
+            <button class="btn-link" onclick="document.getElementById('res').value=''">C</button>
+        </div>
     </div>
 </div>
 
-<div id="p4" class="page">
+<div id="hacker" class="page">
     <div class="card" style="border-color: #0f0;">
         <h2 style="color: #0f0;">💻 Terminal Mode</h2>
-        <div id="log" style="text-align: left; background: #000; color: #0f0; padding: 10px; height: 100px; overflow-y: auto; font-family: monospace;">
-            > System Ready...
+        <div id="log" style="text-align: left; background: #000; color: #0f0; padding: 10px; height: 120px; overflow-y: auto; font-family: monospace; border: 1px solid #0f0;">
+            > Zeyad System Active...
         </div>
-        <button class="item" style="border-color: #0f0; color: #0f0;" onclick="hack()">ابدأ الهجوم 🧨</button>
+        <button class="btn-link" style="border-color: #0f0; color: #0f0;" onclick="startHack()">إطلاق الهجوم 🧨</button>
     </div>
 </div>
 
 <script>
-    // الوظيفة السحرية لتغيير الصفحات
-    function changePage(pageId, btn) {
-        // 1. إخفاء كل الصفحات
+    function showSection(sectionId, btn) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
-        // 2. إظهار الصفحة اللي اخترتها
-        document.getElementById(pageId).classList.add('show');
-        
-        // 3. مسح اللون من كل الأزرار
-        document.querySelectorAll('nav button').forEach(b => b.classList.remove('btn-active'));
-        // 4. تلوين الزرار اللي دست عليه
-        btn.classList.add('btn-active');
+        document.getElementById(sectionId).classList.add('show');
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-btn'));
+        btn.classList.add('active-btn');
     }
 
-    function hack() {
+    function startHack() {
         const l = document.getElementById('log');
-        l.innerHTML += "<br>> Accessing Mainframe...";
+        l.innerHTML += "<br>> Bypassing security...";
         l.scrollTop = l.scrollHeight;
     }
 
-    // Matrix Effect
+    // Matrix
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     const drops = Array(Math.floor(canvas.width/16)).fill(1);
     function draw() {
         ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = "#00f2ff"; ctx.font = "16px monospace";
+        ctx.fillStyle = "#00f2ff"; ctx.font = "15px monospace";
         drops.forEach((y, i) => {
             ctx.fillText("Z", i*16, y*16);
             if(y*16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
