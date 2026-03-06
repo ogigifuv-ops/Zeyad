@@ -3,104 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إمبراطورية زياد | النظام المتكامل</title>
+    <title>ZEYAD MEGA STATION | محطة زياد العملاقة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --neon: #00f2ff; --purple: #bc13fe; --dark: #080808; }
+        :root { --neon: #00f2ff; --purple: #bc13fe; --dark: #080808; --gold: #ffd700; }
         body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
         
-        /* Navbar ثابت ومنور */
-        nav { 
-            background: rgba(0,0,0,0.95); padding: 15px; display: flex; 
-            overflow-x: auto; gap: 10px; position: sticky; top: 0; 
-            z-index: 100; border-bottom: 2px solid var(--neon); 
-        }
-        nav button { 
-            background: rgba(255,255,255,0.05); border: 1px solid var(--neon); 
-            color: white; padding: 10px 20px; border-radius: 15px; 
-            cursor: pointer; white-space: nowrap; font-family: 'Cairo'; 
-            font-weight: bold; transition: 0.3s;
-        }
+        /* Navbar متطور */
+        nav { background: rgba(0,0,0,0.95); padding: 15px; display: flex; overflow-x: auto; gap: 10px; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--neon); scrollbar-width: none; }
+        nav button { background: rgba(255,255,255,0.05); border: 1px solid var(--neon); color: white; padding: 10px 20px; border-radius: 15px; cursor: pointer; white-space: nowrap; font-family: 'Cairo'; font-weight: bold; transition: 0.3s; }
         .active-btn { background: var(--neon) !important; color: black !important; box-shadow: 0 0 15px var(--neon); }
 
         .page { display: none; max-width: 800px; margin: 20px auto; padding: 20px; text-align: center; }
-        .show { display: block !important; animation: slideIn 0.3s ease; }
+        .show { display: block !important; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
 
-        @keyframes slideIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+        .card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 25px; border: 1px solid rgba(0,242,255,0.3); backdrop-filter: blur(15px); margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .btn-link { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 1px solid var(--purple); color: white; text-decoration: none; border-radius: 15px; background: rgba(188, 19, 254, 0.1); font-weight: bold; cursor: pointer; }
+        .btn-link:hover { background: var(--purple); box-shadow: 0 0 20px var(--purple); transform: scale(1.02); }
 
-        .card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 25px; border: 1px solid rgba(0,242,255,0.3); backdrop-filter: blur(15px); }
-        .btn-link { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 1px solid var(--purple); color: white; text-decoration: none; border-radius: 15px; background: rgba(188, 19, 254, 0.1); font-weight: bold; }
-        .btn-link:hover { background: var(--purple); box-shadow: 0 0 20px var(--purple); }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; text-decoration: none; box-shadow: 0 0 15px #25d366; z-index: 1000; }
     </style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
+<a href="https://wa.me/201148175381" class="whatsapp-float" target="_blank">💬</a>
 
 <nav>
-    <button onclick="showSection('home', this)" class="active-btn">🏰 الرئيسية</button>
-    <button onclick="showSection('apps', this)">📱 التطبيقات</button>
-    <button onclick="showSection('tools', this)">🔧 الأدوات</button>
-    <button onclick="showSection('hacker', this)">💻 الهكر</button>
+    <button onclick="st('home', this)" class="active-btn">🏠 الرئيسية</button>
+    <button onclick="st('apps', this)">📱 تطبيقات</button>
+    <button onclick="st('tools', this)">🔧 أدوات</button>
+    <button onclick="st('jokes', this)">😂 نكت</button>
+    <button onclick="st('money', this)">💰 العملات</button>
+    <button onclick="st('secret', this)">🔐 الخزنة</button>
 </nav>
 
 <div id="home" class="page show">
     <div class="card">
-        <h1 style="font-size: 35px;">👑 إمبراطورية ZEYAD</h1>
-        <p>أهلاً بك في المنصة رقم #1. تم تفعيل كل الأزرار والمحتوى الآن.</p>
-        <div style="display: flex; justify-content: space-around; margin-top: 20px;">
-            <div class="card" style="padding:10px;">⭐ 5.0</div>
-            <div class="card" style="padding:10px;">👥 +10K</div>
+        <h1 style="color: var(--neon);">⚡ محطة ZEYAD الفضائية</h1>
+        <p>أهلاً بك في النسخة العملاقة. كل الأدوات بين يديك الآن.</p>
+        <div class="card" style="border-color: var(--gold);">
+            <h4 id="quote">"البرمجة ليست مجرد كود، بل هي فن صناعة الواقع."</h4>
         </div>
     </div>
 </div>
 
 <div id="apps" class="page">
     <div class="card">
-        <h2>📱 تطبيقات جاهزة للاستخدام</h2>
-        <a href="https://quran.com" target="_blank" class="btn-link">🕋 تصفح المصحف الإلكتروني</a>
-        <a href="https://codepen.io/pen/" target="_blank" class="btn-link">📝 محرر أكواد أونلاين</a>
-        <a href="https://pwa.rocks" target="_blank" class="btn-link">🧹 متجر تطبيقات ويب خفيفة</a>
+        <h2>📱 متجر الخدمات</h2>
+        <a href="https://quran.com" class="btn-link" target="_blank">🕋 المصحف الذهبي</a>
+        <a href="https://translate.google.com" class="btn-link" target="_blank">🌍 المترجم الفوري</a>
+        <a href="https://chat.openai.com" class="btn-link" target="_blank">🤖 مساعد الذكاء الاصطناعي</a>
     </div>
 </div>
 
 <div id="tools" class="page">
     <div class="card">
-        <h2>🔧 ورشة الأدوات الذكية</h2>
-        <p>آلة حاسبة سريعة:</p>
-        <input type="text" id="res" style="width: 80%; padding: 10px; margin-bottom: 10px; background: #000; color: var(--neon); border: 1px solid var(--neon); text-align: center;" placeholder="0">
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
-            <button class="btn-link" onclick="document.getElementById('res').value+='1'">1</button>
-            <button class="btn-link" onclick="document.getElementById('res').value+='2'">2</button>
-            <button class="btn-link" onclick="document.getElementById('res').value+='3'">3</button>
-            <button class="btn-link" onclick="document.getElementById('res').value=''">C</button>
-        </div>
+        <h2>🔧 أدوات زياد الذكية</h2>
+        <div id="count" style="font-size: 50px; color: var(--neon);">0</div>
+        <button class="btn-link" onclick="up()">اضغط للتسبيح 📿</button>
+        <button class="btn-link" style="border-color: #0f0;" onclick="alert('جاري تنظيف الرامات...')">🧹 تنظيف الموبايل</button>
     </div>
 </div>
 
-<div id="hacker" class="page">
-    <div class="card" style="border-color: #0f0;">
-        <h2 style="color: #0f0;">💻 Terminal Mode</h2>
-        <div id="log" style="text-align: left; background: #000; color: #0f0; padding: 10px; height: 120px; overflow-y: auto; font-family: monospace; border: 1px solid #0f0;">
-            > Zeyad System Active...
+<div id="jokes" class="page">
+    <div class="card">
+        <h2>😂 اضحك مع زياد</h2>
+        <div id="joke-box" style="min-height: 80px; margin: 15px; font-size: 18px;">مرة مبرمج راح يشتري عيش، قال للبائع: هات لي 10 أرغفة، ولو فيه بيض هات لي 12. رجع بـ 12 رغيف!</div>
+        <button class="btn-link" onclick="newJoke()">نكتة تانية 🤣</button>
+    </div>
+</div>
+
+<div id="money" class="page">
+    <div class="card">
+        <h2>💰 محول العملات السريع</h2>
+        <input type="number" id="usd" style="width: 80%; padding: 10px; margin: 10px; border-radius: 10px;" placeholder="المبلغ بالدولار...">
+        <button class="btn-link" onclick="conv()">حول للمصري 🇪🇬</button>
+        <h3 id="money-res" style="color: var(--gold);"></h3>
+    </div>
+</div>
+
+<div id="secret" class="page">
+    <div class="card" style="border-color: var(--gold);">
+        <h2>🔐 الخزنة الملكية</h2>
+        <p>اكتب الباسورد (رقم موبايلك بدون الصفر):</p>
+        <input type="password" id="pass" style="width: 80%; padding: 10px; border-radius: 10px; border: 1px solid var(--gold); background: #000; color: #fff;" placeholder="الباسورد...">
+        <button class="btn-link" style="border-color: var(--gold);" onclick="chk()">فتح المنطقة المحظورة 🔓</button>
+        <div id="sc" style="display:none; margin-top:20px; color: var(--gold);">
+            <h3>🔥 تم اختراق السيرفر بنجاح!</h3>
+            <p>أهلاً بك في غرفة تحكم الإمبراطورية.</p>
         </div>
-        <button class="btn-link" style="border-color: #0f0; color: #0f0;" onclick="startHack()">إطلاق الهجوم 🧨</button>
     </div>
 </div>
 
 <script>
-    function showSection(sectionId, btn) {
+    function st(id, btn) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
-        document.getElementById(sectionId).classList.add('show');
+        document.getElementById(id).classList.add('show');
         document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-btn'));
         btn.classList.add('active-btn');
     }
 
-    function startHack() {
-        const l = document.getElementById('log');
-        l.innerHTML += "<br>> Bypassing security...";
-        l.scrollTop = l.scrollHeight;
+    let c = 0; function up() { c++; document.getElementById('count').innerText = c; }
+
+    function chk() {
+        if(document.getElementById('pass').value === "1148175381") {
+            document.getElementById('sc').style.display = 'block';
+            alert("أهلاً يا زياد!");
+        } else { alert("غلط!"); }
+    }
+
+    function newJoke() {
+        const jokes = [
+            "مبرمج بيصلح ثلاجة، لقى الباب مش بيفتح، عمل ريستارت للشقة!",
+            "ليه المبرمجين بيكرهوا الطبيعة؟ عشان مفيش فيها Bugs!",
+            "واحد سأل مبرمج: إيه أكتر حاجة بتخوفك؟ قاله: إن الإنترنت يقطع وأنا بعمل Commit."
+        ];
+        document.getElementById('joke-box').innerText = jokes[Math.floor(Math.random()*jokes.length)];
+    }
+
+    function conv() {
+        const val = document.getElementById('usd').value;
+        document.getElementById('money-res').innerText = (val * 50) + " جنيه مصري تقريباً";
     }
 
     // Matrix
@@ -112,7 +138,7 @@
         ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,canvas.width,canvas.height);
         ctx.fillStyle = "#00f2ff"; ctx.font = "15px monospace";
         drops.forEach((y, i) => {
-            ctx.fillText("Z", i*16, y*16);
+            ctx.fillText("ZEYAD", i*16, y*16);
             if(y*16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
             drops[i]++;
         });
