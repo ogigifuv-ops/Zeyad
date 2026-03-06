@@ -21,7 +21,7 @@
         .active-btn { background: var(--gold) !important; color: black !important; }
 
         .main-display { flex-grow: 1; padding: 20px; background: radial-gradient(circle, #022b22, #010c0a); }
-        .page { display: none; width: 100%; max-width: 800px; margin: auto; animation: fadeIn 0.4s ease; }
+        .page { display: none; width: 100%; max-width: 900px; margin: auto; animation: fadeIn 0.4s ease; }
         .show-page { display: block !important; }
 
         .card { background: rgba(1, 68, 54, 0.6); border: 1.5px solid var(--gold); border-radius: 20px; padding: 20px; margin-bottom: 30px; }
@@ -29,10 +29,16 @@
 
         .reciter-select { width: 100%; padding: 15px; background: var(--emerald); color: white; border: 2px solid var(--gold); border-radius: 12px; font-weight: bold; margin-bottom: 20px; font-family: 'Cairo'; }
 
-        .s-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .s-btn { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--gold); padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        /* تعديل شبكة العرض لتناسب 99 اسم وجميع الشاشات */
+        .s-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+            gap: 10px; 
+        }
+        .s-btn { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--gold); padding: 15px 5px; border-radius: 10px; cursor: pointer; font-weight: bold; text-align: center; font-size: 14px; transition: 0.3s; }
+        .s-btn:hover { background: var(--gold); color: black; }
 
-        .sebha-circle { width: 140px; height: 140px; border: 8px solid var(--gold); border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 50px; cursor: pointer; box-shadow: var(--neon); }
+        .sebha-circle { width: 140px; height: 140px; border: 8px solid var(--gold); border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 50px; cursor: pointer; box-shadow: var(--neon); user-select: none; }
         .reset-btn { background: #ff3333; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; }
 
         .footer-empire { text-align: center; padding: 35px 20px; background: #000; border-top: 3px solid var(--gold); margin-top: auto; }
@@ -66,7 +72,7 @@
     <div id="p1" class="page show-page">
         <div class="card">
             <h2 style="text-align:center; color:var(--gold);">مرحباً يا إمبراطور زياد</h2>
-            <div class="item-box">تم تحديث الأقسام الـ 12 بالكامل. تم إصلاح صوت المنشاوي والراديو الآن يعمل ببث مباشر آمن.</div>
+            <div class="item-box">تم تحديث الأقسام الـ 12 بالكامل. تم إضافة جميع أسماء الله الحسنى الـ 99 بنجاح.</div>
         </div>
     </div>
 
@@ -107,14 +113,21 @@
     <div id="p5" class="page"><div class="card"><h3>🌆 أذكار المساء</h3><div class="item-box">أمسينا وأمسى الملك لله والحمد لله.</div></div></div>
     <div id="p2" class="page"><div class="card"><h3>🌙 رمضان</h3><div class="item-box">اللهم بلغنا رمضان وبارك لنا فيه.</div></div></div>
     <div id="p8" class="page"><div class="card"><h3>💰 الرزق</h3><div class="item-box">اللهم اكفني بحلالك عن حرامك.</div></div></div>
-    <div id="p11" class="page"><div class="card"><h3>🌟 الأسماء الحسنى</h3><div id="names-list" class="s-grid"></div></div></div>
+    
+    <div id="p11" class="page">
+        <div class="card">
+            <h3 style="text-align: center;">🌟 أسماء الله الحسنى</h3>
+            <div id="names-list" class="s-grid"></div>
+        </div>
+    </div>
+
     <div id="p6" class="page"><div class="card"><h3>😴 أذكار النوم</h3><div class="item-box">باسمك ربي وضعت جنبي وبك أرفعه.</div></div></div>
     <div id="p7" class="page"><div class="card"><h3>🕌 أذكار الصلاة</h3><div class="item-box">أستغفر الله (3 مرات).. اللهم أنت السلام.</div></div></div>
     <div id="p9" class="page"><div class="card"><h3>🤲 أدعية متنوعة</h3><div class="item-box">ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة.</div></div></div>
 </div>
 
 <footer class="footer-empire">
-    <h2>تم تصميم هذا الموقع بواسطة Zeyad Mekawy</h2>
+    <h2>تم تصميم هذا الموقع بواسطة Zeyاد Mekawy</h2>
     <p>© ZEYAD EMPIRE 2026</p>
 </footer>
 
@@ -129,7 +142,6 @@
 
     const suras = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
     
-    // سيرفرات القراء المحدثة
     const servers = {
         'husr': 'https://server13.mp3quran.net/husr/',
         'yasser': 'https://server11.mp3quran.net/yasser/',
@@ -156,12 +168,23 @@
     let c = 0;
     function countUp() { c++; document.getElementById('counter').innerText = c; }
 
-    const names = ["الرحمن","الرحيم","الملك","القدوس","السلام","المؤمن","المهيمن","العزيز","الجبار","المتكبر","الخالق","البارئ","المصور","الغفار","القهار"];
+    // مصفوفة الـ 99 اسم كاملة
+    const names = [
+        "الله", "الرحمن", "الرحيم", "الملك", "القدوس", "السلام", "المؤمن", "المهيمن", "العزيز", "الجبار", "المتكبر", "الخالق", "البارئ", "المصور", "الغفار", "القهار", "الوهاب", "الرزاق", "الفتاح", "العليم", "القابض", "الباسط", "الخافض", "الرافع", "المعز", "المذل", "السميع", "البصير", "الحكيم", "العدل", "اللطيف", "الخبير", "الحليم", "العظيم", "الغفور", "الشكور", "العلي", "الكبير", "الحفيظ", "المقيت", "الحسيب", "الجليل", "الكريم", "الرقيب", "المجيب", "الواسع", "الحكيم", "الودود", "المجيد", "الباعث", "الشهيد", "الحق", "الوكيل", "القوي", "المتين", "الولي", "الحميد", "المحصي", "المبدئ", "المعيد", "المحيي", "المميت", "الحي", "القيوم", "الواجد", "الماجد", "الواحد", "الأحد", "الصمد", "القادر", "المقتدر", "المقدم", "المؤخر", "الأول", "الآخر", "الظاهر", "الباطن", "الوالي", "المتعالي", "البر", "التواب", "المنتقم", "العفو", "الرؤوف", "مالك الملك", "ذو الجلال والإكرام", "المقسط", "الجامع", "الغني", "المغني", "المانع", "الضار", "النافع", "النور", "الهادي", "البديع", "الباقي", "الوارث", "الرشيد", "الصبور"
+    ];
+
     const nl = document.getElementById('names-list');
     names.forEach(n => {
         let d = document.createElement('div');
-        d.style.cssText = "border:1px solid var(--gold); padding:10px; text-align:center; background:rgba(255,204,0,0.05); border-radius:5px;";
+        d.className = 's-btn';
+        d.style.cursor = 'default';
         d.innerText = n;
+        // تمييز لفظ الجلالة
+        if(n === "الله") {
+            d.style.background = "var(--gold)";
+            d.style.color = "black";
+            d.style.gridColumn = "span 2"; // ليكون مميزاً في العرض
+        }
         nl.appendChild(d);
     });
 </script>
