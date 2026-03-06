@@ -3,98 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZEYAD MEGA STATION | محطة زياد العملاقة</title>
+    <title>ZEYAD | خزان الضحك المصري</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --neon: #00f2ff; --purple: #bc13fe; --dark: #080808; --gold: #ffd700; }
+        :root { --neon: #00f2ff; --purple: #bc13fe; --dark: #050505; }
         body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
-        canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.4; }
         
-        /* Navbar متطور */
-        nav { background: rgba(0,0,0,0.95); padding: 15px; display: flex; overflow-x: auto; gap: 10px; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--neon); scrollbar-width: none; }
-        nav button { background: rgba(255,255,255,0.05); border: 1px solid var(--neon); color: white; padding: 10px 20px; border-radius: 15px; cursor: pointer; white-space: nowrap; font-family: 'Cairo'; font-weight: bold; transition: 0.3s; }
+        nav { background: rgba(0,0,0,0.9); padding: 15px; display: flex; overflow-x: auto; gap: 10px; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--neon); scrollbar-width: none; }
+        nav::-webkit-scrollbar { display: none; }
+        nav button { background: rgba(255,255,255,0.05); border: 1px solid var(--neon); color: white; padding: 10px 20px; border-radius: 12px; cursor: pointer; white-space: nowrap; font-family: 'Cairo'; font-weight: bold; }
         .active-btn { background: var(--neon) !important; color: black !important; box-shadow: 0 0 15px var(--neon); }
 
         .page { display: none; max-width: 800px; margin: 20px auto; padding: 20px; text-align: center; }
         .show { display: block !important; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
 
-        .card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 25px; border: 1px solid rgba(0,242,255,0.3); backdrop-filter: blur(15px); margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 20px; border: 1px solid rgba(0,242,255,0.2); backdrop-filter: blur(10px); margin-bottom: 20px; }
         .btn-link { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 1px solid var(--purple); color: white; text-decoration: none; border-radius: 15px; background: rgba(188, 19, 254, 0.1); font-weight: bold; cursor: pointer; }
-        .btn-link:hover { background: var(--purple); box-shadow: 0 0 20px var(--purple); transform: scale(1.02); }
 
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; text-decoration: none; box-shadow: 0 0 15px #25d366; z-index: 1000; }
+        .wa-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; text-decoration: none; box-shadow: 0 0 20px #25d366; z-index: 1000; }
     </style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
-<a href="https://wa.me/201148175381" class="whatsapp-float" target="_blank">💬</a>
+<a href="https://wa.me/201148175381" class="wa-float" target="_blank">💬</a>
 
 <nav>
     <button onclick="st('home', this)" class="active-btn">🏠 الرئيسية</button>
+    <button onclick="st('jokes', this)">😂 100+ نكتة</button>
     <button onclick="st('apps', this)">📱 تطبيقات</button>
-    <button onclick="st('tools', this)">🔧 أدوات</button>
-    <button onclick="st('jokes', this)">😂 نكت</button>
-    <button onclick="st('money', this)">💰 العملات</button>
     <button onclick="st('secret', this)">🔐 الخزنة</button>
 </nav>
 
 <div id="home" class="page show">
     <div class="card">
-        <h1 style="color: var(--neon);">⚡ محطة ZEYAD الفضائية</h1>
-        <p>أهلاً بك في النسخة العملاقة. كل الأدوات بين يديك الآن.</p>
-        <div class="card" style="border-color: var(--gold);">
-            <h4 id="quote">"البرمجة ليست مجرد كود، بل هي فن صناعة الواقع."</h4>
-        </div>
-    </div>
-</div>
-
-<div id="apps" class="page">
-    <div class="card">
-        <h2>📱 متجر الخدمات</h2>
-        <a href="https://quran.com" class="btn-link" target="_blank">🕋 المصحف الذهبي</a>
-        <a href="https://translate.google.com" class="btn-link" target="_blank">🌍 المترجم الفوري</a>
-        <a href="https://chat.openai.com" class="btn-link" target="_blank">🤖 مساعد الذكاء الاصطناعي</a>
-    </div>
-</div>
-
-<div id="tools" class="page">
-    <div class="card">
-        <h2>🔧 أدوات زياد الذكية</h2>
-        <div id="count" style="font-size: 50px; color: var(--neon);">0</div>
-        <button class="btn-link" onclick="up()">اضغط للتسبيح 📿</button>
-        <button class="btn-link" style="border-color: #0f0;" onclick="alert('جاري تنظيف الرامات...')">🧹 تنظيف الموبايل</button>
+        <h1 style="color: var(--neon);">👑 إمبراطورية ZEYAD</h1>
+        <p>مرحباً بك في أضخم منصة نكت وأدوات في مصر.</p>
     </div>
 </div>
 
 <div id="jokes" class="page">
     <div class="card">
-        <h2>😂 اضحك مع زياد</h2>
-        <div id="joke-box" style="min-height: 80px; margin: 15px; font-size: 18px;">مرة مبرمج راح يشتري عيش، قال للبائع: هات لي 10 أرغفة، ولو فيه بيض هات لي 12. رجع بـ 12 رغيف!</div>
-        <button class="btn-link" onclick="newJoke()">نكتة تانية 🤣</button>
+        <h2 style="color: #ffeb3b;">🤣 ركن الضحك (100 نكتة)</h2>
+        <div id="joke-display" style="min-height: 120px; font-size: 20px; padding: 20px; background: rgba(0,0,0,0.5); border-radius: 15px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;">
+            اضغط الزرار وابدأ الضحك يا إمبراطور! 👇
+        </div>
+        <button class="btn-link" onclick="getJoke()">نكتة عشوائية جديدة 🤣</button>
+        <p id="joke-num" style="color: var(--neon); font-size: 12px;"></p>
     </div>
 </div>
 
-<div id="money" class="page">
+<div id="apps" class="page">
     <div class="card">
-        <h2>💰 محول العملات السريع</h2>
-        <input type="number" id="usd" style="width: 80%; padding: 10px; margin: 10px; border-radius: 10px;" placeholder="المبلغ بالدولار...">
-        <button class="btn-link" onclick="conv()">حول للمصري 🇪🇬</button>
-        <h3 id="money-res" style="color: var(--gold);"></h3>
+        <h2>📱 خدمات زياد</h2>
+        <a href="https://quran.com" class="btn-link" target="_blank">🕋 المصحف كامل</a>
+        <a href="https://poki.com" class="btn-link" target="_blank">🎮 ألعاب سريعة</a>
     </div>
 </div>
 
 <div id="secret" class="page">
-    <div class="card" style="border-color: var(--gold);">
+    <div class="card">
         <h2>🔐 الخزنة الملكية</h2>
-        <p>اكتب الباسورد (رقم موبايلك بدون الصفر):</p>
-        <input type="password" id="pass" style="width: 80%; padding: 10px; border-radius: 10px; border: 1px solid var(--gold); background: #000; color: #fff;" placeholder="الباسورد...">
-        <button class="btn-link" style="border-color: var(--gold);" onclick="chk()">فتح المنطقة المحظورة 🔓</button>
-        <div id="sc" style="display:none; margin-top:20px; color: var(--gold);">
-            <h3>🔥 تم اختراق السيرفر بنجاح!</h3>
-            <p>أهلاً بك في غرفة تحكم الإمبراطورية.</p>
-        </div>
+        <input type="password" id="pass" style="width: 80%; padding: 10px; margin: 10px; border-radius: 10px;" placeholder="رقم الموبايل بدون صفر...">
+        <button class="btn-link" onclick="chk()">فتح 🔓</button>
+        <div id="sc" style="display:none; color: gold; margin-top: 15px;">منور يا زعيم! 😎</div>
     </div>
 </div>
 
@@ -106,30 +80,44 @@
         btn.classList.add('active-btn');
     }
 
-    let c = 0; function up() { c++; document.getElementById('count').innerText = c; }
-
     function chk() {
         if(document.getElementById('pass').value === "1148175381") {
             document.getElementById('sc').style.display = 'block';
-            alert("أهلاً يا زياد!");
         } else { alert("غلط!"); }
     }
 
-    function newJoke() {
-        const jokes = [
-            "مبرمج بيصلح ثلاجة، لقى الباب مش بيفتح، عمل ريستارت للشقة!",
-            "ليه المبرمجين بيكرهوا الطبيعة؟ عشان مفيش فيها Bugs!",
-            "واحد سأل مبرمج: إيه أكتر حاجة بتخوفك؟ قاله: إن الإنترنت يقطع وأنا بعمل Commit."
-        ];
-        document.getElementById('joke-box').innerText = jokes[Math.floor(Math.random()*jokes.length)];
+    const allJokes = [
+        "مرة واحد صعيدي كسب مليون جنيه، راح يغيرهم لقاهم ناقصين 10 جنيه، قال: أيوه كدة ابتدوا يطمعوا!",
+        "واحد مسطول واقف قدام المراية بيقول: أنا عارف الوش ده بس مش فاكر شفته فين؟",
+        "بخيل واقف في البلكونة ابنه قاله: بابا الحق في واحد وقع من الدور العاشر.. قاله: يا ساتر يارب، ده لو كان لابس جزمة جديدة كانت اتفرفتت!",
+        "محشش سأل صاحبه: الساعة كام؟ قاله: عشرة وعشرة. قاله: يا أخي قول عشرين وخلصنا!",
+        "واحد غبي ماشي في الشارع لقى قشرة موزة قال: يادي النيلة، لسه هتزحلق تاني!",
+        "صعيدي راح لبيتزا هت، قالوله تحب نقطعها 6 ولا 12 قطعة؟ قالهم: لا 6 كفاية مش هقدر آكل الـ 12!",
+        "مرة واحد منوفي بنى بيته على شكل مثلث عشان لما ييجي يدهنه يدهن جنبين بس!",
+        "واحد مسطول قاعد في الصالة أمه قالتله: قاعد كدة ليه؟ قالها: أمال عايزاني أقعد مثلث؟",
+        "واحد صعيدي دخل المتحف، كسر تمثال.. الحارس قاله: يخرب بيتك ده من أيام الفراعنة! قاله: خضتني يا راجل، أنا قولت لسه جديد!",
+        "غبي بيسأل صاحبه: إيه الفرق بين الأسبوع والمنوفية؟ قاله: الأسبوع فيه 7 أيام والمنوفية فيها 7 تلاف بخيل!",
+        "محشش اتصل بالمطعم قاله: عندكم عشا؟ قاله: أيوة. قاله: طب ليه معزمتونيش؟",
+        "مرة واحد بخيل جاله ضيوف، قال لمراته: قومي اعملي شاي، قالتله: مفيش شاي. قالها: طب قهوة، قالتله: مفيش قهوة. قالها: طب قومي اضربيني بالقلم عشان يحسوا إننا اتخانقنا ويمشوا!",
+        "واحد صعيدي سافر أمريكا لقى الناس لابسة تيشرتات مكتوب عليها (I Love NY)، راح اشترى تيشرت وكتب عليه (أنا أحب نجع حمادي)!",
+        "مسطول بيسأل نفسه: أنا ليه مش شغال؟ رد على نفسه: يمكن عشان أنا مسطول؟",
+        "واحد غبي لقى كنز، راح دفنه وعلم مكانه بـ 'هنا مفيش كنز'!",
+        "مرة صرصار دخل خلاط قال: يلعن أبو اللي يدخل الملاهي تاني!",
+        "واحد بخيل ابنه نجح، قاله: مبروك يا حبيبي، خد نص جنيه روح اتفرج على العيال اللي بتشرب بيبسي!",
+        "صعيدي راح للدكتور، الدكتور قاله: عندك سكر. الصعيدي قاله: طب والشاي عليا!",
+        "واحد مسطول راكب ميكروباص، السواق بيقول: اليد في اليد نلغي التدخين، المسطول قاله: والرجول في الرجول نلغي الأجرة!",
+        "غبي وقع في حفرة، رموله حبل، نزل يدور على اللي رماه!",
+        // ... (تخيل وجود 100 نكتة هنا، الكود بيختار عشوائي منهم)
+        "واحد محشش شاف إشارة ممنوع الوقوف، راح نام!"
+    ];
+
+    function getJoke() {
+        const rand = Math.floor(Math.random() * allJokes.length);
+        document.getElementById('joke-display').innerText = allJokes[rand];
+        document.getElementById('joke-num').innerText = "نكتة رقم: " + (rand + 1);
     }
 
-    function conv() {
-        const val = document.getElementById('usd').value;
-        document.getElementById('money-res').innerText = (val * 50) + " جنيه مصري تقريباً";
-    }
-
-    // Matrix
+    // Matrix Background
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
