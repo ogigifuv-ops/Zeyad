@@ -22,7 +22,7 @@
     <div class="container">
         <header><h2>Zeyad AI Master ✨</h2></header>
         <div id="chat-box" class="chat-box">
-            <div class="msg bot">مرحباً بك! أنا مساعدك الذكي، كيف يمكنني مساعدتك؟</div>
+            <div class="msg bot">مرحباً بك! أنا مساعدك الذكي، كيف يمكنني مساعدتك اليوم؟</div>
         </div>
         <div class="input-area">
             <input type="text" id="user-input" placeholder="اسألني أي شيء...">
@@ -30,7 +30,7 @@
         </div>
     </div>
     <script>
-        // مفتاحك الجديد اللي هيخلي الموقع يشتغل صاروخ
+        // مفتاحك الجديد اللي هيشغل المحرك
         const API_KEY = "AIzaSyB654-HXqsYoWH7-MQbNXVODk9c9ehzeWM";
 
         async function send() {
@@ -60,7 +60,7 @@
                     box.innerHTML += `<div class="msg bot">${data.candidates[0].content.parts[0].text}</div>`;
                 } else { throw new Error(); }
             } catch(e) { 
-                document.getElementById(loadingId).innerText = "عذراً، حدث خطأ. تأكد من المفتاح والإنترنت."; 
+                document.getElementById(loadingId).innerText = "عذراً، حدث خطأ. تأكد من إعدادات المفتاح."; 
             }
             box.scrollTop = box.scrollHeight;
         }
