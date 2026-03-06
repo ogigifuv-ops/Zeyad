@@ -10,14 +10,14 @@
         :root { --gold: #ffcc00; --emerald: #014436; --dark: #010c0a; --neon: 0 0 15px #ffcc00; }
         body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; min-height: 100vh; display: flex; flex-direction: column; overflow-y: auto; }
         
-        /* الزر العائم والرجوع لأعلى */
         .whatsapp-float { position: fixed; bottom: 20px; left: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 1000; text-decoration: none; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .scroll-top { position: fixed; bottom: 85px; left: 20px; background: var(--gold); color: black; width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; z-index: 1000; border: none; }
 
         header { background: linear-gradient(to bottom, var(--emerald), var(--dark)); padding: 15px; text-align: center; border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 1001; }
         header h1 { font-family: 'Amiri', serif; font-size: 24px; color: var(--gold); margin: 0; text-shadow: var(--neon); }
 
-        nav { display: flex; overflow-x: auto; background: #000; padding: 10px; gap: 8px; border-bottom: 2px solid var(--gold); position: sticky; top: 65px; z-index: 1000; }
+        nav { display: flex; overflow-x: auto; background: #000; padding: 10px; gap: 8px; border-bottom: 2px solid var(--gold); position: sticky; top: 65px; z-index: 1000; scrollbar-width: none; }
+        nav::-webkit-scrollbar { display: none; }
         nav button { background: rgba(255, 204, 0, 0.1); border: 1px solid var(--gold); color: white; padding: 8px 15px; border-radius: 20px; white-space: nowrap; cursor: pointer; font-family: 'Cairo'; font-weight: bold; }
         .active-btn { background: var(--gold) !important; color: black !important; }
 
@@ -26,15 +26,16 @@
         .show-page { display: block !important; }
 
         .card { background: rgba(1, 68, 54, 0.6); border: 1.5px solid var(--gold); border-radius: 15px; padding: 15px; margin-bottom: 20px; }
-        .search-box { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--gold); background: #000; color: white; margin-bottom: 15px; font-family: 'Cairo'; }
+        .search-box { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--gold); background: #000; color: white; margin-bottom: 15px; font-family: 'Cairo'; outline: none; box-sizing: border-box; }
 
         .item-box { background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-right: 5px solid var(--gold); position: relative; font-size: 18px; }
-        .copy-btn { float: left; background: var(--gold); color: black; border: none; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
+        .copy-btn { float: left; background: var(--gold); color: black; border: none; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; margin-bottom: 5px; }
 
         .s-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; }
-        .s-btn { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--gold); padding: 12px 5px; border-radius: 8px; cursor: pointer; text-align: center; font-size: 13px; }
+        .s-btn { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--gold); padding: 12px 5px; border-radius: 8px; cursor: pointer; text-align: center; font-size: 13px; font-weight: bold; transition: 0.3s; }
+        .s-btn:hover { background: var(--gold); color: black; }
 
-        .sebha-circle { width: 120px; height: 120px; border: 6px solid var(--gold); border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer; user-select: none; }
+        .sebha-circle { width: 120px; height: 120px; border: 6px solid var(--gold); border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer; user-select: none; box-shadow: var(--neon); }
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -59,8 +60,8 @@
 <div class="main-display">
     <div id="p1" class="page show-page">
         <div class="card">
-            <h2 style="color:var(--gold); text-align:center;">مرحباً يا زياد</h2>
-            <p style="text-align:center;">تم إصلاح جميع الأزرار والبحث يعمل الآن بكفاءة.</p>
+            <h2 style="color:var(--gold); text-align:center;">مرحباً يا إمبراطور زياد</h2>
+            <div class="item-box">تم تحديث الراديو، إضافة الـ 99 اسماً، تفعيل البحث عن السور، وإضافة أزرار النسخ.</div>
         </div>
     </div>
 
@@ -73,8 +74,8 @@
                 <option value="minsh">محمد صديق المنشاوي</option>
                 <option value="basit">عبد الباسط عبد الصمد</option>
             </select>
-            <div id="player-ui" style="display:none; text-align:center; margin-bottom:15px;">
-                <p id="s-title" style="color:var(--gold); margin:5px 0;"></p>
+            <div id="player-ui" style="display:none; text-align:center; margin-bottom:15px; background: #000; padding: 10px; border-radius: 10px; border: 1px solid var(--gold);">
+                <p id="s-title" style="color:var(--gold); margin:5px 0; font-weight: bold;"></p>
                 <audio id="audio-player" controls style="width:100%"><source id="audio-src" src=""></audio>
             </div>
             <div id="surah-container" class="s-grid"></div>
@@ -85,29 +86,12 @@
         <div class="card" style="text-align:center;">
             <h3>📿 السبحة الإلكترونية</h3>
             <div id="counter" class="sebha-circle">0</div>
-            <button onclick="resetCounter()" style="background:red; color:white; border:none; padding:10px 20px; border-radius:10px; margin-top:15px; width:100%;">تصفير</button>
+            <button onclick="resetCounter()" style="background:red; color:white; border:none; padding:12px; border-radius:10px; margin-top:15px; width:100%; font-weight: bold; cursor: pointer;">تصفير العداد</button>
         </div>
     </div>
 
-    <div id="p4" class="page">
-        <div class="card">
-            <h3>☀️ أذكار الصباح</h3>
-            <div class="item-box">
-                <button class="copy-btn" onclick="copyText(this)">نسخ</button>
-                <span class="txt">أصبحنا وأصبح الملك لله والحمد لله، لا إله إلا الله وحده لا شريك له.</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="p5" class="page">
-        <div class="card">
-            <h3>🌆 أذكار المساء</h3>
-            <div class="item-box">
-                <button class="copy-btn" onclick="copyText(this)">نسخ</button>
-                <span class="txt">أمسينا وأمسى الملك لله والحمد لله.</span>
-            </div>
-        </div>
-    </div>
+    <div id="p4" class="page"><div class="card"><h3>☀️ أذكار الصباح</h3><div class="item-box"><button class="copy-btn" onclick="copyText(this)">نسخ</button><span class="txt">أصبحنا وأصبح الملك لله والحمد لله..</span></div></div></div>
+    <div id="p5" class="page"><div class="card"><h3>🌆 أذكار المساء</h3><div class="item-box"><button class="copy-btn" onclick="copyText(this)">نسخ</button><span class="txt">أمسينا وأمسى الملك لله والحمد لله..</span></div></div></div>
 
     <div id="p11" class="page">
         <div class="card">
@@ -118,14 +102,19 @@
 
     <div id="p12" class="page">
         <div class="card" style="text-align:center;">
-            <h3>📻 إذاعة القرآن الكريم</h3>
-            <audio controls style="width:100%;"><source src="https://n02.radiojar.com/8s7u7caactv5v?1710260431"></audio>
+            <h3>📻 إذاعة القرآن الكريم - القاهرة</h3>
+            <div style="background: #000; padding: 20px; border-radius: 15px; border: 1px solid var(--gold);">
+                <audio id="radio-player" controls style="width:100%;">
+                    <source src="https://n0a.radiojar.com/8s7u7caactv5v" type="audio/mpeg">
+                    <source src="https://stream.zeno.fm/f8vggut0j1duv" type="audio/mpeg">
+                </audio>
+                <p style="margin-top:15px; color:var(--gold);">البث المباشر يعمل الآن</p>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    // 1. التنقل بين الصفحات
     function go(pageId, btn) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('show-page'));
         document.getElementById(pageId).classList.add('show-page');
@@ -133,7 +122,6 @@
         btn.classList.add('active-btn');
     }
 
-    // 2. نظام النسخ
     function copyText(btn) {
         const text = btn.parentElement.querySelector('.txt').innerText;
         navigator.clipboard.writeText(text).then(() => {
@@ -142,30 +130,25 @@
         });
     }
 
-    // 3. القرآن والبحث
-    const suras = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
+    const suras = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الالذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
     const servers = { 'husr': 'https://server13.mp3quran.net/husr/', 'yasser': 'https://server11.mp3quran.net/yasser/', 'minsh': 'https://server10.mp3quran.net/minsh/', 'basit': 'https://server7.mp3quran.net/basit/' };
 
     const container = document.getElementById('surah-container');
     suras.forEach((name, index) => {
         let b = document.createElement('button');
-        b.className = 's-btn';
-        b.innerText = name;
-        b.onclick = () => playSurah(name, index + 1);
+        b.className = 's-btn'; b.innerText = name;
+        b.onclick = () => {
+            let rec = document.getElementById('reciter').value;
+            let id = (index + 1).toString().padStart(3, '0');
+            document.getElementById('player-ui').style.display = 'block';
+            document.getElementById('s-title').innerText = "سورة " + name;
+            let audio = document.getElementById('audio-player');
+            document.getElementById('audio-src').src = servers[rec] + id + '.mp3';
+            audio.load(); audio.play();
+        };
         container.appendChild(b);
     });
 
-    function playSurah(name, id) {
-        let rec = document.getElementById('reciter').value;
-        let formattedId = id.toString().padStart(3, '0');
-        document.getElementById('player-ui').style.display = 'block';
-        document.getElementById('s-title').innerText = "سورة " + name;
-        let audio = document.getElementById('audio-player');
-        document.getElementById('audio-src').src = servers[rec] + formattedId + '.mp3';
-        audio.load(); audio.play();
-    }
-
-    // البحث
     document.getElementById('surahSearch').onkeyup = function() {
         let val = this.value;
         document.querySelectorAll('.s-btn').forEach(b => {
@@ -173,31 +156,23 @@
         });
     };
 
-    // 4. السبحة
     let count = 0;
-    document.getElementById('counter').onclick = function() {
-        count++;
-        this.innerText = count;
-    };
+    document.getElementById('counter').onclick = function() { count++; this.innerText = count; };
     function resetCounter() { count = 0; document.getElementById('counter').innerText = 0; }
 
-    // 5. أسماء الله الحسنى
     const names = ["الله", "الرحمن", "الرحيم", "الملك", "القدوس", "السلام", "المؤمن", "المهيمن", "العزيز", "الجبار", "المتكبر", "الخالق", "البارئ", "المصور", "الغفار", "القهار", "الوهاب", "الرزاق", "الفتاح", "العليم", "القابض", "الباسط", "الخافض", "الرافع", "المعز", "المذل", "السميع", "البصير", "الحكم", "العدل", "اللطيف", "الخبير", "الحليم", "العظيم", "الغفور", "الشكور", "العلي", "الكبير", "الحفيظ", "المقيت", "الحسيب", "الجليل", "الكريم", "الرقيب", "المجيب", "الواسع", "الحكيم", "الودود", "المجيد", "الباعث", "الشهيد", "الحق", "الوكيل", "القوي", "المتين", "الولي", "الحميد", "المحصي", "المبدئ", "المعيد", "المحيي", "المميت", "الحي", "القيوم", "الواجد", "الماجد", "الواحد", "الأحد", "الصمد", "القادر", "المقتدر", "المقدم", "المؤخر", "الأول", "الآخر", "الظاهر", "الباطن", "الوالي", "المتعالي", "البر", "التواب", "المنتقم", "العفو", "الرؤوف", "مالك الملك", "ذو الجلال والإكرام", "المقسط", "الجامع", "الغني", "المغني", "المانع", "الضار", "النافع", "النور", "الهادي", "البديع", "الباقي", "الوارث", "الرشيد", "الصبور"];
     const nl = document.getElementById('names-list');
     names.forEach(n => {
         let d = document.createElement('div');
         d.className = 's-btn'; d.innerText = n;
-        if(n === "الله") { d.style.background = "var(--gold)"; d.style.color = "black"; }
+        if(n === "الله") { d.style.background = "var(--gold)"; d.style.color = "black"; d.style.gridColumn = "span 2"; }
         nl.appendChild(d);
     });
 
-    // 6. زر الصعود
     window.onscroll = function() {
-        let btn = document.getElementById("scrollTopBtn");
-        btn.style.display = (window.scrollY > 300) ? "flex" : "none";
+        document.getElementById("scrollTopBtn").style.display = (window.scrollY > 300) ? "flex" : "none";
     };
     document.getElementById("scrollTopBtn").onclick = () => window.scrollTo(0,0);
 </script>
-
 </body>
 </html>
