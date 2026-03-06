@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --gold: #ffcc00; --emerald: #014436; --dark: #010c0a; --neon: 0 0 15px #ffcc00; }
-        body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; min-height: 100vh; display: flex; flex-direction: column; overflow-y: auto; }
+        body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; min-height: 100vh; display: flex; flex-direction: column; overflow-y: auto; scroll-behavior: smooth; }
         
         .whatsapp-float { position: fixed; bottom: 25px; left: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 9999; text-decoration: none; border: 2px solid white; }
+        .scroll-top { position: fixed; bottom: 100px; left: 25px; background: var(--gold); color: black; width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; z-index: 9998; border: none; }
 
         header { background: linear-gradient(to bottom, var(--emerald), var(--dark)); padding: 20px; text-align: center; border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
         header h1 { font-family: 'Amiri', serif; font-size: 26px; color: var(--gold); margin: 0; text-shadow: var(--neon); }
@@ -25,16 +26,19 @@
         .show-page { display: block !important; }
 
         .card { background: rgba(1, 68, 54, 0.6); border: 1.5px solid var(--gold); border-radius: 20px; padding: 20px; margin-bottom: 30px; }
-        .item-box { background: rgba(255,255,255,0.08); padding: 18px; border-radius: 12px; margin-bottom: 12px; border-right: 5px solid var(--gold); font-family: 'Amiri', serif; font-size: 22px; line-height: 1.6; }
+        
+        /* تحسين خانة البحث */
+        .search-box { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--gold); background: rgba(0,0,0,0.3); color: white; margin-bottom: 15px; outline: none; box-sizing: border-box; }
+
+        .item-box { background: rgba(255,255,255,0.08); padding: 18px; border-radius: 12px; margin-bottom: 12px; border-right: 5px solid var(--gold); font-family: 'Amiri', serif; font-size: 22px; line-height: 1.6; position: relative; }
+        
+        /* زرار النسخ */
+        .copy-btn { position: absolute; top: 10px; left: 10px; background: rgba(255,204,0,0.2); border: 1px solid var(--gold); color: var(--gold); padding: 5px 10px; border-radius: 8px; font-size: 12px; cursor: pointer; transition: 0.3s; }
+        .copy-btn:hover { background: var(--gold); color: black; }
 
         .reciter-select { width: 100%; padding: 15px; background: var(--emerald); color: white; border: 2px solid var(--gold); border-radius: 12px; font-weight: bold; margin-bottom: 20px; font-family: 'Cairo'; }
 
-        /* تعديل شبكة العرض لتناسب 99 اسم وجميع الشاشات */
-        .s-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
-            gap: 10px; 
-        }
+        .s-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
         .s-btn { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--gold); padding: 15px 5px; border-radius: 10px; cursor: pointer; font-weight: bold; text-align: center; font-size: 14px; transition: 0.3s; }
         .s-btn:hover { background: var(--gold); color: black; }
 
@@ -42,14 +46,14 @@
         .reset-btn { background: #ff3333; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; }
 
         .footer-empire { text-align: center; padding: 35px 20px; background: #000; border-top: 3px solid var(--gold); margin-top: auto; }
-        .footer-empire h2 { font-family: 'Cairo'; font-size: 20px; color: white; text-shadow: 0 0 10px var(--gold); margin: 0; }
-
+        
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
 <a href="https://wa.me/201148175381" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo(0,0)"><i class="fas fa-arrow-up"></i></button>
 
 <header><h1>✨ إِمْبَرَاطُورِيَّةُ التِّلَاوَةِ ✨</h1></header>
 
@@ -72,13 +76,14 @@
     <div id="p1" class="page show-page">
         <div class="card">
             <h2 style="text-align:center; color:var(--gold);">مرحباً يا إمبراطور زياد</h2>
-            <div class="item-box">تم تحديث الأقسام الـ 12 بالكامل. تم إضافة جميع أسماء الله الحسنى الـ 99 بنجاح.</div>
+            <div class="item-box">تم تحديث الموقع ليشمل خاصية البحث عن السور، أزرار النسخ التلقائي، والقائمة الكاملة لأسماء الله الحسنى.</div>
         </div>
     </div>
 
     <div id="p3" class="page">
         <div class="card">
-            <h3>📖 اختيار القارئ والسورة</h3>
+            <h3>📖 القرآن الكريم</h3>
+            <input type="text" id="surahSearch" class="search-box" placeholder="🔍 ابحث عن اسم السورة..." onkeyup="filterSurahs()">
             <select id="reciter" class="reciter-select">
                 <option value="husr">محمود خليل الحصري</option>
                 <option value="yasser">ياسر الدوسري</option>
@@ -101,18 +106,8 @@
         </div>
     </div>
 
-    <div id="p12" class="page">
-        <div class="card" style="text-align:center;">
-            <h3>📻 إذاعة القرآن الكريم - القاهرة</h3>
-            <audio controls style="width:100%;"><source src="https://n02.radiojar.com/8s7u7caactv5v?1710260431"></audio>
-            <p style="margin-top:10px; color:var(--gold);">البث يعمل الآن بجودة عالية</p>
-        </div>
-    </div>
-
-    <div id="p4" class="page"><div class="card"><h3>☀️ أذكار الصباح</h3><div class="item-box">أصبحنا وأصبح الملك لله والحمد لله.</div></div></div>
-    <div id="p5" class="page"><div class="card"><h3>🌆 أذكار المساء</h3><div class="item-box">أمسينا وأمسى الملك لله والحمد لله.</div></div></div>
-    <div id="p2" class="page"><div class="card"><h3>🌙 رمضان</h3><div class="item-box">اللهم بلغنا رمضان وبارك لنا فيه.</div></div></div>
-    <div id="p8" class="page"><div class="card"><h3>💰 الرزق</h3><div class="item-box">اللهم اكفني بحلالك عن حرامك.</div></div></div>
+    <div id="p4" class="page"><div class="card"><h3>☀️ أذكار الصباح</h3><div class="item-box" id="azkar1">أصبحنا وأصبح الملك لله والحمد لله.<button class="copy-btn" onclick="copyText('azkar1')">نسخ</button></div></div></div>
+    <div id="p5" class="page"><div class="card"><h3>🌆 أذكار المساء</h3><div class="item-box" id="azkar2">أمسينا وأمسى الملك لله والحمد لله.<button class="copy-btn" onclick="copyText('azkar2')">نسخ</button></div></div></div>
     
     <div id="p11" class="page">
         <div class="card">
@@ -121,17 +116,20 @@
         </div>
     </div>
 
-    <div id="p6" class="page"><div class="card"><h3>😴 أذكار النوم</h3><div class="item-box">باسمك ربي وضعت جنبي وبك أرفعه.</div></div></div>
-    <div id="p7" class="page"><div class="card"><h3>🕌 أذكار الصلاة</h3><div class="item-box">أستغفر الله (3 مرات).. اللهم أنت السلام.</div></div></div>
-    <div id="p9" class="page"><div class="card"><h3>🤲 أدعية متنوعة</h3><div class="item-box">ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة.</div></div></div>
+    <div id="p12" class="page">
+        <div class="card" style="text-align:center;">
+            <h3>📻 إذاعة القرآن الكريم</h3>
+            <audio controls style="width:100%;"><source src="https://n02.radiojar.com/8s7u7caactv5v?1710260431"></audio>
+        </div>
+    </div>
 </div>
 
 <footer class="footer-empire">
-    <h2>تم تصميم هذا الموقع بواسطة Zeyاد Mekawy</h2>
-    <p>© ZEYAD EMPIRE 2026</p>
+    <h2 style="color:white; font-size:18px;">ZEYAD EMPIRE 2026</h2>
 </footer>
 
 <script>
+    // التنقل بين الصفحات
     function go(pageId, btn) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('show-page'));
         document.getElementById(pageId).classList.add('show-page');
@@ -140,6 +138,24 @@
         window.scrollTo(0,0);
     }
 
+    // نسخ النص
+    function copyText(id) {
+        const text = document.getElementById(id).innerText.replace('نسخ', '');
+        navigator.clipboard.writeText(text);
+        alert('تم نسخ النص يا إمبراطور!');
+    }
+
+    // زر الصعود للأعلى
+    window.onscroll = function() {
+        let btn = document.getElementById("scrollTopBtn");
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            btn.style.display = "flex";
+        } else {
+            btn.style.display = "none";
+        }
+    };
+
+    // قائمة السور
     const suras = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
     
     const servers = {
@@ -149,44 +165,57 @@
         'basit': 'https://server7.mp3quran.net/basit/'
     };
 
-    const container = document.getElementById('surah-container');
-    suras.forEach((name, index) => {
-        let btn = document.createElement('button');
-        btn.className = 's-btn'; btn.innerText = name;
-        btn.onclick = () => {
-            let reciter = document.getElementById('reciter').value;
-            let id = (index + 1).toString().padStart(3, '0');
-            document.getElementById('player-ui').style.display = 'block';
-            document.getElementById('s-title').innerText = "سورة " + name;
-            document.getElementById('audio-src').src = servers[reciter] + id + '.mp3';
-            const player = document.getElementById('audio-player');
-            player.load(); player.play();
-        };
-        container.appendChild(btn);
-    });
+    function renderSurahs() {
+        const container = document.getElementById('surah-container');
+        container.innerHTML = '';
+        suras.forEach((name, index) => {
+            let btn = document.createElement('button');
+            btn.className = 's-btn'; btn.innerText = name;
+            btn.onclick = () => {
+                let reciter = document.getElementById('reciter').value;
+                let id = (index + 1).toString().padStart(3, '0');
+                document.getElementById('player-ui').style.display = 'block';
+                document.getElementById('s-title').innerText = "سورة " + name;
+                document.getElementById('audio-src').src = servers[reciter] + id + '.mp3';
+                const player = document.getElementById('audio-player');
+                player.load(); player.play();
+            };
+            container.appendChild(btn);
+        });
+    }
+
+    // وظيفة البحث عن السور
+    function filterSurahs() {
+        let input = document.getElementById('surahSearch').value;
+        let btns = document.querySelectorAll('#surah-container .s-btn');
+        btns.forEach(btn => {
+            if (btn.innerText.includes(input)) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        });
+    }
+
+    // قائمة الأسماء الحسنى (99 اسم)
+    const names = ["الله", "الرحمن", "الرحيم", "الملك", "القدوس", "السلام", "المؤمن", "المهيمن", "العزيز", "الجبار", "المتكبر", "الخالق", "البارئ", "المصور", "الغفار", "القهار", "الوهاب", "الرزاق", "الفتاح", "العليم", "القابض", "الباسط", "الخافض", "الرافع", "المعز", "المذل", "السميع", "البصير", "الحكم", "العدل", "اللطيف", "الخبير", "الحليم", "العظيم", "الغفور", "الشكور", "العلي", "الكبير", "الحفيظ", "المقيت", "الحسيب", "الجليل", "الكريم", "الرقيب", "المجيب", "الواسع", "الحكيم", "الودود", "المجيد", "الباعث", "الشهيد", "الحق", "الوكيل", "القوي", "المتين", "الولي", "الحميد", "المحصي", "المبدئ", "المعيد", "المحيي", "المميت", "الحي", "القيوم", "الواجد", "الماجد", "الواحد", "الأحد", "الصمد", "القادر", "المقتدر", "المقدم", "المؤخر", "الأول", "الآخر", "الظاهر", "الباطن", "الوالي", "المتعالي", "البر", "التواب", "المنتقم", "العفو", "الرؤوف", "مالك الملك", "ذو الجلال والإكرام", "المقسط", "الجامع", "الغني", "المغني", "المانع", "الضار", "النافع", "النور", "الهادي", "البديع", "الباقي", "الوارث", "الرشيد", "الصبور"];
+
+    function renderNames() {
+        const nl = document.getElementById('names-list');
+        names.forEach(n => {
+            let d = document.createElement('div');
+            d.className = 's-btn'; d.innerText = n;
+            if(n === "الله") { d.style.background = "var(--gold)"; d.style.color = "black"; d.style.gridColumn = "span 2"; }
+            nl.appendChild(d);
+        });
+    }
 
     let c = 0;
     function countUp() { c++; document.getElementById('counter').innerText = c; }
 
-    // مصفوفة الـ 99 اسم كاملة
-    const names = [
-        "الله", "الرحمن", "الرحيم", "الملك", "القدوس", "السلام", "المؤمن", "المهيمن", "العزيز", "الجبار", "المتكبر", "الخالق", "البارئ", "المصور", "الغفار", "القهار", "الوهاب", "الرزاق", "الفتاح", "العليم", "القابض", "الباسط", "الخافض", "الرافع", "المعز", "المذل", "السميع", "البصير", "الحكيم", "العدل", "اللطيف", "الخبير", "الحليم", "العظيم", "الغفور", "الشكور", "العلي", "الكبير", "الحفيظ", "المقيت", "الحسيب", "الجليل", "الكريم", "الرقيب", "المجيب", "الواسع", "الحكيم", "الودود", "المجيد", "الباعث", "الشهيد", "الحق", "الوكيل", "القوي", "المتين", "الولي", "الحميد", "المحصي", "المبدئ", "المعيد", "المحيي", "المميت", "الحي", "القيوم", "الواجد", "الماجد", "الواحد", "الأحد", "الصمد", "القادر", "المقتدر", "المقدم", "المؤخر", "الأول", "الآخر", "الظاهر", "الباطن", "الوالي", "المتعالي", "البر", "التواب", "المنتقم", "العفو", "الرؤوف", "مالك الملك", "ذو الجلال والإكرام", "المقسط", "الجامع", "الغني", "المغني", "المانع", "الضار", "النافع", "النور", "الهادي", "البديع", "الباقي", "الوارث", "الرشيد", "الصبور"
-    ];
-
-    const nl = document.getElementById('names-list');
-    names.forEach(n => {
-        let d = document.createElement('div');
-        d.className = 's-btn';
-        d.style.cursor = 'default';
-        d.innerText = n;
-        // تمييز لفظ الجلالة
-        if(n === "الله") {
-            d.style.background = "var(--gold)";
-            d.style.color = "black";
-            d.style.gridColumn = "span 2"; // ليكون مميزاً في العرض
-        }
-        nl.appendChild(d);
-    });
+    // تشغيل الدوال عند الفتح
+    renderSurahs();
+    renderNames();
 </script>
 </body>
 </html>
