@@ -3,172 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZEYAD CYBER EMPIRE</title>
+    <title>ZEYAD ULTIMATE EMPIRE 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --neon-blue: #00f2ff; 
-            --neon-pink: #ff00e6; 
-            --neon-green: #00ff8c;
-            --dark-bg: #0a0a0b;
-            --card-bg: rgba(20, 20, 25, 0.8);
-        }
-        
+        :root { --neon-blue: #00f2ff; --neon-pink: #ff00e6; --neon-green: #00ff8c; --gold: #ffd700; --dark-bg: #050505; }
         body { margin: 0; background: var(--dark-bg); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
-        canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.4; }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
         
-        /* شريط التنقل المطور بألوان متغيرة */
-        nav { 
-            background: rgba(0, 0, 0, 0.8); 
-            padding: 12px; 
-            display: flex; 
-            overflow-x: auto; 
-            gap: 10px; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            border-bottom: 2px solid var(--neon-blue); 
-            backdrop-filter: blur(15px);
-            scrollbar-width: none;
-        }
+        /* شريط التنقل العملاق - اسحب يمين وشمال */
+        nav { background: rgba(0,0,0,0.9); padding: 10px; display: flex; overflow-x: auto; gap: 8px; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--neon-blue); scrollbar-width: none; }
         nav::-webkit-scrollbar { display: none; }
-        
-        nav button { 
-            background: transparent; 
-            border: 1px solid var(--neon-blue); 
-            color: var(--neon-blue); 
-            padding: 10px 18px; 
-            border-radius: 25px; 
-            cursor: pointer; 
-            white-space: nowrap; 
-            font-family: 'Cairo'; 
-            font-weight: bold; 
-            font-size: 13px; 
-            transition: all 0.3s;
-        }
-        .active-btn { 
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink)) !important; 
-            color: white !important; 
-            border: none !important;
-            box-shadow: 0 0 20px var(--neon-blue);
-        }
+        nav button { background: rgba(255,255,255,0.05); border: 1px solid var(--neon-blue); color: white; padding: 8px 15px; border-radius: 12px; cursor: pointer; white-space: nowrap; font-family: 'Cairo'; font-weight: bold; font-size: 12px; transition: 0.3s; }
+        .active-btn { background: var(--neon-blue) !important; color: black !important; box-shadow: 0 0 15px var(--neon-blue); border: none !important; }
 
-        /* نظام الصفحات المنفصلة */
-        .page { display: none; width: 92%; margin: 20px auto; text-align: center; min-height: 80vh; }
-        .show { display: block !important; animation: slideUp 0.5s ease-out; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .page { display: none; width: 92%; margin: 15px auto; text-align: center; min-height: 80vh; }
+        .show { display: block !important; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* تصميم البطاقات المطور */
-        .card { 
-            background: var(--card-bg); 
-            padding: 20px; 
-            border-radius: 20px; 
-            border: 1px solid rgba(0, 242, 255, 0.3); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-bottom: 20px; 
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        .btn-link { 
-            display: block; 
-            width: 100%; 
-            padding: 15px 0; 
-            margin: 12px 0; 
-            border: 2px solid var(--neon-blue); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 15px; 
-            background: rgba(0, 242, 255, 0.05); 
-            font-weight: bold; 
-            font-size: 15px; 
-            transition: 0.3s;
-            box-sizing: border-box; 
-        }
-        .btn-link:hover { 
-            background: var(--neon-blue); 
-            color: black; 
-            box-shadow: 0 0 15px var(--neon-blue);
-        }
-        
-        .wa-float { position: fixed; bottom: 20px; left: 20px; background: var(--neon-green); width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; z-index: 2000; box-shadow: 0 0 20px var(--neon-green); }
-        input { width: 90%; padding: 15px; border-radius: 15px; border: 1px solid var(--neon-pink); background: rgba(0,0,0,0.5); color: white; margin: 10px 0; text-align: center; outline: none; }
+        .card { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 20px; border: 1px solid rgba(0,242,255,0.2); backdrop-filter: blur(10px); margin-bottom: 15px; box-sizing: border-box; width: 100%; }
+        .btn-link { display: block; width: 100%; padding: 12px 0; margin: 10px 0; border: 1px solid var(--neon-pink); color: white; text-decoration: none; border-radius: 15px; background: rgba(255, 0, 230, 0.05); font-weight: bold; font-size: 14px; box-sizing: border-box; transition: 0.2s; }
+        .btn-link:active { transform: scale(0.95); background: var(--neon-pink); }
     </style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
-<a href="https://wa.me/201148175381" class="wa-float" target="_blank">💬</a>
+<a href="https://wa.me/201148175381" style="position:fixed; bottom:15px; left:15px; background:#25d366; width:50px; height:50px; border-radius:50%; display:flex; justify-content:center; align-items:center; text-decoration:none; z-index:2000; box-shadow:0 0 15px #25d366;">💬</a>
 
 <nav>
-    <button onclick="st('home', this)" class="active-btn">🏠 هوم</button>
+    <button onclick="st('home', this)" class="active-btn">🏠 الرئيسية</button>
+    <button onclick="st('live', this)">⚽ كورة لايف</button>
+    <button onclick="st('money', this)">💰 المال والذهب</button>
+    <button onclick="st('news', this)">🔔 أخبار عاجلة</button>
     <button onclick="st('trends', this)">🔥 التريند</button>
-    <button onclick="st('live', this)">⚽ كورة</button>
-    <button onclick="st('money', this)">💰 الفلوس</button>
-    <button onclick="st('news', this)">📰 الأخبار</button>
-    <button onclick="st('games', this)">🎮 ألعاب</button>
+    <button onclick="st('tools', this)">🛠️ أدوات ذكية</button>
+    <button onclick="st('services', this)">🏛️ خدمات مصر</button>
+    <button onclick="st('games', this)">🎮 مركز الألعاب</button>
+    <button onclick="st('health', this)">🍎 صحتك</button>
+    <button onclick="st('islam', this)">🕋 إسلاميات</button>
     <button onclick="st('secret', this)">🔐 الخزنة</button>
 </nav>
 
 <div id="home" class="page show">
     <div class="card">
-        <h1 style="background: linear-gradient(to right, #00f2ff, #ff00e6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 28px;">👑 إمبراطورية ZEYAD</h1>
-        <p style="color: #ccc;">أهلاً بك في الجيل القادم من التطبيقات.</p>
-        <div class="card" style="border-color: var(--neon-pink);">
-            <h3 style="color: var(--neon-pink);">📥 مركز التحميل</h3>
-            <a href="https://www.appcreator24.com/app3947806-z45quj" class="btn-link" style="border-color: var(--neon-pink);">📱 تحميل التطبيق الرسمي (APK)</a>
+        <h1 style="color: var(--neon-blue);">👑 إمبراطورية ZEYAD</h1>
+        <div class="card" style="border-color: var(--gold);">
+            <h3 style="color: var(--gold);">📥 التحميلات</h3>
+            <a href="https://www.appcreator24.com/app3947806-z45quj" class="btn-link" style="background: var(--gold); color: black; border:none;">📱 تحميل التطبيق الرسمي (APK)</a>
         </div>
-    </div>
-</div>
-
-<div id="trends" class="page">
-    <div class="card">
-        <h2 style="color: var(--neon-green);">🔥 تريندات جوجل اليوم</h2>
-        <p>اكتشف ما يبحث عنه المصريون الآن</p>
-        <a href="https://trends.google.com/trends/trendingsearches/daily?geo=EG" class="btn-link" style="border-color: var(--neon-green);">🔎 عرض التريند الآن</a>
     </div>
 </div>
 
 <div id="live" class="page">
     <div class="card">
-        <h2 style="color: var(--neon-blue);">⚽ ركن الملاعب</h2>
-        <a href="https://kooora4live.net/" class="btn-link">🏆 كورة لايف (بث مباشر)</a>
+        <h2 style="color: var(--neon-green);">⚽ بث مباشر للمباريات</h2>
+        <a href="https://kooora4live.net/" class="btn-link" style="border-color: var(--neon-green);">🏆 دخول كورة لايف</a>
     </div>
 </div>
 
 <div id="money" class="page">
     <div class="card">
-        <h2 style="color: var(--gold);">💰 أسعار الصرف والذهب</h2>
-        <a href="https://www.goldprice.org/ar/gold-price-egypt.html" class="btn-link" style="border-color: var(--gold);">🟡 سعر الذهب عيار 21</a>
-        <a href="https://www.xe.com/ar/currencyconverter/convert/?Amount=1&From=USD&To=EGP" class="btn-link" style="border-color: var(--gold);">💵 سعر الدولار مقابل الجنيه</a>
+        <h2 style="color: var(--gold);">💰 أسعار اليوم</h2>
+        <a href="https://web.vodafone.com.eg/ar/home" class="btn-link">💸 خدمات فودافون</a>
+        <a href="https://www.goldprice.org/ar/gold-price-egypt.html" class="btn-link">🟡 سعر الذهب الآن</a>
+        <a href="https://www.xe.com/ar/currencyconverter/convert/?Amount=1&From=USD&To=EGP" class="btn-link">💵 سعر الدولار</a>
     </div>
 </div>
 
 <div id="news" class="page">
     <div class="card">
-        <h2 style="color: var(--neon-pink);">📰 الصحافة العالمية</h2>
-        <a href="https://www.youm7.com/" class="btn-link">🔴 اليوم السابع عاجل</a>
-        <a href="https://www.skynewsarabia.com/" class="btn-link">🌐 سكاي نيوز عربية</a>
+        <h2 style="color: var(--neon-pink);">🔔 أخبار العالم</h2>
+        <a href="https://www.youm7.com/" class="btn-link">📰 اليوم السابع</a>
+        <a href="https://www.almasryalyoum.com/" class="btn-link">🗞️ المصري اليوم</a>
+    </div>
+</div>
+
+<div id="trends" class="page">
+    <div class="card">
+        <h2 style="color: var(--neon-blue);">🔥 تريندات جوجل</h2>
+        <a href="https://trends.google.com/trends/trendingsearches/daily?geo=EG" class="btn-link">🔎 ماذا يبحث المصريون؟</a>
+    </div>
+</div>
+
+<div id="tools" class="page">
+    <div class="card">
+        <h2 style="color: var(--neon-blue);">🛠️ أدوات ذكية</h2>
+        <a href="https://chatgpt.com" class="btn-link">🤖 ChatGPT</a>
+        <a href="https://www.speedtest.net" class="btn-link">🚀 قياس سرعة النت</a>
+        <a href="https://www.accuweather.com/ar/eg/minya/127059" class="btn-link">🛰️ طقس المنيا</a>
+    </div>
+</div>
+
+<div id="services" class="page">
+    <div class="card">
+        <h2 style="color: var(--neon-blue);">🏛️ خدمات حكومية</h2>
+        <a href="https://digital.gov.eg/" class="btn-link">🇪🇬 مصر الرقمية</a>
+        <a href="https://ppo.gov.eg/webcenter/portal/PPOPortal/pages_publicservices/trafficservices" class="btn-link">🚗 مخالفات المرور</a>
     </div>
 </div>
 
 <div id="games" class="page">
     <div class="card">
-        <h2 style="color: var(--neon-green);">🎮 منطقة الترفيه</h2>
-        <a href="https://poki.com/en/g/subway-surfers" class="btn-link">🏃 Subway Surfers</a>
+        <h2 style="color: var(--neon-green);">🎮 منطقة الألعاب</h2>
+        <a href="https://poki.com/en/g/subway-surfers" class="btn-link">🏃 Subway</a>
         <a href="https://poki.com/en/g/drive-mad" class="btn-link">🚗 Drive Mad</a>
     </div>
 </div>
 
+<div id="health" class="page">
+    <div class="card">
+        <h2 style="color: var(--neon-pink);">🍎 ركن الصحة</h2>
+        <a href="https://www.calculator.net/calorie-calculator.html" class="btn-link">🔥 حاسبة السعرات</a>
+        <a href="https://www.webteb.com/" class="btn-link">🏥 موسوعة طبية</a>
+    </div>
+</div>
+
+<div id="islam" class="page">
+    <div class="card">
+        <h2 style="color: var(--neon-green);">🕋 ركن المسلم</h2>
+        <a href="https://quran.com" class="btn-link">📖 المصحف</a>
+        <a href="https://www.azkary.com" class="btn-link">📿 أذكار</a>
+    </div>
+</div>
+
 <div id="secret" class="page">
-    <div class="card" style="border-color: var(--neon-pink);">
-        <h2 style="color: var(--neon-pink);">🔐 مركز التحكم السري</h2>
-        <input type="password" id="pass" placeholder="أدخل كود المرور الخاص بك...">
-        <button class="btn-link" onclick="chk()" style="border-color: var(--neon-pink);">فتح الخزنة 🔓</button>
-        <div id="sc" style="display:none; margin-top:15px;">
-            <p style="color: var(--neon-green);">مرحباً زياد.. إليك إحصائيات الزوار:</p>
-            <img src="https://profile-counter.glitch.me/fuv-ops/count.svg" alt="Counter" style="max-width: 100%; filter: drop-shadow(0 0 5px var(--neon-green));">
-        </div>
+    <div class="card" style="border-color: var(--gold);">
+        <h2>🔐 الخزنة السرية</h2>
+        <input type="password" id="pass" style="width:85%; padding:12px; border-radius:12px; border:1px solid var(--gold); background:#000; color:#fff; text-align:center;" placeholder="الباسورد...">
+        <button class="btn-link" onclick="chk()" style="border-color: var(--gold);">دخول 🔓</button>
+        <div id="sc" style="display:none; margin-top:15px;"><img src="https://profile-counter.glitch.me/fuv-ops/count.svg" style="max-width:100%;"></div>
     </div>
 </div>
 
@@ -180,31 +143,26 @@
         var buttons = document.querySelectorAll('nav button');
         buttons.forEach(function(b) { b.classList.remove('active-btn'); });
         btn.classList.add('active-btn');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0,0);
     }
-
     function chk() {
-        if(document.getElementById('pass').value === "1148175381") {
-            document.getElementById('sc').style.display = 'block';
-        } else { alert("الباسورد خطأ يا إمبراطور!"); }
+        if(document.getElementById('pass').value === "1148175381") document.getElementById('sc').style.display = 'block';
+        else alert("غلط!");
     }
-
-    // تطوير تأثير الماتريكس
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const drops = Array(Math.floor(canvas.width/18)).fill(1);
+    const drops = Array(Math.floor(canvas.width/16)).fill(1);
     function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.08)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#00f2ff"; ctx.font = "bold 16px monospace";
+        ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = "#00f2ff"; ctx.font = "15px monospace";
         drops.forEach((y, i) => {
-            const text = "ZEYAD";
-            ctx.fillText(text, i*18, y*18);
-            if(y*18 > canvas.height && Math.random() > 0.98) drops[i] = 0;
+            ctx.fillText("ZEYAD", i*16, y*16);
+            if(y*16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
             drops[i]++;
         });
     }
-    setInterval(draw, 40);
+    setInterval(draw, 33);
 </script>
 </body>
 </html>
