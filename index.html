@@ -7,166 +7,140 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #ffcc00; --emerald: #014436; --dark: #010c0a; }
-        body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
-        
+        body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; }
         header { background: var(--emerald); padding: 20px; text-align: center; border-bottom: 3px solid var(--gold); }
-        header h1 { font-family: 'Amiri', serif; font-size: 26px; color: var(--gold); margin: 0; }
-
-        /* شريط التنقل */
-        nav { display: flex; overflow-x: auto; background: #000; padding: 10px; gap: 8px; position: sticky; top: 0; z-index: 9999; border-bottom: 1px solid var(--gold); }
+        header h1 { font-family: 'Amiri', serif; font-size: 28px; color: var(--gold); margin: 0; }
+        nav { display: flex; overflow-x: auto; background: #000; padding: 10px; gap: 8px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); scrollbar-width: none; }
+        nav::-webkit-scrollbar { display: none; }
         nav button { background: rgba(255, 204, 0, 0.1); border: 1px solid var(--gold); color: white; padding: 10px 15px; border-radius: 20px; white-space: nowrap; cursor: pointer; flex-shrink: 0; }
         .active-btn { background: var(--gold) !important; color: black !important; font-weight: bold; }
-
-        .container { padding: 20px; max-width: 800px; margin: auto; }
-        
-        /* إعدادات الصفحات - الإخفاء والإظهار */
+        .container { padding: 15px; max-width: 800px; margin: auto; }
         .page { display: none; } 
         .show { display: block !important; }
-
-        .card { background: rgba(1, 68, 54, 0.3); border: 1px solid rgba(255, 204, 0, 0.3); border-radius: 15px; padding: 20px; margin-bottom: 15px; }
-        .duaa-item { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-right: 4px solid var(--gold); font-family: 'Amiri', serif; font-size: 20px; }
-        
-        .s-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-height: 350px; overflow-y: auto; }
-        .s-btn { background: #014436; color: white; border: 1px solid var(--gold); padding: 10px; border-radius: 8px; cursor: pointer; }
-
-        .sebha-circle { width: 120px; height: 120px; border: 5px solid var(--gold); border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer; }
-        .names-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .name-box { border: 1px solid var(--gold); padding: 8px; border-radius: 5px; text-align: center; font-family: 'Amiri'; }
-
-        .signature { text-align: center; padding: 40px; background: #000; border-top: 2px solid var(--gold); margin-top: 30px; }
+        .card { background: rgba(1, 68, 54, 0.4); border: 1px solid rgba(255, 204, 0, 0.3); border-radius: 15px; padding: 15px; margin-bottom: 15px; }
+        .duaa-box { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 8px; border-right: 4px solid var(--gold); font-family: 'Amiri', serif; font-size: 19px; line-height: 1.6; }
+        .s-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-height: 400px; overflow-y: auto; padding: 5px; }
+        .s-btn { background: #014436; color: white; border: 1px solid var(--gold); padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .names-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .name-item { border: 1px solid var(--gold); padding: 8px; border-radius: 5px; text-align: center; font-size: 14px; background: rgba(255,204,0,0.05); }
+        .signature { text-align: center; padding: 30px; border-top: 1px solid var(--gold); margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <header><h1>✨ إِمْبَرَاطُورِيَّةُ التِّلَاوَةِ ✨</h1></header>
 
-<nav>
-    <button onclick="changePage('home', this)" class="active-btn">🏠 الرئيسية</button>
-    <button onclick="changePage('quran', this)">📖 المصحف</button>
-    <button onclick="changePage('azkar', this)">☀️ الأذكار</button>
-    <button onclick="changePage('duaa', this)">🤲 الأدعية</button>
-    <button onclick="changePage('sebha', this)">📿 السبحة</button>
-    <button onclick="changePage('names', this)">🌟 الأسماء</button>
-    <button onclick="changePage('radio', this)">📻 الراديو</button>
+<nav id="navbar">
+    <button onclick="openPage('home', this)" class="active-btn">🏠 الرئيسية</button>
+    <button onclick="openPage('quran', this)">📖 المصحف</button>
+    <button onclick="openPage('azkar', this)">☀️ الأذكار</button>
+    <button onclick="openPage('sebha', this)">📿 السبحة</button>
+    <button onclick="openPage('names', this)">🌟 الأسماء</button>
+    <button onclick="openPage('radio', this)">📻 الراديو</button>
 </nav>
 
 <div class="container">
     <div id="home" class="page show">
         <div class="card">
             <h2>مرحباً يا إمبراطور</h2>
-            <p class="duaa-item">"ألا بذكر الله تطمئن القلوب"</p>
+            <div class="duaa-box">"ألا بذكر الله تطمئن القلوب"</div>
         </div>
     </div>
 
     <div id="quran" class="page">
         <div class="card">
-            <h3>📖 المصحف المرتل</h3>
-            <div id="player" style="display:none; margin-bottom:15px;">
-                <p id="sName" style="color:var(--gold)"></p>
-                <audio id="audio" controls style="width:100%"><source id="src" src=""></audio>
+            <h3>📖 المصحف المرتل (114 سورة)</h3>
+            <div id="player" style="display:none; margin-bottom:15px; text-align:center;">
+                <p id="nowPlaying" style="color:var(--gold); font-weight:bold;"></p>
+                <audio id="audioMain" controls style="width:100%"><source id="audioSrc" src=""></audio>
             </div>
-            <div id="listS" class="s-list"></div>
+            <div id="surahList" class="s-grid"></div>
         </div>
     </div>
 
     <div id="azkar" class="page">
         <div class="card">
-            <h3>☀️ الأذكار</h3>
-            <div class="duaa-item">أصبحنا وأصبح الملك لله والحمد لله.</div>
-            <div class="duaa-item">رضيت بالله رباً وبالإسلام ديناً.</div>
-        </div>
-    </div>
-
-    <div id="duaa" class="page">
-        <div class="card">
-            <h3>🤲 الأدعية</h3>
-            <div class="duaa-item">اللهم إنك عفو كريم تحب العفو فاعف عني.</div>
-            <div class="duaa-item">يا حي يا قيوم برحمتك أستغيث.</div>
+            <h3>☀️ موسوعة الأذكار</h3>
+            <div class="duaa-box">أصبحنا وأصبح الملك لله والحمد لله.</div>
+            <div class="duaa-box">بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء.</div>
+            <div class="duaa-box">رضيت بالله رباً وبالإسلام ديناً وبمحمد ﷺ نبياً.</div>
+            <div class="duaa-box">اللهم إني أسألك علماً نافعاً ورزقاً طيباً وعملاً متقبلاً.</div>
+            <div class="duaa-box">يا حي يا قيوم برحمتك أستغيث أصلح لي شأني كله.</div>
         </div>
     </div>
 
     <div id="sebha" class="page">
-        <div class="card">
-            <h3>📿 السبحة</h3>
-            <div class="sebha-circle" id="countNum" onclick="doCount()">0</div>
-            <button onclick="doReset()" style="background:red; color:white; border:none; padding:10px; border-radius:10px; width:100%; cursor:pointer;">تصفير</button>
+        <div class="card" style="text-align:center;">
+            <h3>📿 السبحة الإلكترونية</h3>
+            <div id="sCounter" style="width:120px; height:120px; border:4px solid var(--gold); border-radius:50%; margin:20px auto; display:flex; align-items:center; justify-content:center; font-size:40px; cursor:pointer;" onclick="countInc()">0</div>
+            <button onclick="countRes()" style="background:red; color:white; border:none; padding:10px; border-radius:10px; width:100%; cursor:pointer;">تصفير العداد</button>
         </div>
     </div>
 
     <div id="names" class="page">
         <div class="card">
-            <h3>🌟 الأسماء الحسنى</h3>
-            <div id="namesList" class="names-grid"></div>
+            <h3>🌟 أسماء الله الحسنى</h3>
+            <div id="namesBox" class="names-grid"></div>
         </div>
     </div>
 
     <div id="radio" class="page">
         <div class="card">
-            <h3>📻 الراديو</h3>
-            <audio controls style="width:100%"><source src="https://n02.radiojar.com/8s7u7caactv5v" type="audio/mpeg"></audio>
+            <h3>📻 إذاعة القرآن الكريم (مباشر)</h3>
+            <audio id="liveRadio" controls style="width:100%">
+                <source src="https://qurango.net/radio/mix" type="audio/mpeg">
+            </audio>
+            <p style="font-size:12px; margin-top:10px; color:var(--gold);">* إذا لم يعمل البث فوراً، يرجى الضغط على زر التشغيل.</p>
         </div>
     </div>
 </div>
 
 <div class="signature">
-    <div class="shining-text">بواسطة Zeyad Mekawy</div>
-    <p>ZEYAD EMPIRE 2026</p>
+    <div style="font-size: 20px; color: #fff; text-shadow: 0 0 10px var(--gold);">تم تصميم الموقع بواسطة Zeyad Mekawy</div>
+    <p style="font-size: 10px; color: #777; margin-top: 10px;">ZEYAD EMPIRE 2026 ©</p>
 </div>
 
 <script>
-    // الدالة المسؤولة عن تشغيل الأزرار
-    function changePage(id, btn) {
-        // 1. إخفاء كل الصفحات فوراً
-        var allPages = document.getElementsByClassName('page');
-        for (var i = 0; i < allPages.length; i++) {
-            allPages[i].style.display = 'none';
-        }
-        // 2. إظهار الصفحة المطلوبة
-        document.getElementById(id).style.display = 'block';
-
-        // 3. تغيير لون الأزرار
-        var allBtns = document.querySelectorAll('nav button');
-        allBtns.forEach(b => b.classList.remove('active-btn'));
+    // نظام التنقل بالأزرار
+    function openPage(pageId, btn) {
+        var pages = document.getElementsByClassName('page');
+        for (var i = 0; i < pages.length; i++) { pages[i].style.display = 'none'; }
+        document.getElementById(pageId).style.display = 'block';
+        
+        var btns = document.querySelectorAll('nav button');
+        btns.forEach(b => b.classList.remove('active-btn'));
         btn.classList.add('active-btn');
+        window.scrollTo(0,0);
     }
 
-    // السبحة
-    var counterValue = 0;
-    function doCount() {
-        counterValue++;
-        document.getElementById('countNum').innerText = counterValue;
-    }
-    function doReset() {
-        counterValue = 0;
-        document.getElementById('countNum').innerText = 0;
-    }
+    // نظام السبحة
+    var sVal = 0;
+    function countInc() { sVal++; document.getElementById('sCounter').innerText = sVal; }
+    function countRes() { sVal = 0; document.getElementById('sCounter').innerText = 0; }
 
-    // المصحف
-    const suras = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
-    const listDiv = document.getElementById('listS');
-    suras.forEach((s, i) => {
+    // قائمة السور
+    const sNames = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
+    const sBox = document.getElementById('surahList');
+    sNames.forEach((name, i) => {
         let b = document.createElement('button');
-        b.className = 's-btn';
-        b.innerText = s;
+        b.className = 's-btn'; b.innerText = name;
         b.onclick = function() {
             let num = (i+1).toString().padStart(3,'0');
             document.getElementById('player').style.display = 'block';
-            document.getElementById('sName').innerText = "سورة " + s;
-            document.getElementById('src').src = "https://server13.mp3quran.net/husr/" + num + ".mp3";
-            document.getElementById('audio').load();
-            document.getElementById('audio').play();
+            document.getElementById('nowPlaying').innerText = "جاري تلاوة سورة " + name;
+            document.getElementById('audioSrc').src = "https://server13.mp3quran.net/husr/" + num + ".mp3";
+            document.getElementById('audioMain').load();
+            document.getElementById('audioMain').play();
         };
-        listDiv.appendChild(b);
+        sBox.appendChild(b);
     });
 
-    // الأسماء
-    const nms = ["الرحمن","الرحيم","الملك","القدوس","السلام","المؤمن","المهيمن","العزيز","الجبار","المتكبر","الخالق","البارئ","المصور","الغفار","القهار","الوهاب","الرزاق","الفتاح","العليم","القابض","الباسط","الخافض","الرافع","المعز","المذل","السميع","البصير","الحكم","العدل","اللطيف","الخبير","الحليم","العظيم","الغفور","الشكور","العلي","الكبير","الحفيظ","المقيت","الحسيب","الجليل","الكريم","الرقيب","المجيب","الواسع","الحكيم","الودود","المجيد","الباعث","الشهيد","الحق","الوكيل","القوي","المتين","الولي","الحميد","المحصي","المبدئ","المعيد","المحيي","المميت","الحي","القيوم","الواجد","الماجد","الواحد","الأحد","الصمد","القادر","المقتدر","المقدم","المؤخر","الأول","الآخر","الظاهر","الباطن","الوالي","المتعالي","البر","التواب","المنتقم","العفو","الرؤوف","مالك الملك","ذو الجلال والإكرام","المقسط","الجامع","الغني","المغني","المانع","الضار","النافع","النور","الهادي","البديع","الباقي","الوارث","الرشيد","الصبور"];
-    const namesDiv = document.getElementById('namesList');
-    nms.forEach(n => {
-        let d = document.createElement('div');
-        d.className = 'name-box';
-        d.innerText = n;
-        namesDiv.appendChild(d);
+    // أسماء الله الحسنى
+    const nList = ["الرحمن","الرحيم","الملك","القدوس","السلام","المؤمن","المهيمن","العزيز","الجبار","المتكبر","الخالق","البارئ","المصور","الغفار","القهار","الوهاب","الرزاق","الفتاح","العليم","القابض","الباسط","الخافض","الرافع","المعز","المذل","السميع","البصير","الحكم","العدل","اللطيف","الخبير","الحليم","العظيم","الغفور","الشكور","العلي","الكبير","الحفيظ","المقيت","الحسيب","الجليل","الكريم","الرقيب","المجيب","الواسع","الحكيم","الودود","المجيد","الباعث","الشهيد","الحق","الوكيل","القوي","المتين","الولي","الحميد","المحصي","المبدئ","المعيد","المحيي","المميت","الحي","القيوم","الواجد","الماجد","الواحد","الأحد","الصمد","القادر","المقتدر","المقدم","المؤخر","الأول","الآخر","الظاهر","الباطن","الوالي","المتعالي","البر","التواب","المنتقم","العفو","الرؤوف","مالك الملك","ذو الجلال والإكرام","المقسط","الجامع","الغني","المغني","المانع","الضار","النافع","النور","الهادي","البديع","الباقي","الوارث","الرشيد","الصبور"];
+    const nBox = document.getElementById('namesBox');
+    nList.forEach(name => {
+        let d = document.createElement('div'); d.className = 'name-item'; d.innerText = name;
+        nBox.appendChild(d);
     });
 </script>
 </body>
