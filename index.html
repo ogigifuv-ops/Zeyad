@@ -8,35 +8,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --gold: #ffcc00; --emerald: #014436; --dark: #010c0a; --neon: 0 0 15px #ffcc00; }
-        body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; min-height: 100vh; overflow-x: hidden; }
+        body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; min-height: 100vh; padding-bottom: 120px; }
         
         header { background: linear-gradient(to bottom, var(--emerald), var(--dark)); padding: 20px 10px; text-align: center; border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 1001; }
         header h1 { font-family: 'Amiri', serif; font-size: 26px; color: var(--gold); margin: 0; text-shadow: var(--neon); }
 
         nav { display: flex; overflow-x: auto; background: #000; padding: 12px; gap: 10px; border-bottom: 2px solid var(--gold); position: sticky; top: 75px; z-index: 1000; scrollbar-width: none; }
-        nav button { background: rgba(255, 204, 0, 0.1); border: 1.5px solid var(--gold); color: white; padding: 10px 20px; border-radius: 25px; white-space: nowrap; cursor: pointer; font-family: 'Cairo'; font-weight: bold; }
-        .active-btn { background: var(--gold) !important; color: black !important; box-shadow: var(--neon); }
+        nav button { background: rgba(255, 204, 0, 0.1); border: 1.5px solid var(--gold); color: white; padding: 10px 20px; border-radius: 25px; white-space: nowrap; cursor: pointer; font-family: 'Cairo'; font-weight: bold; font-size: 14px; }
+        .active-btn { background: var(--gold) !important; color: black !important; }
 
-        .main-display { padding: 20px; background: radial-gradient(circle, #022b22, #010c0a); min-height: 80vh; }
+        .main-display { padding: 15px; background: radial-gradient(circle, #022b22, #010c0a); min-height: 80vh; }
         .page { display: none; animation: fadeIn 0.4s ease; max-width: 600px; margin: auto; }
         .show-page { display: block !important; }
 
-        .card { background: rgba(1, 68, 54, 0.7); border: 2px solid var(--gold); border-radius: 20px; padding: 25px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; }
+        .card { background: rgba(1, 68, 54, 0.7); border: 2px solid var(--gold); border-radius: 20px; padding: 20px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .item-box { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid rgba(255,204,0,0.3); font-family: 'Amiri', serif; font-size: 22px; line-height: 1.8; text-align: center; width: 100%; box-sizing: border-box; }
         
-        /* مشغل الصوت المطور بالعداد */
-        .player-box { background: #000; border-radius: 15px; padding: 15px; margin-top: 15px; border: 1px solid var(--gold); }
-        .audio-timer { display: flex; justify-content: space-between; color: var(--gold); font-size: 14px; margin-top: 5px; font-family: monospace; }
-        audio { width: 100%; height: 40px; }
+        .s-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .s-container { display: flex; flex-direction: column; gap: 5px; }
+        .s-btn, .radio-btn { background: rgba(1, 68, 54, 0.9); color: white; border: 1.5px solid var(--gold); padding: 12px; border-radius: 12px; cursor: pointer; font-weight: bold; width: 100%; }
+        
+        .download-btn { background: #25d366; color: white; border: none; padding: 6px; border-radius: 8px; font-size: 11px; cursor: pointer; text-decoration: none; text-align: center; font-weight: bold; }
 
-        .item-box { background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; margin-bottom: 12px; border: 1px solid rgba(255,204,0,0.3); font-family: 'Amiri', serif; font-size: 20px; line-height: 1.6; }
-        .copy-btn { float: left; background: var(--gold); color: black; border: none; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold; }
+        #player-container { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; border-top: 3px solid var(--gold); padding: 15px; z-index: 2000; display: none; }
+        .progress-container { width: 100%; height: 8px; background: #333; border-radius: 10px; margin: 10px 0; cursor: pointer; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--gold); width: 0%; transition: width 0.1s linear; }
+        .time-display { display: flex; justify-content: space-between; color: var(--gold); font-family: monospace; font-size: 14px; }
+        .player-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 5px; }
+        .player-controls i { font-size: 30px; color: white; cursor: pointer; }
 
-        .s-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .s-btn, .radio-btn { background: rgba(1, 68, 54, 0.9); color: white; border: 1.5px solid var(--gold); padding: 15px; border-radius: 12px; cursor: pointer; font-weight: bold; width: 100%; }
-        
-        .sebha-circle { width: 140px; height: 140px; border: 6px solid var(--gold); border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 45px; cursor: pointer; box-shadow: var(--neon); color: var(--gold); }
-        
-        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; border: 2px solid white; }
+        .sebha-circle { width: 130px; height: 130px; border: 6px solid var(--gold); border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer; color: var(--gold); background: rgba(0,0,0,0.3); }
+        .copy-btn { background: var(--gold); color: black; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -61,97 +63,122 @@
 </nav>
 
 <div class="main-display">
-    <div id="p1" class="page show-page"><div class="card"><h2>مرحباً يا إمبراطور زياد</h2><p>تم استعادة الـ 12 قسم وتفعيل عداد الصوت في جميع الأقسام.</p></div></div>
-
-    <div id="p12" class="page">
-        <div class="card">
-            <h3>📻 محطات الراديو المباشرة</h3>
-            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/mohammad_siddiq_alminshawi_mojawwad', 'إذاعة الشيخ المنشاوي')">📻 إذاعة الشيخ المنشاوي</button><br><br>
-            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/mahmoud_khalil_alhussary_mojawwad', 'إذاعة الشيخ الحصري')">📻 إذاعة الشيخ الحصري</button><br><br>
-            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/radio_quran', 'إذاعة القرآن الكريم - القاهرة')">📻 إذاعة القرآن الكريم</button>
-            <div id="audio-ui" class="player-box" style="display:none;">
-                <div id="atitle" style="color:var(--gold); margin-bottom:10px; font-weight:bold;"></div>
-                <audio id="main-player" controls preload="auto"><source id="asrc" src=""></audio>
-            </div>
-        </div>
-    </div>
+    <div id="p1" class="page show-page"><div class="card" style="text-align:center;"><h2>مرحباً إمبراطور زياد</h2><p>تم إضافة جميع القراء وشريط العد بنجاح.</p></div></div>
 
     <div id="p3" class="page">
         <div class="card">
-            <h3>📖 المصحف الشريف</h3>
-            <select id="reciter" class="radio-btn" style="background:#000; margin-bottom:15px;">
-                <option value="minsh">الشيخ المنشاوي</option>
-                <option value="husr">الشيخ الحصري</option>
-                <option value="basit">الشيخ عبد الباسط</option>
+            <h3>📖 اختر القارئ والسورة</h3>
+            <select id="reciterSelect" class="radio-btn" style="background:#000; border-color:var(--gold); margin-bottom:15px;" onchange="updateSurahList()">
+                <option value="https://server10.mp3quran.net/minsh/">محمد صديق المنشاوي</option>
+                <option value="https://server13.mp3quran.net/husr/">محمود خليل الحصري</option>
+                <option value="https://server7.mp3quran.net/basit/">عبد الباسط عبد الصمد</option>
+                <option value="https://server12.mp3quran.net/maher/">ماهر المعيقلي</option>
+                <option value="https://server8.mp3quran.net/afs/">مشاري العفاسي</option>
+                <option value="https://server7.mp3quran.net/s_gmd/">سعد الغامدي</option>
+                <option value="https://server11.mp3quran.net/yasser/">ياسر الدوسري</option>
+                <option value="https://server6.mp3quran.net/qtm/">ناصر القطامي</option>
+                <option value="https://server12.mp3quran.net/shur/">سعود الشريم</option>
+                <option value="https://server7.mp3quran.net/sds/">عبد الرحمن السديس</option>
+                <option value="https://server8.mp3quran.net/lhdan/">محمد اللحيدان</option>
+                <option value="https://server10.mp3quran.net/ajm/">أحمد العجمي</option>
+                <option value="https://server11.mp3quran.net/fares/">فارس عباد</option>
             </select>
             <div id="surah-list" class="s-grid"></div>
         </div>
     </div>
 
-    <div id="p10" class="page">
-        <div class="card"><h3>📿 السبحة</h3><div id="count" class="sebha-circle" onclick="countUp()">0</div><button onclick="resetC()" style="background:red; color:white; border:none; padding:10px; border-radius:8px; width:100%;">تصفير</button></div>
+    <div id="p12" class="page">
+        <div class="card">
+            <h3>📻 الراديو المباشر</h3>
+            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/radio_quran', 'إذاعة القرآن الكريم')">📻 إذاعة القرآن الكريم</button><br><br>
+            <button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/mohammad_siddiq_alminshawi_mojawwad', 'بث المنشاوي مباشر')">📻 راديو المنشاوي</button>
+        </div>
     </div>
 
-    <div id="p11" class="page"><div class="card"><h3>🌟 أسماء الله الحسنى</h3><div id="names-grid" class="s-grid"></div></div></div>
-    
-    <div id="p4" class="page"><div class="card"><h3>☀️ أذكار الصباح</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">أصبحنا وأصبح الملك لله..</span></div></div></div>
-    <div id="p5" class="page"><div class="card"><h3>🌆 أذكار المساء</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">أمسينا وأمسى الملك لله..</span></div></div></div>
-    <div id="p2" class="page"><div class="card"><h3>🌙 رمضان</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">اللهم بلغنا رمضان..</span></div></div></div>
-    <div id="p8" class="page"><div class="card"><h3>💰 الرزق</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">اللهم اكفني بحلالك..</span></div></div></div>
-    <div id="p6" class="page"><div class="card"><h3>😴 النوم</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">باسمك ربي وضعت جنبي..</span></div></div></div>
-    <div id="p7" class="page"><div class="card"><h3>🕌 الصلاة</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">أستغفر الله (3 مرات)..</span></div></div></div>
-    <div id="p9" class="page"><div class="card"><h3>🤲 أدعية</h3><div class="item-box"><button class="copy-btn" onclick="copyT(this)">نسخ</button><span class="txt">ربنا آتنا في الدنيا حسنة..</span></div></div></div>
+    <div id="p6" class="page"><div class="card"><h3>😴 أذكار النوم</h3><div class="item-box"><span class="txt">باسمك ربي وضعت جنبي وبك أرفعه...</span><button class="copy-btn" onclick="copyText(this)">نسخ</button></div></div></div>
+    <div id="p10" class="page"><div class="card"><h3>📿 السبحة</h3><div id="count" class="sebha-circle" onclick="countUp()">0</div></div></div>
 </div>
 
-<a href="https://wa.me/201148175381" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<div id="player-container">
+    <div id="track-name" style="color:var(--gold); text-align:center; font-size:12px; margin-bottom:5px;"></div>
+    <div class="player-controls"><i class="fas fa-play" id="playIcon" onclick="togglePlay()"></i></div>
+    <div class="progress-container" onclick="seek(event)"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="time-display"><span id="currTime">00:00</span><span id="durTime">00:00</span></div>
+</div>
+
+<audio id="hiddenPlayer"></audio>
 
 <script>
+    const player = document.getElementById('hiddenPlayer');
+    const progressBar = document.getElementById('progressBar');
+    const playIcon = document.getElementById('playIcon');
+
     function go(id, btn) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('show-page'));
         document.getElementById(id).classList.add('show-page');
         document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-btn'));
         btn.classList.add('active-btn');
-        window.scrollTo(0,0);
     }
 
     function playAudio(url, title) {
-        const ui = document.getElementById('audio-ui');
-        const player = document.getElementById('main-player');
-        ui.style.display = 'block';
-        document.getElementById('atitle').innerText = "جاري تشغيل: " + title;
-        document.getElementById('asrc').src = url;
-        player.load();
+        document.getElementById('player-container').style.display = 'block';
+        document.getElementById('track-name').innerText = title;
+        player.src = url;
         player.play();
-        ui.scrollIntoView({behavior: 'smooth'});
+        playIcon.className = "fas fa-pause";
     }
 
-    let c = 0;
-    function countUp() { c++; document.getElementById('count').innerText = c; if(navigator.vibrate) navigator.vibrate(50); }
-    function resetC() { c = 0; document.getElementById('count').innerText = 0; }
-
-    function copyT(btn) {
-        const t = btn.parentElement.querySelector('.txt').innerText;
-        navigator.clipboard.writeText(t);
-        btn.innerText = "تم!";
-        setTimeout(() => btn.innerText = "نسخ", 2000);
+    function togglePlay() {
+        if (player.paused) { player.play(); playIcon.className = "fas fa-pause"; }
+        else { player.pause(); playIcon.className = "fas fa-play"; }
     }
 
-    const suras = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
-    const srv = { 'minsh': 'https://server10.mp3quran.net/minsh/', 'husr': 'https://server13.mp3quran.net/husr/', 'basit': 'https://server7.mp3quran.net/basit/' };
-    const list = document.getElementById('surah-list');
-    suras.forEach((s, i) => {
-        let b = document.createElement('button'); b.className = 's-btn'; b.innerText = s;
-        b.onclick = () => {
-            let r = document.getElementById('reciter').value;
-            let id = (i+1).toString().padStart(3, '0');
-            playAudio(srv[r]+id+'.mp3', "سورة " + s);
-        };
-        list.appendChild(b);
-    });
+    player.ontimeupdate = function() {
+        if (player.duration) {
+            progressBar.style.width = (player.currentTime / player.duration) * 100 + "%";
+            document.getElementById('currTime').innerText = formatTime(player.currentTime);
+            document.getElementById('durTime').innerText = formatTime(player.duration);
+        }
+    };
 
-    const names = ["الله", "الرحمن", "الرحيم", "الملك", "القدوس", "السلام", "المؤمن", "المهيمن", "العزيز", "الجبار", "المتكبر", "الخالق", "البارئ", "المصور", "الغفار", "القهار", "الوهاب", "الرزاق", "الفتاح", "العليم", "القابض", "الباسط", "الخافض", "الرافع", "المعز", "المذل", "السميع", "البصير", "الحكم", "العدل", "اللطيف", "الخبير", "الحليم", "العظيم", "الغفور", "الشكور", "العلي", "الكبير", "الحفيظ", "المقيت", "الحسيب", "الجليل", "الكريم", "الرقيب", "المجيب", "الواسع", "الحكيم", "الودود", "المجيد", "الباعث", "الشهيد", "الحق", "الوكيل", "القوي", "المتين", "الولي", "الحميد", "المحصي", "المبدئ", "المعيد", "المحيي", "المميت", "الحي", "القيوم", "الواجد", "الماجد", "الواحد", "الأحد", "الصمد", "القادر", "المقتدر", "المقدم", "المؤخر", "الأول", "الآخر", "الظاهر", "الباطن", "الوالي", "المتعالي", "البر", "التواب", "المنتقم", "العفو", "الرؤوف", "مالك الملك", "ذو الجلال والإكرام", "المقسط", "الجامع", "الغني", "المغني", "المانع", "الضار", "النافع", "النور", "الهادي", "البديع", "الباقي", "الوارث", "الرشيد", "الصبور"];
-    const ng = document.getElementById('names-grid');
-    names.forEach(n => { let d = document.createElement('div'); d.className = 's-btn'; d.innerText = n; ng.appendChild(d); });
+    function formatTime(sec) {
+        let m = Math.floor(sec / 60); let s = Math.floor(sec % 60);
+        return (m < 10 ? "0"+m : m) + ":" + (s < 10 ? "0"+s : s);
+    }
+
+    function seek(e) {
+        const rect = e.currentTarget.getBoundingClientRect();
+        player.currentTime = ((e.clientX - rect.left) / rect.width) * player.duration;
+    }
+
+    const suraNames = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
+
+    function updateSurahList() {
+        const list = document.getElementById('surah-list');
+        const server = document.getElementById('reciterSelect').value;
+        const reciterName = document.getElementById('reciterSelect').options[document.getElementById('reciterSelect').selectedIndex].text;
+        list.innerHTML = '';
+        
+        suraNames.forEach((name, i) => {
+            let id = (i + 1).toString().padStart(3, '0');
+            let url = server + id + '.mp3';
+            let div = document.createElement('div');
+            div.className = 's-container';
+            div.innerHTML = `
+                <button class="s-btn" onclick="playAudio('${url}', '${name} - ${reciterName}')">${name}</button>
+                <a href="${url}" download="${name}.mp3" class="download-btn">⬇ تحميل للنت المقطوع</a>
+            `;
+            list.appendChild(div);
+        });
+    }
+
+    function countUp() { 
+        let c = parseInt(document.getElementById('count').innerText);
+        document.getElementById('count').innerText = c + 1;
+        if(navigator.vibrate) navigator.vibrate(40);
+    }
+
+    updateSurahList();
 </script>
 </body>
 </html>
