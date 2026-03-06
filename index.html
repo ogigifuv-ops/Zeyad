@@ -2,29 +2,36 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>إمبراطورية التلاوة | Zeyad Mekawy</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --gold: #ffcc00; --emerald: #014436; --dark: #010c0a; --neon: 0 0 15px #ffcc00; }
         
-        body { 
+        /* أهم جزء لمنع التحديث والسحب */
+        html, body { 
             margin: 0; 
+            height: 100%;
+            overflow: hidden; /* يمنع السحب العشوائي للجسم كله */
             background: var(--dark); 
             color: white; 
             font-family: 'Cairo', sans-serif; 
-            min-height: 100vh; 
+            overscroll-behavior-y: none !important; /* قفل ميزة السحب للتحديث في كروم */
+        }
+
+        /* جعل المحتوى فقط هو القابل للسحب داخل التطبيق */
+        .scroll-container {
+            height: 100vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
             padding-bottom: 180px;
-            /* السطور اللي بتمنع التحديث عند السحب */
-            overscroll-behavior-y: contain; 
-            touch-action: pan-x pan-y;
         }
         
         header { background: linear-gradient(to bottom, var(--emerald), var(--dark)); padding: 20px 10px; text-align: center; border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 1001; }
         header h1 { font-family: 'Amiri', serif; font-size: 22px; color: var(--gold); margin: 0; text-shadow: var(--neon); }
 
-        nav { display: flex; overflow-x: auto; background: #000; padding: 12px; gap: 8px; border-bottom: 2px solid var(--gold); position: sticky; top: 70px; z-index: 1000; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        nav { display: flex; overflow-x: auto; background: #000; padding: 12px; gap: 8px; border-bottom: 2px solid var(--gold); position: sticky; top: 70px; z-index: 1000; scrollbar-width: none; }
         nav::-webkit-scrollbar { display: none; }
         nav button { background: rgba(255, 204, 0, 0.1); border: 1.5px solid var(--gold); color: white; padding: 8px 15px; border-radius: 20px; white-space: nowrap; cursor: pointer; font-weight: bold; font-size: 13px; flex-shrink: 0; }
         .active-btn { background: var(--gold) !important; color: black !important; }
@@ -46,8 +53,7 @@
         
         .signature { text-align: center; color: var(--gold); font-weight: bold; font-size: 14px; margin-top: 5px; letter-spacing: 1px; text-shadow: 0 0 5px rgba(255,204,0,0.5); }
 
-        .sebha-btn { width: 90px; height: 90px; border: 4px solid var(--gold); border-radius: 50%; margin: 10px auto; display: flex; align-items: center; justify-content: center; font-size: 30px; color: var(--gold); cursor: pointer; background: rgba(255,204,0,0.1); user-select: none; }
-        .sebha-btn:active { transform: scale(0.95); background: rgba(255,204,0,0.3); }
+        .sebha-btn { width: 90px; height: 90px; border: 4px solid var(--gold); border-radius: 50%; margin: 10px auto; display: flex; align-items: center; justify-content: center; font-size: 30px; color: var(--gold); cursor: pointer; background: rgba(255, 204, 0, 0.1); user-select: none; }
         .reset-btn { background: #ff4444; color: white; border: none; padding: 6px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -55,52 +61,51 @@
 </head>
 <body>
 
-<header><h1>✨ إِمْبَرَاطُورِيَّةُ التِّلَاوَةِ ✨</h1></header>
+<div class="scroll-container" id="appBody">
+    <header><h1>✨ إِمْبَرَاطُورِيَّةُ التِّلَاوَةِ ✨</h1></header>
 
-<nav id="navbar">
-    <button onclick="go('p1', this)" class="active-btn">🏠 الرئيسية</button>
-    <button onclick="go('p3', this)">📖 المصحف</button>
-    <button onclick="go('p12', this)">📻 الراديو</button>
-    <button onclick="go('p10', this)">📿 السبحة</button>
-    <button onclick="go('p11', this)">🌟 الأسماء</button>
-    <button onclick="go('p4', this)">☀️ الصباح</button>
-    <button onclick="go('p5', this)">🌆 المساء</button>
-    <button onclick="go('p6', this)">😴 النوم</button>
-    <button onclick="go('p8', this)">💰 الرزق</button>
-    <button onclick="go('p9', this)">🤲 أدعية</button>
-</nav>
+    <nav id="navbar">
+        <button onclick="go('p1', this)" class="active-btn">🏠 الرئيسية</button>
+        <button onclick="go('p3', this)">📖 المصحف</button>
+        <button onclick="go('p12', this)">📻 الراديو</button>
+        <button onclick="go('p10', this)">📿 السبحة</button>
+        <button onclick="go('p11', this)">🌟 الأسماء</button>
+        <button onclick="go('p4', this)">☀️ الصباح</button>
+        <button onclick="go('p5', this)">🌆 المساء</button>
+        <button onclick="go('p6', this)">😴 النوم</button>
+        <button onclick="go('p8', this)">💰 الرزق</button>
+        <button onclick="go('p9', this)">🤲 أدعية</button>
+    </nav>
 
-<div class="main-display">
-    <div id="p1" class="page show-page">
-        <div class="card">
-            <h2>تطبيق الإمبراطور زياد</h2>
-            <p>أهلاً بك في النسخة الاحترافية من تطبيق إمبراطورية التلاوة.</p>
-            <div class="item-box" style="text-align:center;">تم تطوير هذا العمل ليكون صدقة جارية</div>
+    <div class="main-display">
+        <div id="p1" class="page show-page">
+            <div class="card">
+                <h2>تطبيق الإمبراطور زياد</h2>
+                <p>أهلاً بك في النسخة الاحترافية المثبتة.</p>
+                <div class="item-box" style="text-align:center;">تم تطوير هذا العمل ليكون صدقة جارية</div>
+            </div>
         </div>
-    </div>
-    
-    <div id="p3" class="page">
-        <div class="card">
-            <h3>📖 المصحف (114 سورة)</h3>
-            <select id="recSelect" class="radio-btn" style="background:#000; margin-bottom:15px;" onchange="updateSurahs()">
-                <option value="https://server8.mp3quran.net/frs_a/">فارس عباد</option>
-                <option value="https://server10.mp3quran.net/minsh/">المنشاوي</option>
-                <option value="https://server13.mp3quran.net/husr/">الحصري</option>
-                <option value="https://server7.mp3quran.net/basit/">عبد الباسط</option>
-                <option value="https://server12.mp3quran.net/maher/">ماهر المعيقلي</option>
-            </select>
-            <div id="surah-list" class="s-grid"></div>
+        
+        <div id="p3" class="page">
+            <div class="card">
+                <h3>📖 المصحف (114 سورة)</h3>
+                <select id="recSelect" class="radio-btn" style="background:#000; margin-bottom:15px;" onchange="updateSurahs()">
+                    <option value="https://server8.mp3quran.net/frs_a/">فارس عباد</option>
+                    <option value="https://server10.mp3quran.net/minsh/">المنشاوي</option>
+                    <option value="https://server13.mp3quran.net/husr/">الحصري</option>
+                    <option value="https://server7.mp3quran.net/basit/">عبد الباسط</option>
+                    <option value="https://server12.mp3quran.net/maher/">ماهر المعيقلي</option>
+                </select>
+                <div id="surah-list" class="s-grid"></div>
+            </div>
         </div>
-    </div>
 
-    <div id="p10" class="page"><div class="card"><h3>📿 السبحة</h3><div id="s-count" class="sebha-btn" onclick="countUp()">0</div><button class="reset-btn" onclick="resetCount()">🔄 تصفير</button></div></div>
-    <div id="p11" class="page"><div class="card"><h3>🌟 الأسماء الحسنى</h3><div id="n-grid" class="s-grid"></div></div></div>
-    <div id="p4" class="page"><div class="card"><h3>☀️ أذكار الصباح</h3><div class="item-box">أصبحنا وأصبح الملك لله والحمد لله، لا إله إلا الله وحده لا شريك له..</div><div class="item-box">اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور..</div></div></div>
-    <div id="p5" class="page"><div class="card"><h3>🌆 أذكار المساء</h3><div class="item-box">أمسينا وأمسى الملك لله والحمد لله..</div><div class="item-box">اللهم ما أمسى بي من نعمة أو بأحد من خلقك فمنك وحدك..</div></div></div>
-    <div id="p6" class="page"><div class="card"><h3>😴 أذكار النوم</h3><div class="item-box">باسمك ربي وضعت جنبي وبك أرفعه..</div><div class="item-box">اللهم قني عذابك يوم تبعث عبادك..</div></div></div>
-    <div id="p8" class="page"><div class="card"><h3>💰 الرزق</h3><div class="item-box">اللهم اكفني بحلالك عن حرامك وأغنني بفضلك عمن سواك..</div></div></div>
-    <div id="p9" class="page"><div class="card"><h3>🤲 أدعية</h3><div class="item-box">يا حي يا قيوم برحمتك أستغيث أصلح لي شأني كله..</div><div class="item-box">اللهم إنك عفو كريم تحب العفو فاعفُ عني..</div></div></div>
-    <div id="p12" class="page"><div class="card"><h3>📻 الراديو المباشر</h3><button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/radio_quran', 'إذاعة القرآن الكريم', true)">📻 تشغيل الإذاعة الآن</button></div></div>
+        <div id="p10" class="page"><div class="card"><h3>📿 السبحة</h3><div id="s-count" class="sebha-btn" onclick="countUp()">0</div><button class="reset-btn" onclick="resetCount()">🔄 تصفير</button></div></div>
+        <div id="p11" class="page"><div class="card"><h3>🌟 الأسماء الحسنى</h3><div id="n-grid" class="s-grid"></div></div></div>
+        <div id="p4" class="page"><div class="card"><h3>☀️ أذكار الصباح</h3><div class="item-box">أصبحنا وأصبح الملك لله..</div></div></div>
+        <div id="p5" class="page"><div class="card"><h3>🌆 أذكار المساء</h3><div class="item-box">أمسينا وأمسى الملك لله..</div></div></div>
+        <div id="p12" class="page"><div class="card"><h3>📻 الراديو</h3><button class="radio-btn" onclick="playAudio('https://backup.qurango.net/radio/radio_quran', 'إذاعة القرآن الكريم', true)">📻 تشغيل الإذاعة</button></div></div>
+    </div>
 </div>
 
 <div id="player-container">
@@ -108,34 +113,42 @@
     <div style="text-align:center; margin: 5px 0;"><i class="fas fa-play" id="play-icon" onclick="togglePlay()" style="font-size:25px; cursor:pointer;"></i></div>
     <div class="progress-container" onclick="seek(event)"><div class="progress-bar" id="p-bar"></div></div>
     <div class="time-info"><span id="c-time">00:00</span><span id="d-time">00:00</span></div>
-    
     <div class="signature">By: Zeyad Mekawy</div>
 </div>
 
 <audio id="aud"></audio>
 
 <script>
+    // 1. منع السحب للتحديث بالجافا سكريبت (الحل الجذري)
+    let touchStart;
+    document.addEventListener('touchstart', function (e) {
+        touchStart = e.touches[0].pageY;
+    }, {passive: false});
+
+    document.addEventListener('touchmove', function (e) {
+        let touchMove = e.touches[0].pageY;
+        // لو المستخدم بيسحب لتحت وهو في قمة الصفحة.. امنع الحركة
+        if (touchMove > touchStart && document.getElementById('appBody').scrollTop <= 0) {
+            e.preventDefault();
+        }
+    }, {passive: false});
+
     const aud = document.getElementById('aud');
     let isLive = false;
-
-    // منع الزووم عند الضغط المتكرر
-    document.addEventListener('touchstart', function (event) {
-        if (event.touches.length > 1) {
-            event.preventDefault();
-        }
-    }, { passive: false });
 
     function go(id, btn) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('show-page'));
         document.getElementById(id).classList.add('show-page');
         document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-btn'));
         btn.classList.add('active-btn');
+        // العودة لقمة الصفحة عند التنقل
+        document.getElementById('appBody').scrollTop = 0;
     }
 
     function countUp() { 
         const c = document.getElementById('s-count');
         c.innerText = parseInt(c.innerText) + 1;
-        if(navigator.vibrate) navigator.vibrate(40); // اهتزاز عند التسبيح
+        if(navigator.vibrate) navigator.vibrate(40);
     }
     function resetCount() { document.getElementById('s-count').innerText = "0"; }
 
@@ -163,7 +176,6 @@
         document.getElementById('track-name').innerText = title;
         aud.src = url; aud.play();
         document.getElementById('play-icon').className = "fas fa-pause";
-        document.getElementById('d-time').innerText = live ? "بث مباشر" : "00:00";
     }
 
     function togglePlay() {
@@ -176,7 +188,7 @@
             document.getElementById('p-bar').style.width = (aud.currentTime / aud.duration) * 100 + "%";
             document.getElementById('c-time').innerText = fmt(aud.currentTime);
             document.getElementById('d-time').innerText = fmt(aud.duration);
-        } else { document.getElementById('c-time').innerText = fmt(aud.currentTime); }
+        }
     };
 
     function fmt(s) {
