@@ -10,105 +10,110 @@
         body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
         canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
         
-        /* Navbar شغال باللمس والضغط */
-        nav { background: rgba(0,0,0,0.95); padding: 15px; display: flex; overflow-x: auto; gap: 15px; position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--neon); }
-        nav button { background: none; border: 1px solid var(--neon); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; white-space: nowrap; font-family: 'Cairo'; transition: 0.3s; }
-        nav button.active-nav { background: var(--neon); color: black; box-shadow: 0 0 15px var(--neon); }
+        /* Navbar ثابت وشغال */
+        nav { 
+            background: rgba(0,0,0,0.95); padding: 15px; display: flex; 
+            overflow-x: auto; gap: 10px; position: sticky; top: 0; 
+            z-index: 100; border-bottom: 2px solid var(--neon); 
+        }
+        nav button { 
+            background: rgba(255,255,255,0.1); border: 1px solid var(--neon); 
+            color: white; padding: 10px 20px; border-radius: 15px; 
+            cursor: pointer; white-space: nowrap; font-family: 'Cairo'; 
+            font-weight: bold; transition: 0.3s;
+        }
+        /* شكل الزرار لما يكون شغال */
+        .btn-active { background: var(--neon) !important; color: black !important; box-shadow: 0 0 15px var(--neon); }
 
-        .container { max-width: 900px; margin: 20px auto; padding: 20px; display: none; }
-        .active-page { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+        .page { display: none; max-width: 900px; margin: 20px auto; padding: 20px; text-align: center; }
+        .show { display: block; animation: fadeIn 0.5s ease; }
 
-        .card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 25px; border: 1px solid rgba(0,242,255,0.3); backdrop-filter: blur(15px); text-align: center; }
-        .btn-link { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 2px solid var(--purple); color: white; text-decoration: none; border-radius: 15px; font-weight: bold; background: rgba(188, 19, 254, 0.1); }
-        .btn-link:hover { background: var(--purple); box-shadow: 0 0 20px var(--purple); }
+        @keyframes fadeIn { from { opacity:0; transform: scale(0.95); } to { opacity:1; transform: scale(1); } }
+
+        .card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 25px; border: 1px solid rgba(0,242,255,0.3); backdrop-filter: blur(15px); }
+        .item { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 1px solid var(--purple); color: white; text-decoration: none; border-radius: 12px; background: rgba(188, 19, 254, 0.1); font-weight: bold; }
     </style>
 </head>
 <body>
 
 <canvas id="matrix"></canvas>
 
-<nav id="navbar">
-    <button onclick="openPage('home', this)" class="active-nav">🏰 الرئيسية</button>
-    <button onclick="openPage('apps', this)">📱 التطبيقات</button>
-    <button onclick="openPage('games', this)">🎮 الألعاب</button>
-    <button onclick="openPage('hacker', this)">💻 الهكر</button>
+<nav>
+    <button onclick="changePage('p1', this)" class="btn-active">🏰 الرئيسية</button>
+    <button onclick="changePage('p2', this)">📱 التطبيقات</button>
+    <button onclick="changePage('p3', this)">🎮 الألعاب</button>
+    <button onclick="changePage('p4', this)">💻 الهكر</button>
 </nav>
 
-<div id="home" class="container active-page">
+<div id="p1" class="page show">
     <div class="card">
-        <h1 style="font-size: 35px;">👑 إمبراطورية ZEYAD</h1>
-        <p>أهلاً بك في أضخم منصة برمجية صنعها زياد. الأزرار الآن تعمل بكفاءة!</p>
-        <div class="card" style="margin-top:20px; border-color: var(--purple);">
-            <h3>⭐ تقييمنا: 5.0</h3>
-            <h3>👥 مستخدمينا: +10K</h3>
+        <h1>👑 إمبراطورية ZEYAD</h1>
+        <p>الأزرار اللي فوق دلوقتي هتنقلك بين الأقسام بلمسة واحدة.</p>
+        <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+            <div>⭐ 5.0</div>
+            <div>👥 +10K</div>
         </div>
     </div>
 </div>
 
-<div id="apps" class="container">
+<div id="p2" class="page">
     <div class="card">
         <h2>📱 تطبيقات زياد الحصرية</h2>
-        <a href="#" class="btn-link">🕋 تطبيق الصلاة</a>
-        <a href="#" class="btn-link">📝 محرر الأكواد</a>
-        <a href="#" class="btn-link">🧹 منظف الهاتف</a>
+        <div class="item">🕋 تطبيق الصلاة (قريباً)</div>
+        <div class="item">📝 محرر الأكواد Pro</div>
+        <div class="item">🧹 منظف الهاتف السريع</div>
     </div>
 </div>
 
-<div id="games" class="container">
+<div id="p3" class="page">
     <div class="card">
         <h2>🎮 صالة الألعاب</h2>
-        <p>لعبة "تحطيم الأرقام" قريباً!</p>
-        <button class="btn-link" onclick="alert('اللعبة تحت التطوير يا بطل!')">العب الآن</button>
+        <p>خمن الرقم السري واكسب نقط!</p>
+        <input type="number" id="guess" style="width: 80%; padding: 10px; margin-bottom: 10px;" placeholder="اكتب رقم...">
+        <button class="item" onclick="alert('حاول مرة أخرى!')">تحقق 🎲</button>
     </div>
 </div>
 
-<div id="hacker" class="container">
+<div id="p4" class="page">
     <div class="card" style="border-color: #0f0;">
-        <h2 style="color: #0f0;">💻 وضع الاختراق الوهمي</h2>
-        <div id="console" style="text-align: left; font-family: monospace; color: #0f0; background: #000; padding: 10px; height: 150px; overflow-y: auto;">
-            > النظام جاهز للأوامر...
+        <h2 style="color: #0f0;">💻 Terminal Mode</h2>
+        <div id="log" style="text-align: left; background: #000; color: #0f0; padding: 10px; height: 100px; overflow-y: auto; font-family: monospace;">
+            > System Ready...
         </div>
-        <button class="btn-link" style="border-color: #0f0; color: #0f0;" onclick="startHack()">تشغيل الهجوم 🧨</button>
+        <button class="item" style="border-color: #0f0; color: #0f0;" onclick="hack()">ابدأ الهجوم 🧨</button>
     </div>
 </div>
 
 <script>
-    // برمجة الأزرار عشان تشتغل
-    function openPage(pageId, btn) {
-        // إخفاء كل الصفحات
-        document.querySelectorAll('.container').forEach(p => p.classList.remove('active-page'));
-        // إظهار الصفحة المطلوبة
-        document.getElementById(pageId).classList.add('active-page');
+    // الوظيفة السحرية لتغيير الصفحات
+    function changePage(pageId, btn) {
+        // 1. إخفاء كل الصفحات
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
+        // 2. إظهار الصفحة اللي اخترتها
+        document.getElementById(pageId).classList.add('show');
         
-        // تغيير شكل الزرار النشط
-        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-nav'));
-        btn.classList.add('active-nav');
+        // 3. مسح اللون من كل الأزرار
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('btn-active'));
+        // 4. تلوين الزرار اللي دست عليه
+        btn.classList.add('btn-active');
     }
 
-    function startHack() {
-        const c = document.getElementById('console');
-        const lines = ["> Finding IP...", "> Bypassing Firewall...", "> Access Granted!", "> Downloading Data..."];
-        let i = 0;
-        const inv = setInterval(() => {
-            c.innerHTML += `<br>> ${lines[i]}`;
-            c.scrollTop = c.scrollHeight;
-            i++; if(i>=lines.length) clearInterval(inv);
-        }, 600);
+    function hack() {
+        const l = document.getElementById('log');
+        l.innerHTML += "<br>> Accessing Mainframe...";
+        l.scrollTop = l.scrollHeight;
     }
 
-    // Matrix Background
+    // Matrix Effect
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const letters = "ZEYAD1010";
     const drops = Array(Math.floor(canvas.width/16)).fill(1);
     function draw() {
         ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,canvas.width,canvas.height);
         ctx.fillStyle = "#00f2ff"; ctx.font = "16px monospace";
         drops.forEach((y, i) => {
-            const text = letters[Math.floor(Math.random()*letters.length)];
-            ctx.fillText(text, i*16, y*16);
+            ctx.fillText("Z", i*16, y*16);
             if(y*16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
             drops[i]++;
         });
