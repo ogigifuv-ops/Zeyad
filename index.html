@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --gold: #ffcc00; --emerald: #014436; --dark: #010c0a; --neon: 0 0 15px #ffcc00; }
-        body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; min-height: 100vh; padding-bottom: 120px; }
+        body { margin: 0; background: var(--dark); color: white; font-family: 'Cairo', sans-serif; min-height: 100vh; padding-bottom: 130px; }
         
         header { background: linear-gradient(to bottom, var(--emerald), var(--dark)); padding: 20px 10px; text-align: center; border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 1001; }
-        header h1 { font-family: 'Amiri', serif; font-size: 24px; color: var(--gold); margin: 0; text-shadow: var(--neon); }
+        header h1 { font-family: 'Amiri', serif; font-size: 22px; color: var(--gold); margin: 0; text-shadow: var(--neon); }
 
-        nav { display: flex; overflow-x: auto; background: #000; padding: 12px; gap: 10px; border-bottom: 2px solid var(--gold); position: sticky; top: 73px; z-index: 1000; scrollbar-width: none; }
-        nav button { background: rgba(255, 204, 0, 0.1); border: 1.5px solid var(--gold); color: white; padding: 10px 18px; border-radius: 20px; white-space: nowrap; cursor: pointer; font-weight: bold; font-family: 'Cairo'; }
+        nav { display: flex; overflow-x: auto; background: #000; padding: 12px; gap: 8px; border-bottom: 2px solid var(--gold); position: sticky; top: 70px; z-index: 1000; scrollbar-width: none; }
+        nav::-webkit-scrollbar { display: none; }
+        nav button { background: rgba(255, 204, 0, 0.1); border: 1.5px solid var(--gold); color: white; padding: 8px 15px; border-radius: 20px; white-space: nowrap; cursor: pointer; font-weight: bold; font-size: 13px; }
         .active-btn { background: var(--gold) !important; color: black !important; }
 
         .main-display { padding: 15px; }
@@ -22,16 +23,15 @@
         .show-page { display: block !important; }
 
         .card { background: rgba(1, 68, 54, 0.7); border: 2px solid var(--gold); border-radius: 20px; padding: 15px; margin-bottom: 20px; text-align: center; }
-        .item-box { background: rgba(0,0,0,0.5); padding: 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--gold); font-family: 'Amiri'; font-size: 20px; line-height: 1.6; }
+        .item-box { background: rgba(0,0,0,0.5); padding: 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--gold); font-family: 'Amiri'; font-size: 22px; line-height: 1.8; }
         
         .s-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .s-btn, .radio-btn { background: #014436; color: white; border: 1px solid var(--gold); padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; }
+        .s-btn, .radio-btn { background: #014436; color: white; border: 1px solid var(--gold); padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; font-size: 14px; }
 
-        /* المشغل الثابت المطور */
-        #player-container { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; border-top: 2px solid var(--gold); padding: 10px 20px; z-index: 2000; display: none; box-sizing: border-box; }
-        .progress-container { width: 100%; height: 6px; background: #333; border-radius: 5px; margin: 8px 0; cursor: pointer; }
-        .progress-bar { height: 100%; background: var(--gold); width: 0%; border-radius: 5px; }
-        .time-info { display: flex; justify-content: space-between; color: var(--gold); font-size: 12px; font-family: monospace; }
+        #player-container { position: fixed; bottom: 0; left: 0; width: 100%; background: #000; border-top: 3px solid var(--gold); padding: 15px 20px; z-index: 2000; display: none; box-sizing: border-box; }
+        .progress-container { width: 100%; height: 8px; background: #333; border-radius: 10px; margin: 10px 0; cursor: pointer; position: relative; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--gold); width: 0%; border-radius: 10px; }
+        .time-info { display: flex; justify-content: space-between; color: var(--gold); font-size: 14px; font-family: monospace; }
         
         .sebha-btn { width: 100px; height: 100px; border: 4px solid var(--gold); border-radius: 50%; margin: 10px auto; display: flex; align-items: center; justify-content: center; font-size: 35px; color: var(--gold); cursor: pointer; }
 
@@ -58,7 +58,7 @@
 </nav>
 
 <div class="main-display">
-    <div id="p1" class="page show-page"><div class="card"><h2>أهلاً بك يا إمبراطور</h2><p>كل الـ 12 قسم جاهزين للاستخدام.</p></div></div>
+    <div id="p1" class="page show-page"><div class="card"><h2>أهلاً يا إمبراطور</h2><p>أضفت لك جميع القراء والـ 12 قسم جاهزين.</p></div></div>
 
     <div id="p12" class="page">
         <div class="card">
@@ -70,9 +70,23 @@
 
     <div id="p3" class="page">
         <div class="card">
-            <h3>📖 المصحف</h3>
-            <select id="rec" class="radio-btn" style="background:#000; margin-bottom:10px;"><option value="https://server10.mp3quran.net/minsh/">المنشاوي</option><option value="https://server13.mp3quran.net/husr/">الحصري</option></select>
-            <div id="s-list" class="s-grid"></div>
+            <h3>📖 اختر القارئ والسورة</h3>
+            <select id="recSelect" class="radio-btn" style="background:#000; margin-bottom:15px;" onchange="updateSurahs()">
+                <option value="https://server10.mp3quran.net/minsh/">محمد صديق المنشاوي</option>
+                <option value="https://server13.mp3quran.net/husr/">محمود خليل الحصري</option>
+                <option value="https://server7.mp3quran.net/basit/">عبد الباسط عبد الصمد</option>
+                <option value="https://server12.mp3quran.net/maher/">ماهر المعيقلي</option>
+                <option value="https://server8.mp3quran.net/afs/">مشاري العفاسي</option>
+                <option value="https://server11.mp3quran.net/yasser/">ياسر الدوسري</option>
+                <option value="https://server6.mp3quran.net/qtm/">ناصر القطامي</option>
+                <option value="https://server7.mp3quran.net/sds/">عبد الرحمن السديس</option>
+                <option value="https://server12.mp3quran.net/shur/">سعود الشريم</option>
+                <option value="https://server10.mp3quran.net/ajm/">أحمد العجمي</option>
+                <option value="https://server11.mp3quran.net/fares/">فارس عباد</option>
+                <option value="https://server8.mp3quran.net/lhdan/">محمد اللحيدان</option>
+                <option value="https://server9.mp3quran.net/abu_bakr/">أبو بكر الشاطري</option>
+            </select>
+            <div id="surah-list" class="s-grid"></div>
         </div>
     </div>
 
@@ -81,15 +95,15 @@
     <div id="p4" class="page"><div class="card"><h3>☀️ أذكار الصباح</h3><div class="item-box">أصبحنا وأصبح الملك لله..</div></div></div>
     <div id="p5" class="page"><div class="card"><h3>🌆 أذكار المساء</h3><div class="item-box">أمسينا وأمسى الملك لله..</div></div></div>
     <div id="p2" class="page"><div class="card"><h3>🌙 رمضان</h3><div class="item-box">اللهم بلغنا رمضان..</div></div></div>
-    <div id="p8" class="page"><div class="card"><h3>💰 الرزق</h3><div class="item-box">اللهم ارزقنا من واسع فضلك..</div></div></div>
+    <div id="p8" class="page"><div class="card"><h3>💰 الرزق</h3><div class="item-box">اللهم اكفني بحلالك..</div></div></div>
     <div id="p6" class="page"><div class="card"><h3>😴 النوم</h3><div class="item-box">باسمك ربي وضعت جنبي..</div></div></div>
-    <div id="p7" class="page"><div class="card"><h3>🕌 الصلاة</h3><div class="item-box">أذكار بعد الصلاة..</div></div></div>
-    <div id="p9" class="page"><div class="card"><h3>🤲 أدعية</h3><div class="item-box">ربنا آتنا في الدنيا حسنة..</div></div></div>
+    <div id="p7" class="page"><div class="card"><h3>🕌 الصلاة</h3><div class="item-box">أستغفر الله (3 مرات)..</div></div></div>
+    <div id="p9" class="page"><div class="card"><h3>🤲 أدعية</h3><div class="item-box">يا حي يا قيوم برحمتك أستغيث..</div></div></div>
 </div>
 
 <div id="player-container">
-    <div id="t-name" style="color:var(--gold); text-align:center; font-weight:bold; font-size:14px;"></div>
-    <div style="text-align:center; margin: 5px 0;"><i class="fas fa-play" id="p-icon" onclick="togglePlay()" style="font-size:28px;"></i></div>
+    <div id="track-name" style="color:var(--gold); text-align:center; font-weight:bold; font-size:14px;"></div>
+    <div style="text-align:center; margin: 5px 0;"><i class="fas fa-play" id="play-icon" onclick="togglePlay()" style="font-size:30px; cursor:pointer;"></i></div>
     <div class="progress-container" onclick="seek(event)"><div class="progress-bar" id="p-bar"></div></div>
     <div class="time-info"><span id="c-time">00:00</span><span id="d-time">00:00</span></div>
 </div>
@@ -110,15 +124,15 @@
     function playAudio(url, title, live = false) {
         isLive = live;
         document.getElementById('player-container').style.display = 'block';
-        document.getElementById('t-name').innerText = title;
+        document.getElementById('track-name').innerText = title;
         aud.src = url; aud.play();
-        document.getElementById('p-icon').className = "fas fa-pause";
+        document.getElementById('play-icon').className = "fas fa-pause";
         document.getElementById('d-time').innerText = live ? "بث مباشر" : "00:00";
     }
 
     function togglePlay() {
-        if (aud.paused) { aud.play(); document.getElementById('p-icon').className = "fas fa-pause"; }
-        else { aud.pause(); document.getElementById('p-icon').className = "fas fa-play"; }
+        if (aud.paused) { aud.play(); document.getElementById('play-icon').className = "fas fa-pause"; }
+        else { aud.pause(); document.getElementById('play-icon').className = "fas fa-play"; }
     }
 
     aud.ontimeupdate = () => {
@@ -130,30 +144,38 @@
     };
 
     function fmt(s) {
+        if(isNaN(s)) return "00:00";
         let m = Math.floor(s/60); let sec = Math.floor(s%60);
         return (m<10?'0':'')+m+":"+(sec<10?'0':'')+sec;
     }
 
     function seek(e) {
-        if(!isLive) {
+        if(!isLive && aud.duration) {
             const r = e.currentTarget.getBoundingClientRect();
             aud.currentTime = ((e.clientX - r.left) / r.width) * aud.duration;
         }
     }
 
     function countUp() { 
-        let btn = document.querySelector('.sebha-btn');
-        btn.innerText = parseInt(btn.innerText) + 1;
+        let b = document.querySelector('.sebha-btn');
+        b.innerText = parseInt(b.innerText) + 1;
+        if(navigator.vibrate) navigator.vibrate(40);
     }
 
-    // تعبئة تلقائية
-    const ss = ["الفاتحة","البقرة","آل عمران","النساء","المائدة"];
-    ss.forEach((s, i) => {
-        let b = document.createElement('button'); b.className='s-btn'; b.innerText=s;
-        b.onclick = () => playAudio(document.getElementById('rec').value+(i+1).toString().padStart(3,'0')+'.mp3', s);
-        document.getElementById('s-list').appendChild(b);
-    });
+    function updateSurahs() {
+        const list = document.getElementById('surah-list');
+        const srv = document.getElementById('recSelect').value;
+        const name = document.getElementById('recSelect').options[document.getElementById('recSelect').selectedIndex].text;
+        list.innerHTML = '';
+        const names = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس"];
+        names.forEach((s, i) => {
+            let b = document.createElement('button'); b.className='s-btn'; b.innerText=s;
+            b.onclick = () => playAudio(srv+(i+1).toString().padStart(3,'0')+'.mp3', s + " - " + name);
+            list.appendChild(b);
+        });
+    }
 
+    updateSurahs();
     ["الله","الرحمن","الرحيم"].forEach(n => {
         let d = document.createElement('div'); d.className='s-btn'; d.innerText=n;
         document.getElementById('n-grid').appendChild(d);
